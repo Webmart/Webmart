@@ -59,7 +59,6 @@ Webmart loads the theme's `Config.php` file to apply the settings. After that, i
 With the help of the routing process supplied by Flight, Webmart performs the following:
 
 ```php
-
 // if a page/view controller exists
 require DIR_CONTROLLERS . 'Pagename.php';
 new Pagename($params);
