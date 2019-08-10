@@ -5,7 +5,8 @@ A simple PHP framework for building web applications and websites.
 Jump to:
 
 - [Intro](https://github.com/Webmart/webmart-2-0#framework)
-- [Routing](https://github.com/Webmart/webmart-2-0#routing)
+- [How to work with Routing](https://github.com/Webmart/webmart-2-0#routing)
+- [How to work with the View](https://github.com/Webmart/webmart-2-0#templating)
 - [Constants](https://github.com/Webmart/webmart-2-0#constants)
 - [Variables](https://github.com/Webmart/webmart-2-0#variables)
 - [Methods](https://github.com/Webmart/webmart-2-0#methods)
@@ -92,6 +93,8 @@ $params[3] = 'pepe-sad-became-happy';
 However, the Flight object is not available outside the Webmart class.
 
 Feel free to read up on [Flight](http://flightphp.com/learn/).
+
+### Templating
 
 ### Constants
 
