@@ -20,7 +20,7 @@ git clone https://github.com/Webmart/flight
 
 Finally, open `wm.php` and edit accordingly:
 
-```
+```php
 define('WM_THEME', ''); /** Set a theme folder */
 define('WM_DEBUG', false); /** Enable debug mode */
 define('WM_BASE', ''); /** Set the base URL */
