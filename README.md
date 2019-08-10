@@ -72,6 +72,10 @@ $params[2] = '05';
 $params[3] = 'pepe-sad-became-happy';
 ```
 
+However, the Flight object is not available outside the Webmart class.
+
+Feel free to read up on [Flight](http://flightphp.com/learn/).
+
 ### Constants
 
 #### Webmart
