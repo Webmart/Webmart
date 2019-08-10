@@ -2,6 +2,13 @@
 
 A simple PHP framework for building web applications and websites.
 
+Jump to:
+
+- [Constants](https://github.com/Webmart/webmart-2-0#constants)
+- [Variables](https://github.com/Webmart/webmart-2-0#variables)
+- [Methods](https://github.com/Webmart/webmart-2-0#methods)
+- [Libraries](https://github.com/Webmart/webmart-2-0#libraries)
+
 ### Installation
 
 Clone this repository to your application's or website's root folder:
@@ -69,3 +76,5 @@ Your theme:
 ### Variables
 
 ### Methods
+
+### Libraries
