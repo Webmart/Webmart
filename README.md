@@ -31,24 +31,4 @@ define('WM_ROBOTS', false); /** Auto-generate a robots file */
 define('WM_HTTPS', false); /** Force HTTPs */
 ```
 
-### Libraries
-
-You can optionally load additional libraries inside the `engine/libs/` subdirectory.
-
-So first of:
-
-```
-cd libs/
-```
-
-#### [Medoo](https://github.com/Webmart/Medoo)
-
-```
-git clone https://github.com/Webmart/Medoo
-```
-
-#### [Mobile Detect](https://github.com/Webmart/Mobile-Detect)
-
-```
-git clone https://github.com/Webmart/Mobile-Detect
-```
+Cheers.
