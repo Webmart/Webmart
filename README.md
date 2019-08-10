@@ -14,8 +14,8 @@ git clone https://github.com/Webmart/webmart-2-0 {DIRECTORYNAME}
 Use the [boilerplate theme](https://github.com/Webmart/boilerplate-2-0) to get started:
 
 ```
-cd {ROOTDIRECTORY}/{DIRECTORYNAME}/view/
-git clone https://github.com/Webmart/boilerplate-2-0 {THEMENAME}
+cd {ROOTDIRECTORY}/{DIRECTORYNAME}
+git clone https://github.com/Webmart/boilerplate-2-0 view/{THEMENAME}
 ```
 
 Finally, open `wm.php` and edit accordingly:
