@@ -7,7 +7,7 @@ A simple PHP framework for building web applications and websites.
 Clone this repository to your application's or website's root folder:
 
 ```
-cd {ROOTFOLDER}
+cd {ROOTDIRECTORY}
 git clone https://github.com/Webmart/webmart-2-0 {DIRECTORYNAME}
 ```
 
@@ -31,10 +31,10 @@ You should use the boilerplate theme to get started.
 Switch over to the view subdirectory:
 
 ```
-cd view/
+cd {ROOTDIRECTORY}/{DIRECTORYNAME}/view/
 ```
 
-Clone the [boilerplate theme](https://github.com/Webmart/boilerplate-2-0) available:
+[Boilerplate](https://github.com/Webmart/boilerplate-2-0)
 
 ```
 git clone https://github.com/Webmart/boilerplate-2-0
