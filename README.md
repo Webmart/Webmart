@@ -4,9 +4,9 @@ A simple PHP framework for building web applications and websites.
 
 Jump to:
 
-- [Intro](https://github.com/Webmart/webmart-2-0#framework)
-- [Configuring your Theme](https://github.com/Webmart/webmart-2-0#theme)
+- [Understand the basics](https://github.com/Webmart/webmart-2-0#framework)
 - [How to work with Routing](https://github.com/Webmart/webmart-2-0#routing)
+- [Configuring your Theme](https://github.com/Webmart/webmart-2-0#theme)
 - [How to work with the View](https://github.com/Webmart/webmart-2-0#templating)
 - [Constants](https://github.com/Webmart/webmart-2-0#constants)
 - [Variables](https://github.com/Webmart/webmart-2-0#variables)
@@ -44,32 +44,43 @@ define('WM_HTTPS', false); /** Force HTTPs */
 
 Cheers.
 
-## Framework
+### Framework
 
-Webmart prepares the framework and looks for an active theme.
+The basic actions of the Webmart framework are, in the following order:
 
-If the active theme exists, Webmart loads `Config.php` and `Theme.php`. After starting the routing process, Webmart follows the redirects and routes applied by the theme.
+- Prepare the framework
+- Load the theme and its settings
+- Start the routing process
+- Prepare the view
+- Render the view
 
-If a controller exists for that view OR page, Webmart loads it and creates a new instance.
+Webmart loads the theme's `Config.php` file to apply the settings. After that, it loads the theme's `Theme.php` controller, which acts as a global controller, unless a page OR view controller overrides it (which means your controllers can extend the Theme class).
 
-If a `Theme.php` method exists starting with `route` and the view OR page name, it executes that method.
-
-*For example:*
+With the help of the routing process supplied by Flight, Webmart performs the following:
 
 ```php
-// controller exists
-require_once DIR_CONTROLLERS . 'Login.php';
-new Login();
 
-// controller doesn`t exist
-if (method_exists('Theme', 'routeLogin')) {
-    Theme::routeLogin();
+// if a page/view controller exists
+require DIR_CONTROLLERS . 'Pagename.php';
+new Pagename($params);
+
+// if it doesn't
+if (method_exists('Theme', 'routePagename')) {
+    Theme::routePagename($params);
 }
 ```
 
-The `Theme.php` controller acts as the global controller for all views and pages.
+It's your choice how you want to leverage the routing process.
 
-### Theme
+After that, Webmart collects the view variables and HTML that your theme has collected into the view and renders the view in the following order:
+
+- header.php
+- pagename.php
+- footer.php
+
+If there's a redirect rule for that request in your theme, Webmart will oblige and redirect.
+
+And that's pretty much it.
 
 ### Routing
 
@@ -96,6 +107,8 @@ $params[3] = 'pepe-sad-became-happy';
 However, the Flight object is not available outside the Webmart class.
 
 Feel free to read up on [Flight](http://flightphp.com/learn/).
+
+### Theme
 
 ### Templating
 
