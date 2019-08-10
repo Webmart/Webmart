@@ -4,6 +4,8 @@ A simple PHP framework for building web applications and websites.
 
 Jump to:
 
+- [Intro](https://github.com/Webmart/webmart-2-0#framework)
+- [Routing](https://github.com/Webmart/webmart-2-0#routing)
 - [Constants](https://github.com/Webmart/webmart-2-0#constants)
 - [Variables](https://github.com/Webmart/webmart-2-0#variables)
 - [Methods](https://github.com/Webmart/webmart-2-0#methods)
@@ -65,7 +67,7 @@ if (method_exists('Theme', 'routeLogin')) {
 
 The `Theme.php` controller acts as the global controller for all views and pages.
 
-#### Routing
+### Routing
 
 Webmart follows the functionality of routing variables from Flight. By following the rules applied inside the `Config::$routes` array of the active theme, it returns the parameters to the new instance.
 
