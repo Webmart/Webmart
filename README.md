@@ -123,6 +123,30 @@ Feel free to read up on [Flight](http://flightphp.com/learn/), optionally.
 
 ### Theme
 
+To configure your theme, open `Config.php`.
+
+Configure which cookies, GET and POST data your theme allows Webmart to accept:
+
+Configure the redirects you want Webmart to force:
+
+```php
+public static $redirects = array(
+    '301' => array(
+        '/home' => '/' // tells Webmart to redirect mywebsite.com/home/ to mywebsite.com with 301
+    )
+);
+```
+
+Configure the routes you want Webmart to apply:
+
+```php
+public static $routes = array(
+    'careers', // will run new Careers() on mywebsite.com/careers/
+    'careers-jobs', // will run new Careers() AND new Jobs() on mywebsite.com/careers/jobs/
+    'careers-(jobs-(job))' // will run new Careers($params) as mywebsite.com/careers/{$params[0]}/{$params[1]}
+);
+```
+
 ### Templating
 
 ### Constants
