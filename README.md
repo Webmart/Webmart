@@ -88,6 +88,16 @@ Cheers.
 
 #### Theme
 
+|Name|Type|Description|
+|:---|:---|:-----------|
+|Config::$version|string|Version of the active theme.|
+|Config::$cookies|array|Cookies accepted by the theme.|
+|Config::$query|array|GET data accepted by the theme.|
+|Config::$data|array|POST data accepted by the theme.|
+|Config::$db|array|Database settings.|
+|Config::$redirects|array|Redirect rules and protocols applied by the theme.|
+|Config::$routes|array|Routing rules accepted by the theme.|
+
 ### Methods
 
 ### Libraries
