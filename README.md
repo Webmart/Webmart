@@ -44,7 +44,7 @@ Cheers.
 
 ### Constants
 
-Webmart:
+#### Webmart
 
 |Name|Origin|Description|
 |:---|:---|:-----------|
@@ -62,7 +62,7 @@ Webmart:
 |WM_ROBOTS|wm.php|Option to auto-create robots.txt.|
 |WM_HTTPS|wm.php|Option to force HTTPs (301).|
 
-Your theme:
+#### Theme
 
 |Name|Origin|Description|
 |:---|:---|:-----------|
@@ -74,6 +74,19 @@ Your theme:
 |DIR_JSON|Webmart.php|Subdirectory for the theme's JSON files.|
 
 ### Variables
+
+#### Webmart
+
+|Name|Type|Description|
+|:---|:---|:-----------|
+|Webmart::page|string|Name of the current page.|
+|Webmart::view|string|Name of the assigned view to the current page.|
+|Webmart::url|string|URL of the current page.|
+|Webmart::cookies|array|Collection of request cookies, as accepted by the theme.|
+|Webmart::query|array|Collection of GET data, as accepted by the theme.|
+|Webmart::data|array|Collection of POST data, as accepted by the theme.|
+
+#### Theme
 
 ### Methods
 
