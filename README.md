@@ -54,7 +54,9 @@ The basic actions of the Webmart framework are, in the following order:
 - Prepare the view
 - Render the view
 
-Webmart loads the theme's `Config.php` file to apply the settings. After that, it loads the theme's `Theme.php` controller, which acts as a global controller, unless a page OR view controller overrides it (which means your controllers can extend the Theme class).
+Webmart loads the theme's `Config.php` file to apply the settings. After that, it loads the theme's `Theme.php` controller, which acts as a global controller, unless a page OR view controller overrides it.
+
+Which means your controllers can extend the Theme class.
 
 With the help of the routing process supplied by Flight, Webmart performs the following:
 
@@ -69,7 +71,15 @@ if (method_exists('Theme', 'routePagename')) {
 }
 ```
 
-It's your choice how you want to leverage the routing process.
+Webmart matches pages and views automatically, unless you override them.
+
+```
+mywebsite.com
+=> loads Home.php OR executes routeHome()
+
+mywebsite.com/about/team/
+=> loads About.php AND Team.php if they exist OR executes routeTeam()
+```
 
 After that, Webmart collects the view variables and HTML that your theme has collected into the view and renders the view in the following order:
 
