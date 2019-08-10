@@ -50,7 +50,18 @@ If a controller exists for that view OR page, Webmart loads it and creates a new
 
 If a `Theme.php` method exists starting with `route` and the view OR page name, it executes that method.
 
-*For example: `routeLogin` or `new Login($params)`.*
+*For example:.*
+
+```php
+// controller exists
+require_once DIR_CONTROLLERS . 'Login.php';
+new Login();
+
+// controller doesn`t exist
+if (method_exists('Theme', 'routeLogin')) {
+    Theme::routeLogin();
+}
+```
 
 The `Theme.php` controller acts as the global controller for all views and pages.
 
