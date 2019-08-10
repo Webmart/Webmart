@@ -77,7 +77,6 @@ class Webmart
 
         define('DIR_', getcwd() . '/');
 
-        define('DIR_CONFIG', DIR_ . 'config/');
         define('DIR_ENGINE', DIR_ . 'engine/');
         define('DIR_CORE', DIR_ . 'engine/core/');
         define('DIR_LIBS', DIR_ . 'engine/libs/');
