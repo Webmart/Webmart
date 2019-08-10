@@ -81,7 +81,7 @@ mywebsite.com/about/team/
 => loads About.php AND Team.php if they exist OR executes routeTeam()
 ```
 
-After that, Webmart collects the view variables and HTML that your theme has collected into the view and renders the view in the following order:
+Webmart prepares the view your theme has collected and renders it in the following order:
 
 - header.php
 - pagename.php
