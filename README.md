@@ -48,9 +48,29 @@ If the active theme exists, Webmart loads `Config.php` and `Theme.php` to apply 
 
 If a controller exists for that view OR page, Webmart loads it and creates a new instance.
 
-If a `Theme.php` method exists starting with `route` and the view OR page name, it executes that method. For example: `routeLogin` or `new Login($params)`.
+If a `Theme.php` method exists starting with `route` and the view OR page name, it executes that method.
 
-Webmart follows the variables functions from Flight. By following the rules applied inside the `Config::$routes` array of the active theme, it returns the parameters to the controller.
+*For example: `routeLogin` or `new Login($params)`.*
+
+The `Theme.php` controller acts as the global controller for all views and pages.
+
+Webmart follows the functionality of routing variables from Flight. By following the rules applied inside the `Config::$routes` array of the active theme, it returns the parameters to the new instance.
+
+*For example:*
+
+```php
+$routes = array(
+    'blog-(year-(month-(day-(postname))))'
+);
+
+require DIR_CONTROLLERS . 'Blog.php';
+new Blog($params);
+
+$params[0] = '2019';
+$params[1] = 'august';
+$params[2] = '05';
+$params[3] = 'pepe-sad-became-happy';
+```
 
 ### Constants
 
