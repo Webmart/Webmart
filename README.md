@@ -42,6 +42,16 @@ Cheers.
 
 ## Framework
 
+Webmart prepares the framework and looks for an active theme.
+
+If the active theme exists, Webmart loads `Config.php` and `Theme.php` to apply rules set by the theme. After starting the routing process, Webmart follows the redirects and routes, as directed by the theme.
+
+If a controller exists for that view OR page, Webmart loads it and creates a new instance.
+
+If a `Theme.php` method exists starting with `route` and the view OR page name, it executes that method. For example: `routeLogin` or `new Login($params)`.
+
+Webmart follows the variables functions from Flight. By following the rules applied inside the `Config::$routes` array of the active theme, it returns the parameters to the controller.
+
 ### Constants
 
 #### Webmart
