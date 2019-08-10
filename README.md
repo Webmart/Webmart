@@ -1,5 +1,7 @@
 # Webmart 2.0
 
+A simple PHP framework for building web applications and websites.
+
 ### Installation
 
 Clone this repository to your application's or website's folder:
