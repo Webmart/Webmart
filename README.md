@@ -38,7 +38,7 @@ You should use the boilerplate theme to get started.
 Switch over to the view subdirectory:
 
 ```
-cd view
+cd view/
 ```
 
 Clone the [boilerplate theme](https://github.com/Webmart/boilerplate-2-0) available:
