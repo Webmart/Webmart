@@ -11,7 +11,7 @@ cd {MYFOLDER}
 git clone https://github.com/Webmart/webmart-2-0.git
 ```
 
-Clone the [https://github.com/Webmart/flight](Flight repository) inside the **engine/** subdirectory, to enable Webmart's routing:
+Clone the (Flight repo)[https://github.com/Webmart/flight] inside the `**engine/**` subdirectory, to enable Webmart's routing:
 
 ```
 cd engine/
