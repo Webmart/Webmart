@@ -5,6 +5,7 @@ A simple PHP framework for building web applications and websites.
 Jump to:
 
 - [Intro](https://github.com/Webmart/webmart-2-0#framework)
+- [Configuring your Theme](https://github.com/Webmart/webmart-2-0#theme)
 - [How to work with Routing](https://github.com/Webmart/webmart-2-0#routing)
 - [How to work with the View](https://github.com/Webmart/webmart-2-0#templating)
 - [Constants](https://github.com/Webmart/webmart-2-0#constants)
@@ -67,6 +68,8 @@ if (method_exists('Theme', 'routeLogin')) {
 ```
 
 The `Theme.php` controller acts as the global controller for all views and pages.
+
+### Theme
 
 ### Routing
 
