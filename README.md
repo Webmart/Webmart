@@ -18,6 +18,19 @@ cd engine/
 git clone https://github.com/Webmart/flight
 ```
 
+Finally, open `wm.php` and edit accordingly:
+
+```
+define('WM_THEME', ''); /** Set a theme folder */
+define('WM_DEBUG', false); /** Enable debug mode */
+define('WM_BASE', ''); /** Set the base URL */
+
+define('WM_SITEMAP', false); /** Auto-generate a sitemap */
+define('WM_ROBOTS', false); /** Auto-generate a robots file */
+
+define('WM_HTTPS', false); /** Force HTTPs */
+```
+
 ### Libraries
 
 You can optionally load additional libraries inside the `engine/libs/` subdirectory.
