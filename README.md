@@ -7,15 +7,8 @@ A simple PHP framework for building web applications and websites.
 Clone this repository to your application's or website's root folder:
 
 ```
-cd {MYFOLDER}
-git clone https://github.com/Webmart/webmart-2-0 {MYFOLDER}
-```
-
-Clone the [Flight repo](https://github.com/Webmart/flight) inside the `engine` subdirectory, to enable Webmart's routing:
-
-```
-cd engine/
-git clone https://github.com/Webmart/flight
+cd {ROOTFOLDER}
+git clone https://github.com/Webmart/webmart-2-0 {DIRECTORYNAME}
 ```
 
 Finally, open `wm.php` and edit accordingly:
