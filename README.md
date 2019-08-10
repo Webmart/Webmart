@@ -39,32 +39,32 @@ Cheers.
 
 Webmart:
 
-|Name|Description|
-|:---|:-----------|
-|DIR_|Root directory of the Webmart installation.|
-|DIR_ENGINE|Directory of Webmart's engine.|
-|DIR_CORE|Subdirectory of Webmart's core files.|
-|DIR_LIBS|Subdirectory of Webmart's available libraries.|
+|Name|Origin|Description|
+|:---|:---|:-----------|
+|DIR_|Webmart.php|Root directory of the Webmart installation.|
+|DIR_ENGINE|Webmart.php|Directory of Webmart's engine.|
+|DIR_CORE|Webmart.php|Subdirectory of Webmart's core files.|
+|DIR_LIBS|Webmart.php|Subdirectory of Webmart's available libraries.|
 
-|Name|Description|
-|:---|:-----------|
-|WM_THEME|Name of the active theme.|
-|WM_DEBUG|Option to enable debugging and errors.|
-|WM_BASE|Base URL of the Webmart installation.|
-|WM_SITEMAP|Option to auto-create a sitemap.|
-|WM_ROBOTS|Option to auto-create robots.txt.|
-|WM_HTTPS|Option to force HTTPs (301).|
+|Name|Origin|Description|
+|:---|:---|:-----------|
+|WM_THEME|wm.php|Name of the active theme.|
+|WM_DEBUG|wm.php|Option to enable debugging and errors.|
+|WM_BASE|wm.php|Base URL of the Webmart installation.|
+|WM_SITEMAP|wm.php|Option to auto-create a sitemap.|
+|WM_ROBOTS|wm.php|Option to auto-create robots.txt.|
+|WM_HTTPS|wm.php|Option to force HTTPs (301).|
 
 Your theme:
 
-|Name|Description|
-|:---|:-----------|
-|DIR_VIEW|Root directory of Webmart's active theme.|
-|DIR_ASSETS|Subdirectory for the theme's assets.|
-|DIR_CLASSES|Subdirectory for the theme's classes.|
-|DIR_CONTROLLERS|Subdirectory for the theme's controllers.|
-|DIR_TEMPLATES|Subdirectory for the theme's templates.|
-|DIR_JSON|Subdirectory for the theme's JSON files.|
+|Name|Origin|Description|
+|:---|:---|:-----------|
+|DIR_VIEW|Webmart.php|Root directory of Webmart's active theme.|
+|DIR_ASSETS|Webmart.php|Subdirectory for the theme's assets.|
+|DIR_CLASSES|Webmart.php|Subdirectory for the theme's classes.|
+|DIR_CONTROLLERS|Webmart.php|Subdirectory for the theme's controllers.|
+|DIR_TEMPLATES|Webmart.php|Subdirectory for the theme's templates.|
+|DIR_JSON|Webmart.php|Subdirectory for the theme's JSON files.|
 
 ### Variables
 
