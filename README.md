@@ -56,7 +56,7 @@ The `Theme.php` controller acts as the global controller for all views and pages
 
 Webmart follows the functionality of routing variables from Flight. By following the rules applied inside the `Config::$routes` array of the active theme, it returns the parameters to the new instance.
 
-*For example:*
+*In the following example, `$params` is available in your constructor:*
 
 ```php
 $routes = array(
