@@ -156,6 +156,8 @@ public static $routes = array(
 
 Example C will run new `Careers($params)` as mywebsite.com/careers/{$params[0]}/{$params[1]}.
 
+If there are no controllers or methods, Webmart runs `new Theme($params)`.
+
 ### Templating
 
 ### Constants
