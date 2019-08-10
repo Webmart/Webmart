@@ -93,29 +93,33 @@ And that's pretty much it.
 
 ### Routing
 
-Webmart follows the functionality of routing variables from Flight. By following the rules applied inside the `Config::$routes` array of the active theme, it returns the parameters to the new instance.
+Webmart follows the functionality of routing variables from Flight.
 
-Which means these variables are available in your controllers, through the constructor.
-
-*For example:*
+Which means if your theme's routing includes variables, then they will be treated as such.
 
 ```php
 $routes = array(
-    'blog-(year-(month-(day-(postname))))'
+    'blog-category-tag-(postname)', // option A
+    'blog-(category-(tag-(postname)))' // option B
 );
 
-require DIR_CONTROLLERS . 'Blog.php';
-new Blog($params);
+// routing for option A
+new Tag($params);
+$params[0] = 'pepe-sad-became-happy';
 
-$params[0] = '2019';
-$params[1] = 'august';
-$params[2] = '05';
-$params[3] = 'pepe-sad-became-happy';
+// routing for option B
+new Blog($params);
+$params[0] = 'jokes';
+$params[1] = 'pepe';
+$params[2] = 'pepe-sad-became-happy';
+
+// in case there's no controller
+Theme::routeBlog($params);
 ```
 
-However, the Flight object is not available outside the Webmart class.
+It's up to you how you want to handle the routing process.
 
-Feel free to read up on [Flight](http://flightphp.com/learn/).
+Feel free to read up on [Flight](http://flightphp.com/learn/), optionally.
 
 ### Theme
 
