@@ -79,12 +79,12 @@ Cheers.
 
 |Name|Type|Description|
 |:---|:---|:-----------|
-|Webmart::page|string|Name of the current page.|
-|Webmart::view|string|Name of the assigned view to the current page.|
-|Webmart::url|string|URL of the current page.|
-|Webmart::cookies|array|Collection of request cookies, as accepted by the theme.|
-|Webmart::query|array|Collection of GET data, as accepted by the theme.|
-|Webmart::data|array|Collection of POST data, as accepted by the theme.|
+|Webmart::$page|string|Name of the current page.|
+|Webmart::$view|string|Name of the assigned view to the current page.|
+|Webmart::$url|string|URL of the current page.|
+|Webmart::$cookies|array|Collection of request cookies, as accepted by the theme.|
+|Webmart::$query|array|Collection of GET data, as accepted by the theme.|
+|Webmart::$data|array|Collection of POST data, as accepted by the theme.|
 
 #### Theme
 
