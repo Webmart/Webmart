@@ -11,7 +11,7 @@ cd {ROOTDIRECTORY}
 git clone https://github.com/Webmart/webmart-2-0 {DIRECTORYNAME}
 ```
 
-Use the [boilerplate theme](https://github.com/Webmart/boilerplate-2-0) to get started.
+Use the [boilerplate theme](https://github.com/Webmart/boilerplate-2-0) to get started:
 
 ```
 cd {ROOTDIRECTORY}/{DIRECTORYNAME}/view/
