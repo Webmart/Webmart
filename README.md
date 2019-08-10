@@ -41,7 +41,7 @@ Switch over to the view subdirectory:
 cd view
 ```
 
-Clone the (boilerplate theme)[https://github.com/Webmart/boilerplate-2-0] available:
+Clone the [boilerplate theme](https://github.com/Webmart/boilerplate-2-0) available:
 
 ```
 git clone https://github.com/Webmart/boilerplate-2-0
