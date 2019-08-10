@@ -18,17 +18,26 @@ cd engine/
 git clone https://github.com/Webmart/flight
 ```
 
-#### Optional
+### Libraries
 
-Load the [Medoo repo](https://github.com/Webmart/Medoo) for handling a database:
+You can optionally load additional libraries inside the `engine/libs/` subdirectory.
+
+So first of:
 
 ```
 cd libs/
+```
+
+#### [Medoo](https://github.com/Webmart/Medoo)
+
+```
 git clone https://github.com/Webmart/Medoo
 ```
 
-Load the legendary [Mobile_Detect lib](https://github.com/Webmart/Mobile-Detect):
+#### [Mobile Detect](https://github.com/Webmart/Mobile-Detect)
 
 ```
 git clone https://github.com/Webmart/Mobile-Detect
 ```
+
+### Boilerplate Theme
