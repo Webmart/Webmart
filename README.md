@@ -31,6 +31,22 @@ define('WM_ROBOTS', false); /** Auto-generate a robots file */
 define('WM_HTTPS', false); /** Force HTTPs */
 ```
 
+### Theme
+
+You should use the boilerplate theme to get started.
+
+Switch over to the view subdirectory:
+
+```
+cd view
+```
+
+Clone the (boilerplate theme)[https://github.com/Webmart/boilerplate-2-0] available:
+
+```
+git clone https://github.com/Webmart/boilerplate-2-0
+```
+
 ### Libraries
 
 You can optionally load additional libraries inside the `engine/libs/` subdirectory.
@@ -52,5 +68,3 @@ git clone https://github.com/Webmart/Medoo
 ```
 git clone https://github.com/Webmart/Mobile-Detect
 ```
-
-### Boilerplate Theme
