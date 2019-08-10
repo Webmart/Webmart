@@ -26,18 +26,13 @@ define('WM_HTTPS', false); /** Force HTTPs */
 
 ### Theme
 
-You should use the boilerplate theme to get started.
+You should use the [boilerplate theme](https://github.com/Webmart/boilerplate-2-0) to get started.
 
 Switch over to the view subdirectory:
 
 ```
 cd {ROOTDIRECTORY}/{DIRECTORYNAME}/view/
-```
-
-[Boilerplate](https://github.com/Webmart/boilerplate-2-0)
-
-```
-git clone https://github.com/Webmart/boilerplate-2-0
+git clone https://github.com/Webmart/boilerplate-2-0 {THEMENAME}
 ```
 
 ### Libraries
