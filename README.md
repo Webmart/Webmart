@@ -44,13 +44,13 @@ Cheers.
 
 Webmart prepares the framework and looks for an active theme.
 
-If the active theme exists, Webmart loads `Config.php` and `Theme.php` to apply rules set by the theme. After starting the routing process, Webmart follows the redirects and routes, as directed by the theme.
+If the active theme exists, Webmart loads `Config.php` and `Theme.php`. After starting the routing process, Webmart follows the redirects and routes applied by the theme.
 
 If a controller exists for that view OR page, Webmart loads it and creates a new instance.
 
 If a `Theme.php` method exists starting with `route` and the view OR page name, it executes that method.
 
-*For example:.*
+*For example:*
 
 ```php
 // controller exists
@@ -65,9 +65,13 @@ if (method_exists('Theme', 'routeLogin')) {
 
 The `Theme.php` controller acts as the global controller for all views and pages.
 
+#### Routing
+
 Webmart follows the functionality of routing variables from Flight. By following the rules applied inside the `Config::$routes` array of the active theme, it returns the parameters to the new instance.
 
-*In the following example, `$params` is available in your constructor:*
+Which means these variables are available in your controllers, through the constructor.
+
+*For example:*
 
 ```php
 $routes = array(
