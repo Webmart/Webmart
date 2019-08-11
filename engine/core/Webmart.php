@@ -210,10 +210,10 @@ class Webmart
             return true; // continue to next routing rule (Flight)
         });
 
-        Config::$routes[] = '/'; // add the homepage
+        \Config::$routes[] = '/'; // add the homepage
 
         // parse the next routing process
-        foreach (Config::$routes as $route) {
+        foreach (\Config::$routes as $route) {
             $exploded = explode('-', $route);
             $path = '/';
 
@@ -242,8 +242,8 @@ class Webmart
                 }
 
                 if (!$controller) {
-                    $theme = new Theme($args);
-                    $method = 'route' . ucfirst(Webmart::$view);
+                    $theme = new \Theme($args);
+                    $method = 'route' . ucfirst(self::$view);
 
                     if (method_exists('Theme', $method)) {
                         $theme->$method();
@@ -264,7 +264,7 @@ class Webmart
 
     private static function initView()
     {
-        self::addValue('version', Config::$version);
+        self::addValue('version', \Config::$version);
 
         self::addValue('urls', array(
             'base' => WM_BASE,
