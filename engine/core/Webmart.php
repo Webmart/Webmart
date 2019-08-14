@@ -250,6 +250,10 @@ class Webmart
                     }
                 } else {
                     new $controller($args);
+
+                    if (method_exists($controller, $method)) {
+                        $theme->$method();
+                    }
                 }
             });
         }
