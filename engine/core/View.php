@@ -64,13 +64,8 @@ class View
 
     public static function addAsset($type, $name)
     {
-        try {
-            if (!in_array($type, array('css', 'js'))) {
-                throw new Exception('Asset type is invalid.');
-            }
-        } catch (Exception $error) {
-            echo 'Webmart - ' . $error->getMessage();
-            exit();
+        if (!in_array($type, array('css', 'js'))) {
+            Webmart::error('Asset type for', 'is invalid', $name);
         }
 
         $html = '';
