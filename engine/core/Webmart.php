@@ -242,14 +242,17 @@ class Webmart
                 }
 
                 if (!$controller) {
-                    $theme = new \Theme($args);
+                    $class = '\Theme';
                     $method = 'route' . ucfirst(self::$view);
-
-                    if (method_exists('Theme', $method)) {
-                        $theme->$method();
-                    }
                 } else {
-                    new $controller($args);
+                    $class = '\\' . $controller;
+                    $method = 'route' . ucfirst(self::$page);
+                }
+
+                $instance = new $class($args);
+
+                if (method_exists($class, $method)) {
+                    $instance->$method($args);
                 }
             });
         }

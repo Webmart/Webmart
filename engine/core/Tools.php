@@ -120,8 +120,10 @@ class Tools
             }
         }
 
+        $response['success'] = $success;
+
         if (!empty($request) && $callback) {
-            $override = $callback($success, $response);
+            $override = $callback($response);
 
             if (!empty($override)) {
                 foreach ($override as $field => $data) {
