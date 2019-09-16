@@ -350,14 +350,19 @@ class Webmart
         self::$flight->view()->set('vars', Webmart\View::$vars);
         self::$flight->view()->set('html', Webmart\View::$html);
 
-        foreach (array('header', 'footer') as $global) {
-            if (file_exists(DIR_TEMPLATES . $global . '.php')) {
-                self::$flight->render($global, $global, $global);
-            }
+        // autoload the header template
+        if (file_exists(DIR_TEMPLATES . 'header.php')) {
+            self::$flight->render('header');
         }
 
+        // autoload the page template
         if (file_exists(DIR_TEMPLATES . self::$view . '.php')) {
             self::$flight->render(self::$view);
+        }
+
+        // autoload the footer template
+        if (file_exists(DIR_TEMPLATES . 'footer.php')) {
+            self::$flight->render('footer');
         }
 
         self::$initialised = true;
