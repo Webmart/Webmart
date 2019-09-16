@@ -62,8 +62,12 @@ class Webmart
 
     public static function redirect($where, $http = null)
     {
-        if (!$where) return;
+        if (!$where) {
+            return;
+        }
+
         self::$flight->redirect($where, !$http ? '303' : $http);
+
         exit();
     }
 
