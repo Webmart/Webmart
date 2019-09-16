@@ -10,15 +10,8 @@ class Tools
 
     public static function newDatabase($data = array())
     {
-        try {
-            if (empty($data)) {
-                if (!isset(\Config::$db) || empty(\Config::$db)) {
-                    throw new Exception('Database configuration is invalid.');
-                }
-            }
-        } catch (Exception $error) {
-            echo 'Webmart - ' . $error->getMessage();
-            exit();
+        if (empty($data) && !isset(\Config::$db) || empty(\Config::$db)) {
+            Webmart::error('Database configuration', 'is invalid');
         }
 
         if (!class_exists('Medoo')) {

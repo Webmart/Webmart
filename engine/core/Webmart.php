@@ -71,9 +71,27 @@ class Webmart
     * @method
     */
 
+    public static function error($start = '', $end = '', $variable)
+    {
+        if (isset($variable)) {
+            $variable = '<strong>"' . $variable . '"</strong>';
+        }
+
+        echo $start . ' ' . $variable . ' ' . $end . '. <br/>';
+        echo '<em><a href="http://webmartphp.com" target="_blank">webmartphp.com</a></em>';
+
+        die;
+    }
+
+    /**
+    * @method
+    */
+
     public static function init()
     {
-        if (self::$initialised) return;
+        if (self::$initialised) {
+            return;
+        }
 
         define('DIR_', getcwd() . '/');
 
@@ -81,25 +99,37 @@ class Webmart
         define('DIR_CORE', DIR_ . 'engine/core/');
         define('DIR_LIBS', DIR_ . 'engine/libs/');
 
-        // set the theme folder
+        // load core Webmart files
+        $files = scandir(DIR_CORE);
+
+        array_shift($files); // remove . and ..
+        array_shift($files);
+
+        foreach ($files as $name) {
+            if (file_exists(DIR_CORE . $name) && $name != 'Webmart.php') {
+                require_once DIR_CORE . $name;
+            }
+        }
+
+        // check theme folder
+        if (!is_dir(DIR_ . 'view/' . WM_THEME . '/')) {
+            self::error('Theme directory', 'does not exist', 'view/' . WM_THEME);
+        }
+
+        // set theme folder
         define('DIR_VIEW', DIR_ . 'view/' . WM_THEME . '/');
 
-        try {
-            if (!is_dir(DIR_VIEW)) {
-                throw new Exception('Theme directory is invalid.');
-            } elseif (!file_exists(DIR_VIEW . 'Config.php')) {
-                throw new Exception('Theme configuration file is missing.');
-            } elseif (!file_exists(DIR_VIEW . 'Theme.php')) {
-                throw new Exception('Theme routing file is missing.');
-            }
-        } catch (Exception $error) {
-            echo 'Webmart - ' . $error->getMessage();
-            exit();
+        // check theme
+        if (!file_exists(DIR_VIEW . 'Config.php')) {
+            self::error('Theme configuration file', 'is missing', 'view/' . WM_THEME . '/Config.php');
+        } elseif (!file_exists(DIR_VIEW . 'Theme.php')) {
+            self::error('Theme controller', 'is missing', 'view/' . WM_THEME . '/Theme.php');
         }
 
         require_once DIR_VIEW . 'Config.php';
         require_once DIR_VIEW . 'Theme.php';
 
+        // assign theme dirs
         define('DIR_ASSETS', DIR_VIEW . 'assets/');
         define('DIR_CLASSES', DIR_VIEW . 'classes/');
         define('DIR_CONTROLLERS', DIR_VIEW . 'controllers/');
@@ -116,9 +146,11 @@ class Webmart
             ini_set('display_errors', 0);
         }
 
-        require_once DIR_CORE . 'Tools.php';
-        require_once DIR_CORE . 'View.php';
+        // prepare Flight library
         require_once DIR_ENGINE . 'flight/autoload.php';
+
+        self::$flight = new flight\Engine();
+        self::$flight->set('flight.views.path', DIR_TEMPLATES);
 
         self::initRoute();
     }
@@ -129,22 +161,6 @@ class Webmart
 
     private static function initRoute()
     {
-        self::$flight = new flight\Engine();
-        self::$flight->set('flight.views.path', DIR_TEMPLATES);
-
-        self::$flight->map('notFound', function() {
-            try {
-                if (!file_exists(DIR_TEMPLATES . '404.php')) {
-                    throw new Exception('404 template is missing.');
-                }
-            } catch (Exception $error) {
-                echo 'Webmart - ' . $error->getMessage();
-                exit();
-            }
-
-            require_once DIR_TEMPLATES . '404.php';
-        });
-
         // start the routing process
         self::$flight->route('*', function() {
             $request = self::$flight->request();
