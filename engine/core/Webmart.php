@@ -75,6 +75,17 @@ class Webmart
     * @method
     */
 
+    public static function render($template = '', $data = null, $varname = '')
+    {
+        if (file_exists(DIR_TEMPLATE . $template . '.php')) {
+            self::$flight->render($template, $data, $varname);
+        }
+    }
+
+    /**
+    * @method
+    */
+
     public static function error($start = '', $end = '', $variable)
     {
         if (isset($variable)) {
