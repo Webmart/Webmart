@@ -198,4 +198,16 @@ class Tools
         return new Quill();
     }
 
+    /**
+    * @method
+    */
+
+    public static function newGoogleLibrary($name = '', $version = '')
+    {
+        $available = array(
+            'jQuery' => '',
+            'maps' => ''
+        );
+    }
+
 }
