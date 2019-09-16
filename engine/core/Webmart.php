@@ -115,6 +115,11 @@ class Webmart
             }
         }
 
+        // check theme setting
+        if (WM_THEME == '' || !WM_THEME) {
+            self::error('Theme folder has not been set');
+        }
+
         // check theme folder
         if (!is_dir(DIR_ . 'view/' . WM_THEME . '/')) {
             self::error('Theme directory', 'does not exist', 'view/' . WM_THEME);
