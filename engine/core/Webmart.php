@@ -62,9 +62,24 @@ class Webmart
 
     public static function redirect($where, $http = null)
     {
-        if (!$where) return;
+        if (!$where) {
+            return;
+        }
+
         self::$flight->redirect($where, !$http ? '303' : $http);
+
         exit();
+    }
+
+    /**
+    * @method
+    */
+
+    public static function render($template = '', $data = null, $varname = '')
+    {
+        if (file_exists(DIR_TEMPLATE . $template . '.php')) {
+            self::$flight->render($template, $data, $varname);
+        }
     }
 
     /**
@@ -109,6 +124,11 @@ class Webmart
             if (file_exists(DIR_CORE . $name) && $name != 'Webmart.php') {
                 require_once DIR_CORE . $name;
             }
+        }
+
+        // check theme setting
+        if (WM_THEME == '' || !WM_THEME) {
+            self::error('Theme folder has not been set');
         }
 
         // check theme folder
@@ -341,14 +361,19 @@ class Webmart
         self::$flight->view()->set('vars', Webmart\View::$vars);
         self::$flight->view()->set('html', Webmart\View::$html);
 
-        foreach (array('header', 'footer') as $global) {
-            if (file_exists(DIR_TEMPLATES . $global . '.php')) {
-                self::$flight->render($global, $global, $global);
-            }
+        // autoload the header template
+        if (file_exists(DIR_TEMPLATES . 'header.php')) {
+            self::$flight->render('header');
         }
 
+        // autoload the page template
         if (file_exists(DIR_TEMPLATES . self::$view . '.php')) {
             self::$flight->render(self::$view);
+        }
+
+        // autoload the footer template
+        if (file_exists(DIR_TEMPLATES . 'footer.php')) {
+            self::$flight->render('footer');
         }
 
         self::$initialised = true;
