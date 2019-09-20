@@ -144,4 +144,33 @@ class View
         }
     }
 
+    /**
+    * @method
+    */
+
+    public static function addGoogleLibrary($name, $info = '')
+    {
+        $supported = array(
+            'jquery', // https://developers.google.com/speed/libraries/
+            'maps' // https://developers.google.com/maps/documentation/javascript/libraries
+        );
+
+        $name = strtolower(str_replace(' ', '', $name));
+        $script = '';
+
+        if (!in_array($name, $supported)) {
+            return;
+        }
+
+        if ($name == 'maps') { // handle Google maps
+            $script .= $info . '&libraries=geometry';
+
+            self::addAsset('js', 'https://maps.googleapis.com/maps/api/js?key=' . $script);
+        } else { // handle all other similarly loaded scripts
+            $script .= $name . '/' . $info . '/' . $name . '.min.js';
+
+            self::addAsset('js', 'https://ajax.googleapis.com/ajax/libs/' . $script);
+        }
+    }
+
 }
