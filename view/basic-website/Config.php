@@ -51,8 +51,6 @@ class Config
 
     public static $googlelibs = array(
         'jquery' => '3.4.1',
-        'jquerymobile' => '1.4.5',
-        'jqueryui' => '1.12.1',
         'maps' => 'API_KEY'
     );
 
