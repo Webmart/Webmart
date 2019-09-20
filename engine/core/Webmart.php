@@ -344,6 +344,8 @@ class Webmart
             Webmart\View::addGoogleFont(\Config::$googlefonts);
         }
 
+        // Flight setup of the view
+
         self::$flight->view()->set('vars', Webmart\View::$vars);
         self::$flight->view()->set('html', Webmart\View::$html);
 
