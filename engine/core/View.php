@@ -70,7 +70,15 @@ class View
 
         $html = '';
 
-        if (file_exists(DIR_ASSETS . $type . '/' . $name . '.' . $type)) {
+        if (strpos($name, 'http') === 0) {
+            if ($type == 'css') {
+                $html .= '<link rel="stylesheet" href="' . $name . '" />';
+            } elseif ($type == 'js') {
+                $html .= '<script src="' . $name . '"></script>';
+            }
+
+            self::addMarkup('assets', $html);
+        } elseif (file_exists(DIR_ASSETS . $type . '/' . $name . '.' . $type)) {
             $url = self::$vars->urls[$type] . $name . '.' . $type;
 
             if ($type == 'css') {
@@ -79,10 +87,8 @@ class View
                 $html .= '<script src="' . $url . '"></script>';
             }
 
-            return self::addMarkup('assets', $html);
+            self::addMarkup('assets', $html);
         }
-
-        return null;
     }
 
     /**
