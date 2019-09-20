@@ -1,3 +1,4 @@
 .htaccess
 robots.txt
 sitemap.xml
+vendor/
