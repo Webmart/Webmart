@@ -263,7 +263,27 @@ class Webmart
                 include_once DIR_VIEW . 'functions.php';
             }
 
+            // Check/generate a robots.txt file
+
+            if (!file_exists(DIR_ . 'robots.txt')) {
+                $robots = 'User-agent: *' . PHP_EOL;
+
+                if (isset(\Config::$noindex) && !empty(\Config::$noindex)) {
+                    foreach (\Config::$noindex as $page) {
+                        foreach (array('Disallow', 'Noindex') as $cmd) {
+                            $robots .= $cmd . ': /' . $page . '/' . PHP_EOL;
+                        }
+                    }
+                } else {
+                    $robots .= 'Disallow: ' . PHP_EOL;
+                    $robots .= 'Noindex: ' . PHP_EOL;
+                }
+
+                file_put_contents(DIR_ . 'robots.txt', $robots);
+            }
+
             self::initView();
+
             return true; // continue to next routing rule (Flight)
         });
 

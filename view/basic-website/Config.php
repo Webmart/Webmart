@@ -47,6 +47,12 @@ class Config
         'example-(subpage-(finalpage))'
     );
 
+    /** Disallow pages to be indexed - robots.txt **/
+
+    public static $noindex = array(
+        'home'
+    );
+      
     /** Load Google Hosted Libraries */
 
     public static $googlelibs = array(
