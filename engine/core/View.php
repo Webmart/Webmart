@@ -105,7 +105,7 @@ class View
             }
         } else { // handle one font
             if (!empty($set)) {
-                $font = ucfirst(strtolower($name));
+                $font = str_replace(' ', '+', $name);
 
                 // add font weights
                 if (isset($set['weights']) && !empty($set['weights'])) {
