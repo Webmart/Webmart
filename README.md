@@ -35,4 +35,19 @@ Download the [latest release](https://github.com/webmart/webmart/archive/master.
 
 Open in your browser.
 
+Start with:
+
+```
+view/basic-website/Config.php
+view/basic-website/Theme.php
+```
+
+[Learn more](http://webmartphp.com/) about what you can do with Webmart.
+
+### More
+
+Visit the [GitHub page](https://github.com/Webmart/) to explore more themes.
+
 ## Features
+
+Soon...
