@@ -85,4 +85,45 @@ class View
         return null;
     }
 
+    /**
+    * @method
+    */
+
+    public static function addGoogleFont($name, $set = array())
+    {
+        $html = '';
+
+        if (is_array($name)) { // handle multiple fonts
+            foreach ($name as $fontname => $data) {
+                self::addGoogleFont($fontname, $data);
+            }
+        } else { // handle one font
+            if (!empty($set)) {
+                $font = ucfirst(strtolower($name));
+
+                // add font weights
+                if (isset($set['weights']) && !empty($set['weights'])) {
+                    $font .= ':';
+
+                    foreach ($set['weights'] as $weight) {
+                        $font .= $weight . ',';
+                    }
+                }
+
+                $font .= '&display=swap';
+
+                // add font subsets
+                if (isset($set['subsets']) && !empty($set['subsets'])) {
+                    $font .= '&subset=';
+
+                    foreach ($set['subsets'] as $subset) {
+                        $font .= $subset . ',';
+                    }
+                }
+
+                self::addAsset('css', 'https://fonts.googleapis.com/css?family=' . $font);
+            }
+        }
+    }
+
 }
