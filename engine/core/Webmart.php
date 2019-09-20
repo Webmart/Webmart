@@ -338,6 +338,12 @@ class Webmart
             }
         }
 
+        // Google fonts
+
+        if (isset(\Config::$googlefonts) && !empty(\Config::$googlefonts)) {
+            Webmart\View::addGoogleFont(\Config::$googlefonts);
+        }
+
         self::$flight->view()->set('vars', Webmart\View::$vars);
         self::$flight->view()->set('html', Webmart\View::$html);
 
