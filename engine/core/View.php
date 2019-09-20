@@ -104,7 +104,6 @@ class View
                 self::addGoogleFont($fontname, $data);
             }
         } else { // handle one font
-            var_dump(count($set['weights']));
             if (!empty($set)) {
                 $font = ucfirst(strtolower($name));
 
