@@ -38,8 +38,8 @@ Open in your browser.
 Start with:
 
 ```
-view/basic-website/Config.php
-view/basic-website/Theme.php
+view/{THEME_NAME}/Config.php
+view/{THEME_NAME}/Theme.php
 ```
 
 [Learn more](http://webmartphp.com/) about what you can do with Webmart.
