@@ -6,7 +6,9 @@
 * https://github.com/Webmart
 */
 
-define('WM_THEME', ''); /** Set a theme folder */
+define('WM_FOLDER', ''); /** define a folder, leave empty for root - htaccess **/
+
+define('WM_THEME', 'basic-website'); /** Set a theme folder */
 define('WM_DEBUG', false); /** Enable debug mode */
 define('WM_BASE', ''); /** Set the base URL */
 

@@ -108,6 +108,27 @@ class Webmart
             return;
         }
 
+        // Check/generate .htaccess file
+
+        if (!file_exists('.htaccess')) {
+            $htaccess = 'RewriteEngine On' . PHP_EOL;
+            $htaccess .= 'RewriteBase /' . WM_FOLDER;
+
+            if (WM_FOLDER != '') {
+                $htaccess .= '/';
+            }
+
+            $htaccess .= PHP_EOL;
+
+            $htaccess .= 'RewriteCond %{REQUEST_FILENAME} !-f' . PHP_EOL;
+            $htaccess .= 'RewriteCond %{REQUEST_FILENAME} !-d' . PHP_EOL;
+            $htaccess .= 'RewriteRule ^(.*)$ index.php [QSA,L]' . PHP_EOL;
+
+            file_put_contents('.htaccess', $htaccess);
+
+            self::error('Please refresh the page');
+        }
+
         define('DIR_', getcwd() . '/');
 
         define('DIR_ENGINE', DIR_ . 'engine/');
@@ -377,6 +398,22 @@ class Webmart
                 self::addAsset($type, self::${$file});
             }
         }
+
+        // Google hosted libraries
+
+        if (isset(\Config::$googlelibs) && !empty(\Config::$googlelibs)) {
+            foreach (\Config::$googlelibs as $name => $data) {
+                Webmart\View::addGoogleLibrary($name, $data);
+            }
+        }
+
+        // Google fonts
+
+        if (isset(\Config::$googlefonts) && !empty(\Config::$googlefonts)) {
+            Webmart\View::addGoogleFont(\Config::$googlefonts);
+        }
+
+        // Flight setup of the view
 
         self::$flight->view()->set('vars', Webmart\View::$vars);
         self::$flight->view()->set('html', Webmart\View::$html);
