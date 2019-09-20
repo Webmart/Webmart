@@ -29,9 +29,7 @@ If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
 composer require webmart/webmart
 ```
 
-### Manually
-
-Download the [latest release](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
+Or download the [latest release](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
 
 Open in your browser.
 
@@ -39,7 +37,7 @@ Open in your browser.
 
 Visit the [GitHub page](https://github.com/Webmart/) to explore themes.
 
-Start working on the `basic-website` theme or just create your own theme.
+Start working on the `basic-website` theme or just create your own.
 
 Open `view/{THEME_NAME}/Config.php` and start editing.
 
