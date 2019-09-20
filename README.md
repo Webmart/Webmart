@@ -4,16 +4,16 @@ A basic PHP framework for web applications and websites.
 
 [http://webmartphp.com/](http://webmartphp.com/)
 
-### Requirements
+### Required
 
 - PHP: ^5.5
-- Routing: [Flight](https://github.com/mikecao/flight)
+- Apache
 
 ### License
 
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
 
-### Attribution
+### Thanks
 
 - Not-quite-a-dev, [George Kary](http://georgekary.com/)
 - Beardy guy, [Valandis Zotos](https://github.com/BalzoT)
