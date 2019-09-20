@@ -21,8 +21,6 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 ## Install
 
-### Composer
-
 If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
 
 ```
