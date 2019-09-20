@@ -47,4 +47,10 @@ class Config
         'example-(subpage-(finalpage))'
     );
 
+    /** Disallow pages to be indexed - robots.txt **/
+
+    public static $noindex = array(
+        'home'
+    );
+
 }
