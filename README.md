@@ -35,17 +35,21 @@ Download the [latest release](https://github.com/webmart/webmart/archive/master.
 
 Open in your browser.
 
-Start with:
+## Edit
 
-```
-view/{THEME_NAME}/Config.php
-view/{THEME_NAME}/Theme.php
-```
+Visit the [GitHub page](https://github.com/Webmart/) to explore themes.
 
-[Learn more](http://webmartphp.com/) about what you can do with Webmart.
+Start working on the `basic-website` theme or just create your own theme.
 
-Visit the [GitHub page](https://github.com/Webmart/) to explore more themes.
+Open `view/{THEME_NAME}/Config.php` and start editing.
 
-## Features
+### Supports
 
-Soon...
+- Bootstrap
+- jQuery
+- Google Maps
+- Google Fonts
+
+### More
+
+Visit [webmart/learn](http://webmartphp.com/) to learn more about Webmart.
