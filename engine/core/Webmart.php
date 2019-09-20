@@ -129,8 +129,6 @@ class Webmart
             self::error('Please refresh the page');
         }
 
-        var_dump(1);
-
         define('DIR_', getcwd() . '/');
 
         define('DIR_ENGINE', DIR_ . 'engine/');
