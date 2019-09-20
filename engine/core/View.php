@@ -97,8 +97,6 @@ class View
 
     public static function addGoogleFont($name, $set = array())
     {
-        $html = '';
-
         if (is_array($name)) { // handle multiple fonts
             foreach ($name as $fontname => $data) {
                 self::addGoogleFont($fontname, $data);
