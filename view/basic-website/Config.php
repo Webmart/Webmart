@@ -59,7 +59,7 @@ class Config
     /** Load Google fonts */
 
     public static $googlefonts = array(
-        'roboto' => array(
+        'Fira Sans' => array(
             'weights' => array(
                 '300i',
                 '400',
