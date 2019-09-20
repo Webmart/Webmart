@@ -24,6 +24,7 @@
         }
     ],
     "require": {
+        "php" : "^5.5",
         "catfan/medoo" : "1.7.*",
         "mikecao/flight" : "1.3.7"
     }
