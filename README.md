@@ -41,5 +41,4 @@ Explore the [documentation](http://webmartphp.com/) to learn more.
 ---
 
 ###### Co-created by [George Kary](http://georgekary.com/), [Valandis Zotos](https://github.com/BalzoT), [John Dimas](https://github.com/jdimas87).
-
 ###### Special thanks to [mikecao](https://github.com/mikecao/flight).
