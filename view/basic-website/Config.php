@@ -47,4 +47,27 @@ class Config
         'example-(subpage-(finalpage))'
     );
 
+    /** Load Google Hosted Libraries */
+
+    public static $googlelibs = array(
+        'jquery' => '3.4.1',
+        'maps' => 'API_KEY'
+    );
+
+    /** Load Google fonts */
+
+    public static $googlefonts = array(
+        'Fira Sans' => array(
+            'weights' => array(
+                '300i',
+                '400',
+                '400i'
+            ),
+            'subsets' => array(
+                'cyrillic-ext',
+                'greek-ext'
+            )
+        )
+    );
+
 }

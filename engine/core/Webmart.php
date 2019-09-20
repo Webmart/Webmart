@@ -358,6 +358,22 @@ class Webmart
             }
         }
 
+        // Google hosted libraries
+
+        if (isset(\Config::$googlelibs) && !empty(\Config::$googlelibs)) {
+            foreach (\Config::$googlelibs as $name => $data) {
+                Webmart\View::addGoogleLibrary($name, $data);
+            }
+        }
+
+        // Google fonts
+
+        if (isset(\Config::$googlefonts) && !empty(\Config::$googlefonts)) {
+            Webmart\View::addGoogleFont(\Config::$googlefonts);
+        }
+
+        // Flight setup of the view
+
         self::$flight->view()->set('vars', Webmart\View::$vars);
         self::$flight->view()->set('html', Webmart\View::$html);
 
