@@ -23,7 +23,7 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 ### Composer
 
-If you're using Composer, run the following command:
+If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
 
 ```
 composer require webmart/webmart
