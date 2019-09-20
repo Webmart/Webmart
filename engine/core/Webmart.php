@@ -108,6 +108,29 @@ class Webmart
             return;
         }
 
+        // Check/generate .htaccess file
+
+        if (!file_exists('.htaccess')) {
+            $htaccess = 'RewriteEngine On' . PHP_EOL;
+            $htaccess .= 'RewriteBase /' . WM_FOLDER;
+
+            if (WM_FOLDER != '') {
+                $htaccess .= '/';
+            }
+
+            $htaccess .= PHP_EOL;
+
+            $htaccess .= 'RewriteCond %{REQUEST_FILENAME} !-f' . PHP_EOL;
+            $htaccess .= 'RewriteCond %{REQUEST_FILENAME} !-d' . PHP_EOL;
+            $htaccess .= 'RewriteRule ^(.*)$ index.php [QSA,L]' . PHP_EOL;
+
+            file_put_contents('.htaccess', $htaccess);
+
+            self::error('Please refresh the page');
+        }
+
+        var_dump(1);
+
         define('DIR_', getcwd() . '/');
 
         define('DIR_ENGINE', DIR_ . 'engine/');
