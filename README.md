@@ -31,6 +31,8 @@ composer require webmart/webmart
 
 ### Manually
 
-Download the [latest release](https://github.com/webmart/webmart/archive/master.zip).
+Download the [latest release](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
+
+Open in your browser.
 
 ## Features
