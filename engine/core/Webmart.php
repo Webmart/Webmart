@@ -250,7 +250,7 @@ class Webmart
                 if (isset(\Config::$noindex) && !empty(\Config::$noindex)) {
                     foreach (\Config::$noindex as $page) {
                         foreach (array('Disallow', 'Noindex') as $cmd) {
-                            $robots .= $cmd . ' /' . $page . '/' . PHP_EOL;
+                            $robots .= $cmd . ': /' . $page . '/' . PHP_EOL;
                         }
                     }
                 } else {
@@ -262,7 +262,7 @@ class Webmart
             }
 
             self::initView();
-            
+
             return true; // continue to next routing rule (Flight)
         });
 
