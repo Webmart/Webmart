@@ -104,15 +104,23 @@ class View
                 self::addGoogleFont($fontname, $data);
             }
         } else { // handle one font
+            var_dump(count($set['weights']));
             if (!empty($set)) {
                 $font = ucfirst(strtolower($name));
 
                 // add font weights
                 if (isset($set['weights']) && !empty($set['weights'])) {
+                    $i = 1;
                     $font .= ':';
 
                     foreach ($set['weights'] as $weight) {
-                        $font .= $weight . ',';
+                        $font .= $weight;
+
+                        if ($i < count($set['weights'])) {
+                            $font .= ',';
+                        }
+
+                        $i++;
                     }
                 }
 
@@ -120,10 +128,17 @@ class View
 
                 // add font subsets
                 if (isset($set['subsets']) && !empty($set['subsets'])) {
+                    $i = 1;
                     $font .= '&subset=';
 
                     foreach ($set['subsets'] as $subset) {
-                        $font .= $subset . ',';
+                        $font .= $subset;
+
+                        if ($i < count($set['subsets'])) {
+                            $font .= ',';
+                        }
+
+                        $i++;
                     }
                 }
 
