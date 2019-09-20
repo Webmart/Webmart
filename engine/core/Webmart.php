@@ -262,6 +262,7 @@ class Webmart
             }
 
             self::initView();
+            
             return true; // continue to next routing rule (Flight)
         });
 
