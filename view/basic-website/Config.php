@@ -78,6 +78,6 @@ class Config
 
     /** Load Bootstrap */
 
-    public static $bootstrap = 'bundle';
+    public static $bootstrap = 'bundle'; // false, true, 'bundle'
 
 }
