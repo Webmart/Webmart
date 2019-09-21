@@ -1,9 +1,9 @@
 <?php
 
 /*!
-* Webmart 2.0
-* A simple PHP framework for building web applications and websites.
-* https://github.com/Webmart
+* Webmart
+* A basic PHP framework for web applications and websites.
+* https://webmartphp.com/
 */
 
 require 'wm.php';
