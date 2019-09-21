@@ -13,9 +13,20 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 ## Install
 
-Download the [latest release](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
+- [Manual](#manual)
+- [Composer](#composer)
+
+### Manual
+
+Download [Webmart](https://github.com/webmart/webmart/archive/master.zip).
+
+Unzip in your directory.
+
+Download [Flight](https://github.com/mikecao/flight). Unzip flight folder inside `engine/core`.
 
 Open in your browser.
+
+### Composer
 
 If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
 
@@ -49,4 +60,4 @@ Explore the [documentation](http://webmartphp.com/) to learn more.
 ---
 
 ###### Co-created by [George Kary](http://georgekary.com/), [Valandis Zotos](https://github.com/BalzoT), [John Dimas](https://github.com/jdimas87).
-###### Special thanks to [mikecao](https://github.com/mikecao/flight).
+###### Special thanks to [mikecao](https://github.com/mikecao).
