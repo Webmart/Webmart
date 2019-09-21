@@ -20,7 +20,7 @@ Download [Webmart](https://github.com/webmart/webmart/archive/master.zip). Unzip
 
 Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip flight folder inside `engine/core/` (make sure it's not flight/flight).
 
-You can optionally use [other PHP libraries](http://webmartphp.com/docs/libraries/), including those supported by Webmart.
+You can optionally use extra PHP libraries, including those [supported by Webmart](http://webmartphp.com/docs/libraries/).
 
 Open in your browser.
 
@@ -39,6 +39,8 @@ Create an `index.php` file in your root directory. Require the autoloader:
 ```php
 require 'vendor/autoload.php';
 ```
+
+You can optionally install the suggested libraries, [supported by Webmart](http://webmartphp.com/docs/libraries/).
 
 Open in your browser.
 
