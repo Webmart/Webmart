@@ -444,6 +444,11 @@ class Webmart
             Webmart\View::addGoogleFont(\Config::$googlefonts);
         }
 
+        // Bootstrap
+        if (isset(\Config::$bootstrap) && \Config::$bootstrap != false) {
+            Webmart\View::addBootstrap(\Config::$bootstrap === 'bundle' ? true : false);
+        }
+
         // Flight setup of the view
 
         self::$flight->view()->set('vars', Webmart\View::$vars);
