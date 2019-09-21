@@ -3,7 +3,8 @@
     <head>
         <title><?php echo $vars->title ?></title>
         <meta name="description" content="<?php echo $vars->description ?>" />
+        <?php echo $vars->head ?>
     </head>
-    <body>
+    <body class="<?php echo $vars->body ?>">
         <header></header>
         <main>
