@@ -1,3 +1,5 @@
 .htaccess
 robots.txt
 sitemap.xml
+engine/libs/
+engine/flight/
