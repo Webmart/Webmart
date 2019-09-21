@@ -4,7 +4,7 @@ A basic PHP framework for web applications and websites. [http://webmartphp.com/
 
 ### Required
 
-- PHP: (untested)
+- PHP: >=5.5.*
 - Apache
 
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
