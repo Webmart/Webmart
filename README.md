@@ -14,7 +14,7 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 The first time you'll open in your browser, Webmart will generate `.htaccess` and `wm.php` for you.
 
-### Download manually
+### Setup manually
 
 Download [Webmart](https://github.com/webmart/webmart/archive/master.zip). Unzip in your directory.
 
