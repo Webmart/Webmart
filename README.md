@@ -26,13 +26,13 @@ Open in your browser.
 
 Available versions [here](https://packagist.org/packages/webmart/webmart).
 
-If you're using Composer, run:
+Run:
 
 ```
 composer require webmart/webmart
 ```
 
-Create an `index.php` file in your root directory and run the autoloader:
+Create an `index.php` file in your root directory. Require the autoloader:
 
 ```php
 require 'vendor/autoload.php';
