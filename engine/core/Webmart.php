@@ -421,8 +421,8 @@ class Webmart
 
         $head .= '" />';
 
-        self::addMarkup('head', $head);
-        self::addMarkup('body', ' view-' . self::$view . ' page-' . self::$page);
+        self::addValue('head', $head);
+        self::addValue('body', ' view-' . self::$view . ' page-' . self::$page);
 
         foreach (array('page', 'view') as $file) {
             foreach (array('css', 'js') as $type) {
