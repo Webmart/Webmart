@@ -30,7 +30,7 @@
     },
     "suggest" : {
         "mobiledetect/mobiledetectlib" : "Webmart supports the Mobile_Detect library with Webmart::newDetect().",
-        "catfan/medoo" : "Webmart supports the Medoo library for handling databases with Webmart::newDatabase() or by setting up your theme's Config.php."
+        "catfan/medoo" : "Webmart supports the Medoo library for databases with Webmart::newDatabase()."
     },
     "autoload" : {
         "files" : [
