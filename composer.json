@@ -24,10 +24,9 @@
             "role" : "Co-creator"
         }
     ],
-    "archive" : {
-        "exclude" : [
-            "/engine/flight",
-            "/engine/libs"
+    "autoload" : {
+        "files" : [
+            "autoload.php"
         ]
     }
 }
