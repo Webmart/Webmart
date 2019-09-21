@@ -44,7 +44,7 @@ Open in your browser.
 
 In your selected theme under `/webmart/view/`, open `Config.php` and start editing.
 
-Learn more about the features and supported libraries at [http://webmartphp.com/](http://webmartphp.com/docs/).
+Learn more at [http://webmartphp.com/](http://webmartphp.com/docs/).
 
 
 ###### Co-created by [George Kary](http://georgekary.com/), [Valandis Zotos](https://github.com/BalzoT), [John Dimas](https://github.com/jdimas87).<br>Special thanks to [mikecao](https://github.com/mikecao).
