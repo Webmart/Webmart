@@ -5,6 +5,7 @@ A basic PHP framework for web applications and websites. [http://webmartphp.com/
 ### Required
 
 - PHP: >=5.5.*
+- [Flight](https://github.com/mikecao/flight/), by mikecao
 - Apache
 
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
