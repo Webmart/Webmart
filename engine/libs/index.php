@@ -6,6 +6,4 @@
 * https://webmartphp.com/
 */
 
-require 'engine/core/Webmart.php';
-
-Webmart::init(true);
+/** Add your PHP libraries here, ex. Medoo.php, Mobile_Detect.php, etc */

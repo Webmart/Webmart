@@ -6,7 +6,6 @@
 * https://webmartphp.com/
 */
 
-require 'wm.php';
 require 'engine/core/Webmart.php';
 
 Webmart::init();

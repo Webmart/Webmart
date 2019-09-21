@@ -108,11 +108,30 @@ class Webmart
     * @method
     */
 
-    public static function init()
+    public static function init($composer = false)
     {
         if (self::$initialised) {
             return;
         }
+
+        // Setup root/base directories
+
+        define('WM_DIR', getcwd() . '/');
+
+        if ($composer) {
+            define('WM_ROOT', realpath(__DIR__ . '/../../..'));
+        } else {
+            define('WM_ROOT', WM_DIR);
+        }
+
+        var_dump(WM_DIR, WM_ROOT);
+
+        // Require config file
+        require WM_DIR . 'wm.php';
+
+        var_dump(WM_THEME);
+
+        die();
 
         // Check/generate .htaccess file
 
@@ -135,7 +154,7 @@ class Webmart
             self::error('Please refresh the page');
         }
 
-        define('DIR_', getcwd() . '/');
+
 
         define('DIR_ENGINE', DIR_ . 'engine/');
         define('DIR_CORE', DIR_ . 'engine/core/');
