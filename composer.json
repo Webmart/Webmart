@@ -29,8 +29,8 @@
         "mikecao/flight" : "1.3.*"
     },
     "suggest" : {
-        "mobiledetect/mobiledetectlib" : "2.8.*",
-        "catfan/medoo" : "1.7.*"
+        "mobiledetect/mobiledetectlib" : "Mobile Detect library.",
+        "catfan/medoo" : "Database handler library."
     },
     "autoload" : {
         "files" : [
