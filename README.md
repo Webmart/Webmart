@@ -25,7 +25,9 @@ Open in your browser.
 
 ### Composer
 
-If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
+Available versions [here](https://packagist.org/packages/webmart/webmart).
+
+If you're using Composer, run:
 
 ```
 composer require webmart/webmart
