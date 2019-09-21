@@ -1,5 +1,11 @@
 <?php
 
+/*!
+* Webmart
+* A basic PHP framework for web applications and websites.
+* https://webmartphp.com/
+*/
+
 class Webmart
 {
 
@@ -102,15 +108,32 @@ class Webmart
     * @method
     */
 
-    public static function init()
+    public static function init($composer = false)
     {
         if (self::$initialised) {
             return;
         }
 
+        // Setup root/base directories
+
+        define('WM_ROOT', getcwd() . '/');
+
+        if ($composer) {
+            define('WM_DIR', realpath(__DIR__ . '/../..') . '/');
+        } else {
+            define('WM_DIR', WM_ROOT);
+        }
+
+        define('WM_DIR_ENGINE', WM_DIR . 'engine/');
+        define('WM_DIR_CORE', WM_DIR . 'engine/core/');
+        define('WM_DIR_LIBS', WM_DIR . 'engine/libs/');
+
+        // Check/setup/require configuration file
+        require WM_DIR . 'wm.php';
+
         // Check/generate .htaccess file
 
-        if (!file_exists('.htaccess')) {
+        if (!file_exists(WM_ROOT . '.htaccess')) {
             $htaccess = 'RewriteEngine On' . PHP_EOL;
             $htaccess .= 'RewriteBase /' . WM_FOLDER;
 
@@ -124,28 +147,25 @@ class Webmart
             $htaccess .= 'RewriteCond %{REQUEST_FILENAME} !-d' . PHP_EOL;
             $htaccess .= 'RewriteRule ^(.*)$ index.php [QSA,L]' . PHP_EOL;
 
-            file_put_contents('.htaccess', $htaccess);
+            file_put_contents(WM_ROOT . '.htaccess', $htaccess);
 
-            self::error('Please refresh the page');
+            self::error('Generated .htaccess file. ', 'Please refresh the page');
         }
 
-        define('DIR_', getcwd() . '/');
+        // load core Webmart classes
 
-        define('DIR_ENGINE', DIR_ . 'engine/');
-        define('DIR_CORE', DIR_ . 'engine/core/');
-        define('DIR_LIBS', DIR_ . 'engine/libs/');
-
-        // load core Webmart files
-        $files = scandir(DIR_CORE);
+        $files = scandir(WM_DIR_CORE);
 
         array_shift($files); // remove . and ..
         array_shift($files);
 
         foreach ($files as $name) {
-            if (file_exists(DIR_CORE . $name) && $name != 'Webmart.php') {
-                require_once DIR_CORE . $name;
+            if (file_exists(WM_DIR_CORE . $name) && $name != 'Webmart.php') {
+                require_once WM_DIR_CORE . $name;
             }
         }
+
+        // check/setup/prepare the theme
 
         // check theme setting
         if (WM_THEME == '' || !WM_THEME) {
@@ -153,31 +173,33 @@ class Webmart
         }
 
         // check theme folder
-        if (!is_dir(DIR_ . 'view/' . WM_THEME . '/')) {
+        if (!is_dir(WM_DIR . 'view/' . WM_THEME . '/')) {
             self::error('Theme directory', 'does not exist', 'view/' . WM_THEME);
         }
 
         // set theme folder
-        define('DIR_VIEW', DIR_ . 'view/' . WM_THEME . '/');
+        define('WM_DIR_VIEW', WM_DIR . 'view/' . WM_THEME . '/');
 
-        // check theme
-        if (!file_exists(DIR_VIEW . 'Config.php')) {
+        // check/require theme configuration files
+
+        if (!file_exists(WM_DIR_VIEW . 'Config.php')) {
             self::error('Theme configuration file', 'is missing', 'view/' . WM_THEME . '/Config.php');
-        } elseif (!file_exists(DIR_VIEW . 'Theme.php')) {
+        } elseif (!file_exists(WM_DIR_VIEW . 'Theme.php')) {
             self::error('Theme controller', 'is missing', 'view/' . WM_THEME . '/Theme.php');
         }
 
-        require_once DIR_VIEW . 'Config.php';
-        require_once DIR_VIEW . 'Theme.php';
+        require_once WM_DIR_VIEW . 'Config.php';
+        require_once WM_DIR_VIEW . 'Theme.php';
 
         // assign theme dirs
-        define('DIR_ASSETS', DIR_VIEW . 'assets/');
-        define('DIR_CLASSES', DIR_VIEW . 'classes/');
-        define('DIR_CONTROLLERS', DIR_VIEW . 'controllers/');
-        define('DIR_TEMPLATES', DIR_VIEW . 'templates/');
-        define('DIR_JSON', DIR_VIEW . 'json/');
+        define('WM_DIR_ASSETS', WM_DIR_VIEW . 'assets/');
+        define('WM_DIR_CLASSES', WM_DIR_VIEW . 'classes/');
+        define('WM_DIR_CONTROLLERS', WM_DIR_VIEW . 'controllers/');
+        define('WM_DIR_TEMPLATES', WM_DIR_VIEW . 'templates/');
+        define('WM_DIR_JSON', WM_DIR_VIEW . 'json/');
 
         // open debugging
+
         if (WM_DEBUG == true) {
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
@@ -187,11 +209,20 @@ class Webmart
             ini_set('display_errors', 0);
         }
 
-        // prepare Flight library
-        require_once DIR_ENGINE . 'flight/autoload.php';
+        // setup Flight routing
+
+        if (!$composer) {
+            if (!file_exists(WM_DIR_ENGINE . 'flight/autoload.php')) {
+                self::error('Flight not available. ', 'See installation guide at https://github.com/Webmart/webmart/');
+            }
+
+            require_once WM_DIR_ENGINE . 'flight/autoload.php';
+        }
 
         self::$flight = new flight\Engine();
-        self::$flight->set('flight.views.path', DIR_TEMPLATES);
+        self::$flight->set('flight.views.path', WM_DIR_TEMPLATES);
+
+        // start the routing
 
         self::initRoute();
     }
@@ -259,13 +290,13 @@ class Webmart
             }
 
             // load custom executable file
-            if (WM_DEBUG && file_exists(DIR_VIEW . 'functions.php')) {
-                include_once DIR_VIEW . 'functions.php';
+            if (WM_DEBUG && file_exists(WM_DIR_VIEW . 'functions.php')) {
+                include_once WM_DIR_VIEW . 'functions.php';
             }
 
             // Check/generate a robots.txt file
 
-            if (!file_exists(DIR_ . 'robots.txt')) {
+            if (!file_exists(WM_ROOT . 'robots.txt')) {
                 $robots = 'User-agent: *' . PHP_EOL;
 
                 if (isset(\Config::$noindex) && !empty(\Config::$noindex)) {
@@ -279,7 +310,7 @@ class Webmart
                     $robots .= 'Noindex: ' . PHP_EOL;
                 }
 
-                file_put_contents(DIR_ . 'robots.txt', $robots);
+                file_put_contents(WM_ROOT . 'robots.txt', $robots);
             }
 
             self::initView();
@@ -312,8 +343,8 @@ class Webmart
                 if (empty($args)) $args = null;
 
                 foreach ($parsed as $item) {
-                    if (file_exists(DIR_CONTROLLERS . ucfirst($item) . '.php')) {
-                        require DIR_CONTROLLERS . ucfirst($item) . '.php';
+                    if (file_exists(WM_DIR_CONTROLLERS . ucfirst($item) . '.php')) {
+                        require WM_DIR_CONTROLLERS . ucfirst($item) . '.php';
                         $controller = ucfirst($item);
                     }
                 }
@@ -419,17 +450,17 @@ class Webmart
         self::$flight->view()->set('html', Webmart\View::$html);
 
         // autoload the header template
-        if (file_exists(DIR_TEMPLATES . 'header.php')) {
+        if (file_exists(WM_DIR_TEMPLATES . 'header.php')) {
             self::$flight->render('header');
         }
 
         // autoload the page template
-        if (file_exists(DIR_TEMPLATES . self::$view . '.php')) {
+        if (file_exists(WM_DIR_TEMPLATES . self::$view . '.php')) {
             self::$flight->render(self::$view);
         }
 
         // autoload the footer template
-        if (file_exists(DIR_TEMPLATES . 'footer.php')) {
+        if (file_exists(WM_DIR_TEMPLATES . 'footer.php')) {
             self::$flight->render('footer');
         }
 

@@ -1,5 +1,11 @@
 <?php
 
+/*!
+* Webmart
+* A basic PHP framework for web applications and websites.
+* https://webmartphp.com/
+*/
+
 namespace Webmart;
 class View
 {
@@ -78,7 +84,7 @@ class View
             }
 
             self::addMarkup('assets', $html);
-        } elseif (file_exists(DIR_ASSETS . $type . '/' . $name . '.' . $type)) {
+        } elseif (file_exists(WM_DIR_ASSETS . $type . '/' . $name . '.' . $type)) {
             $url = self::$vars->urls[$type] . $name . '.' . $type;
 
             if ($type == 'css') {

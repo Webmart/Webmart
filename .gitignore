@@ -1,4 +1,5 @@
 .htaccess
 robots.txt
 sitemap.xml
-vendor/
+engine/libs/
+engine/flight/

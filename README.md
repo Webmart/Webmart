@@ -1,44 +1,52 @@
 # Webmart
 
-A basic PHP framework for web applications and websites.
-
-[http://webmartphp.com/](http://webmartphp.com/)
+A basic PHP framework for web applications and websites. [http://webmartphp.com/](http://webmartphp.com/)
 
 ### Required
 
-- PHP: (untested)
+- PHP: >=5.5.*
+- [Flight](https://github.com/mikecao/flight/), by mikecao
 - Apache
 
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
 
-## Install
+## How to Install
 
-If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
+The first time you'll open in your browser, Webmart will generate `.htaccess` and `wm.php` for you.
+
+### Setup manually
+
+Download [Webmart](https://github.com/webmart/webmart/archive/master.zip). Unzip in your directory.
+
+Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip flight folder inside `engine/core/` (make sure it's not flight/flight).
+
+You can optionally use extra PHP libraries, including those [supported by Webmart](http://webmartphp.com/docs/libraries/).
+
+Open in your browser.
+
+### Install with Composer
+
+Available versions [here](https://packagist.org/packages/webmart/webmart). Run:
 
 ```
 composer require webmart/webmart
 ```
 
-Or download the [latest release](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
+Create an `index.php` file in your root directory. Require the autoloader:
+
+```php
+require 'vendor/autoload.php';
+```
+
+You can optionally install the suggested libraries, [supported by Webmart](http://webmartphp.com/docs/libraries/).
 
 Open in your browser.
 
-## Edit
+## How to Edit
 
-Visit the [GitHub page](https://github.com/Webmart/) to explore themes or build your own.
+In your selected theme under `/webmart/view/`, open `Config.php` and start editing.
 
-In your selected theme, open `Config.php` and start editing.
+Learn more at [http://webmartphp.com/](http://webmartphp.com/docs/).
 
-### Supports
 
-- Bootstrap
-- jQuery
-- Google Maps
-- Google Fonts
-
-Explore the [documentation](http://webmartphp.com/) to learn more.
-
----
-
-###### Co-created by [George Kary](http://georgekary.com/), [Valandis Zotos](https://github.com/BalzoT), [John Dimas](https://github.com/jdimas87).
-###### Special thanks to [mikecao](https://github.com/mikecao/flight).
+###### Co-created by [George Kary](http://georgekary.com/), [Valandis Zotos](https://github.com/BalzoT), [John Dimas](https://github.com/jdimas87).<br>Special thanks to [mikecao](https://github.com/mikecao).

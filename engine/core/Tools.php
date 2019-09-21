@@ -1,5 +1,11 @@
 <?php
 
+/*!
+* Webmart
+* A basic PHP framework for web applications and websites.
+* https://webmartphp.com/
+*/
+
 namespace Webmart;
 class Tools
 {
@@ -15,7 +21,7 @@ class Tools
         }
 
         if (!class_exists('Medoo')) {
-            require_once DIR_LIBS . 'Medoo.php';
+            require_once WM_DIR_LIBS . 'Medoo.php';
         }
 
         return new \Medoo\Medoo(!empty($data) ? $data : \Config::$db);
@@ -28,7 +34,7 @@ class Tools
     public static function newDetect()
     {
         if (!class_exists('Mobile_Detect')) {
-            require_once DIR_LIBS . 'Mobile_Detect.php';
+            require_once WM_DIR_LIBS . 'Mobile_Detect.php';
         }
 
         return new \Mobile_Detect();
@@ -192,7 +198,7 @@ class Tools
     public static function newEditor()
     {
         if (!class_exists('Quill')) {
-            require_once DIR_LIBS . 'Quill.php';
+            require_once WM_DIR_LIBS . 'Quill.php';
         }
 
         return new Quill();
