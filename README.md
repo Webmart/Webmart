@@ -14,10 +14,7 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 The first time you'll open in your browser, Webmart will generate `.htaccess` and `wm.php` for you.
 
-- Download and unzip [manually](#manual)
-- Install using [Composer](#composer)
-
-### Manual
+### Download manually
 
 Download [Webmart](https://github.com/webmart/webmart/archive/master.zip). Unzip in your directory.
 
@@ -25,7 +22,7 @@ Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip f
 
 Open in your browser.
 
-### Composer
+### Install using Composer
 
 Available versions [here](https://packagist.org/packages/webmart/webmart).
 
