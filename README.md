@@ -26,9 +26,7 @@ Open in your browser.
 
 ### Install with Composer
 
-Available versions [here](https://packagist.org/packages/webmart/webmart).
-
-Run:
+Available versions [here](https://packagist.org/packages/webmart/webmart). Run:
 
 ```
 composer require webmart/webmart
