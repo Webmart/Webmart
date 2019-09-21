@@ -216,4 +216,21 @@ class Tools
         );
     }
 
+    /**
+    * @method
+    */
+
+    public static function getJSON($filename, $array = true)
+    {
+        if (!$filename) {
+            return null;
+        }
+
+        if (file_exists(WM_DIR_JSON . $filename . '.json')) {
+            return json_decode(file_get_contents(WM_DIR_JSON . $filename . '.json'), $array);
+        }
+
+        return null;
+    }
+
 }
