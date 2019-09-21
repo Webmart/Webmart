@@ -24,10 +24,6 @@
             "role" : "Co-creator"
         }
     ],
-    "require" : {
-        "catfan/medoo" : "1.7.*",
-        "mikecao/flight" : "1.3.7"
-    },
     "archive" : {
         "exclude" : [
             "engine/flight/",
