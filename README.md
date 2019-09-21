@@ -23,7 +23,7 @@ If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
 composer require webmart/webmart
 ```
 
-Create an index.php file and run the autoloader:
+Create an `index.php` file in your root directory and run the autoloader:
 
 ```php
 require 'vendor/autoload.php';
