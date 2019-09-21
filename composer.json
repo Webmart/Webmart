@@ -29,8 +29,8 @@
         "mikecao/flight" : "1.3.*"
     },
     "suggest" : {
-        "mobiledetect/mobiledetectlib" : "Mobile Detect library.",
-        "catfan/medoo" : "Database handler library."
+        "mobiledetect/mobiledetectlib" : "Webmart supports the Mobile_Detect library with Webmart::newDetect().",
+        "catfan/medoo" : "Webmart supports the Medoo library for handling databases with Webmart::newDatabase() or by setting up your theme's Config.php."
     },
     "autoload" : {
         "files" : [
