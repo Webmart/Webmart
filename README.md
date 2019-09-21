@@ -20,6 +20,8 @@ Download [Webmart](https://github.com/webmart/webmart/archive/master.zip). Unzip
 
 Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip flight folder inside `engine/core/` (make sure it's not flight/flight).
 
+You can optionally use [other PHP libraries](http://webmartphp.com/docs/libraries/), including those supported by Webmart.
+
 Open in your browser.
 
 ### Install with Composer
