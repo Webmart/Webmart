@@ -31,6 +31,20 @@ class Theme
         }
 
         Webmart::addValue('description', '');
+
+        require WM_DIR_CLASSES . 'FrontEnd.php';
+
+        FrontEnd::newMenu(
+            'hello',
+            array(
+                'Get Started' => array(
+                    'url' => 'http://webmartphp.com/',
+                    'class' => 'webmart'
+                )
+            ),
+            'Welcome to Webmart',
+            'http://webmartphp.com/'
+        );
     }
 
     /**
