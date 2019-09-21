@@ -19,7 +19,7 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 Download [Webmart](https://github.com/webmart/webmart/archive/master.zip). Unzip in your directory.
 
-Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip flight folder inside `engine/core`.
+Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip flight folder inside `engine/core` (make sure it's not flight/flight).
 
 Open in your browser.
 
