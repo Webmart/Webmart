@@ -12,8 +12,10 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 ## How to Install
 
-- [Manual](#manual)
-- [Composer](#composer)
+The first time you'll open in your browser, Webmart will generate `.htaccess` and `wm.php` for you.
+
+- Download and unzip [manually](#manual)
+- Install using [Composer](#composer)
 
 ### Manual
 
