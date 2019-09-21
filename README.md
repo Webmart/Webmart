@@ -13,13 +13,19 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 ## Install
 
+Download the [latest release](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
+
 If you're using [Composer](https://packagist.org/packages/webmart/webmart), run:
 
 ```
 composer require webmart/webmart
 ```
 
-Or download the [latest release](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
+Create an index.php file and run the autoloader:
+
+```php
+require 'vendor/autoloader.php';
+```
 
 Open in your browser.
 
