@@ -11,7 +11,7 @@ A basic PHP framework for web applications and websites.
 
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
 
-## Install
+## How to Install
 
 - [Manual](#manual)
 - [Composer](#composer)
@@ -40,7 +40,7 @@ require 'vendor/autoload.php';
 
 Open in your browser.
 
-## Edit
+## How to Edit
 
 Visit the [GitHub page](https://github.com/Webmart/) to explore themes or build your own.
 
