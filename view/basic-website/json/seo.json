@@ -1,0 +1,8 @@
+{
+    "home" : {
+        "title" : "My New Homepage - Webmart",
+        "description" : "A basic PHP framework for web applications and websites.",
+        "keywords" : "php, framework",
+        "author" : "Webmart"
+    }
+}
