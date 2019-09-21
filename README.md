@@ -22,7 +22,7 @@ Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip f
 
 Open in your browser.
 
-### Install using Composer
+### Install with Composer
 
 Available versions [here](https://packagist.org/packages/webmart/webmart).
 
@@ -44,6 +44,5 @@ Open in your browser.
 
 In your selected theme under `/webmart/view/`, open `Config.php` and start editing.
 
----
 
 ###### Co-created by [George Kary](http://georgekary.com/), [Valandis Zotos](https://github.com/BalzoT), [John Dimas](https://github.com/jdimas87).<br>Special thanks to [mikecao](https://github.com/mikecao).
