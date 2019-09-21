@@ -29,6 +29,8 @@ class Theme
         } else {
             Webmart::addValue('title', self::$seo['home']['title']);
         }
+
+        Webmart::addValue('description', '');
     }
 
     /**
