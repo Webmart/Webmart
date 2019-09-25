@@ -1,9 +1,9 @@
 <?php
 
 /*!
-* Webmart 2.0
-* A simple PHP framework for building web applications and websites.
-* https://github.com/Webmart
+* Webmart
+* A basic PHP framework for web applications and websites.
+* https://webmartphp.com/
 */
 
-// File for adhoc executions before loading the view.
+/** Enable WM_DEBUG and use this file to execute code before the view */
