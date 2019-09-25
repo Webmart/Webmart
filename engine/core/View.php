@@ -179,4 +179,31 @@ class View
         }
     }
 
+    /**
+    * @method
+    */
+
+    public static function addBootstrap($bundle = false)
+    {
+        $source = 'https://stackpath.bootstrapcdn.com/bootstrap/';
+        $version = '4.3.1';
+
+        self::addAsset('css', $source . $version . '/css/bootstrap.min.css');
+
+        // handle the JavaScript package
+
+        if ($bundle) {
+            $script = '/js/bootstrap.bundle.min.js';
+        } else {
+            $script = '/js/bootstrap.min.js';
+        }
+
+        self::addAsset('js', $source . $version . $script);
+
+        // check/add jQuery
+        if (!isset(\Config::$googlelibs) || !isset(\Config::$googlelibs['jquery'])) {
+            self::addGoogleLibrary('jquery', '3.4.1');
+        }
+    }
+
 }

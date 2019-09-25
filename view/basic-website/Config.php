@@ -52,7 +52,7 @@ class Config
     public static $noindex = array(
         'home'
     );
-      
+
     /** Load Google Hosted Libraries */
 
     public static $googlelibs = array(
@@ -75,5 +75,9 @@ class Config
             )
         )
     );
+
+    /** Load Bootstrap */
+
+    public static $bootstrap = 'bundle'; // false, true, 'bundle'
 
 }
