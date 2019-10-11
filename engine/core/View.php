@@ -169,9 +169,11 @@ class View
         }
 
         if ($name == 'maps') { // handle Google maps
-            $script .= $info . '&libraries=geometry';
+            if ($info != 'API_KEY' && $info != '') {
+                $script .= $info . '&libraries=geometry';
 
-            self::addAsset('js', 'https://maps.googleapis.com/maps/api/js?key=' . $script);
+                self::addAsset('js', 'https://maps.googleapis.com/maps/api/js?key=' . $script);
+            }
         } else { // handle all other similarly loaded scripts
             $script .= $name . '/' . $info . '/' . $name . '.min.js';
 
