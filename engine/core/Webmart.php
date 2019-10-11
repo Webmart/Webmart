@@ -296,21 +296,23 @@ class Webmart
 
             // Check/generate a robots.txt file
 
-            if (!file_exists(WM_ROOT . 'robots.txt')) {
-                $robots = 'User-agent: *' . PHP_EOL;
+            if (WM_ROBOTS === true) {
+                if (!file_exists(WM_ROOT . 'robots.txt')) {
+                    $robots = 'User-agent: *' . PHP_EOL;
 
-                if (isset(\Config::$noindex) && !empty(\Config::$noindex)) {
-                    foreach (\Config::$noindex as $page) {
-                        foreach (array('Disallow', 'Noindex') as $cmd) {
-                            $robots .= $cmd . ': /' . $page . '/' . PHP_EOL;
+                    if (isset(\Config::$noindex) && !empty(\Config::$noindex)) {
+                        foreach (\Config::$noindex as $page) {
+                            foreach (array('Disallow', 'Noindex') as $cmd) {
+                                $robots .= $cmd . ': /' . $page . '/' . PHP_EOL;
+                            }
                         }
+                    } else {
+                        $robots .= 'Disallow: ' . PHP_EOL;
+                        $robots .= 'Noindex: ' . PHP_EOL;
                     }
-                } else {
-                    $robots .= 'Disallow: ' . PHP_EOL;
-                    $robots .= 'Noindex: ' . PHP_EOL;
-                }
 
-                file_put_contents(WM_ROOT . 'robots.txt', $robots);
+                    file_put_contents(WM_ROOT . 'robots.txt', $robots);
+                }
             }
 
             self::initView();
