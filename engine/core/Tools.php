@@ -24,7 +24,7 @@ class Tools
             if (!file_exists(WM_DIR_LIBS . 'Medoo.php')) {
                 return null;
             }
-            
+
             require_once WM_DIR_LIBS . 'Medoo.php';
         }
 
