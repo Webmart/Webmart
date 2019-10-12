@@ -21,6 +21,10 @@ class Tools
         }
 
         if (!class_exists('Medoo')) {
+            if (!file_exists(WM_DIR_LIBS . 'Medoo.php')) {
+                return null;
+            }
+            
             require_once WM_DIR_LIBS . 'Medoo.php';
         }
 
@@ -34,6 +38,10 @@ class Tools
     public static function newDetect()
     {
         if (!class_exists('Mobile_Detect')) {
+            if (!file_exists(WM_DIR_LIBS . 'Mobile_Detect.php')) {
+                return null;
+            }
+
             require_once WM_DIR_LIBS . 'Mobile_Detect.php';
         }
 
