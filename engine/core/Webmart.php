@@ -139,14 +139,16 @@ class Webmart
         // prepare the HTML
 
         $html = '<!DOCTYPE html><html><head><title>Webmart - Installation Wizard</title>';
-        $html .= self::newFont('Fira Sans', array(
+
+        $html .= self::font('Fira Sans', array(
             'weights' => array(
                 '300i',
                 '400',
                 '400i'
             )
         ));
-        $html .= self::newCSS(array(
+
+        $html .= self::style(array(
             'body' => array(
                 'background' => '#f8f8f8',
                 'font-family' => 'Fira Sans, sans-serif',
@@ -157,7 +159,7 @@ class Webmart
             )
         ));
 
-        $html .= self::loadBootstrap(true) . '</head><body><div class="container">';
+        $html .= self::bootstrap(true) . '</head><body><div class="container">';
         $html .= '<div class="row mt-3 mb-5"><div class="col-md-3"></div><div class="col-md-6">';
         $html .= '<img src="https://avatars1.githubusercontent.com/u/35627431?s=200&v=4" />';
         $html .= '<h1 class="mt-5 pt-5 text-center">Welcome to Webmart</h1>';
@@ -166,7 +168,7 @@ class Webmart
 
         // prepare and handle the form
 
-        $html .= self::newForm(
+        $html .= self::form(
             array(
                 'name' => 'wmsetup',
                 'method' => 'POST',
@@ -220,8 +222,7 @@ class Webmart
                 // redirect in case of form resubmission
 
                 if (file_exists(WM_DIR . 'wm.php')) {
-                    Flight::redirect('/');
-                    exit();
+                    self::redirect('/?wm=ready');
                 }
 
                 // override form values
@@ -269,8 +270,7 @@ class Webmart
 
                     file_put_contents(WM_DIR . 'wm.php', $output);
 
-                    Flight::redirect('/');
-                    exit();
+                    self::redirect('/?wm=ready');
                 }
             }
         );
