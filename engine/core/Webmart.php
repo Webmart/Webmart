@@ -294,10 +294,8 @@ class Webmart
     {
         // perform checks
 
-        if (!WM_THEME) {
+        if (!defined('WM_THEME') || WM_THEME == '') {
             exit('Theme not defined. Please check your wm.php configuration.');
-        } elseif (WM_THEME == '') {
-            exit('Theme not defined.');
         } elseif (!is_dir(WM_DIR_THEMES . WM_THEME)) {
             exit('Theme folder not detected.');
         }
@@ -310,10 +308,14 @@ class Webmart
 
         foreach (array('Config', 'Theme') as $file) {
             if (!file_exists(WM_DIR_THEME . $file . '.php')) {
-                exit($file . ' not detected in selected theme.');
+                exit($file . ' file not detected in selected theme.');
             }
 
             require_once WM_DIR_THEME . $file . '.php';
+
+            if (!class_exists($file)) {
+                exit($file . ' class not detected in selected theme.');
+            }
         }
 
         // define secondary directories
@@ -326,7 +328,7 @@ class Webmart
 
         // generate robots.txt file
 
-        if (WM_ROBOTS && WM_ROBOTS === true && !file_exists(WM_ROOT . 'robots.txt')) {
+        if (defined('WM_ROBOTS') && WM_ROBOTS === true && !file_exists(WM_ROOT . 'robots.txt')) {
             $robots = 'User-agent: *' . PHP_EOL;
 
             if (isset(\Config::$noindex) && !empty(\Config::$noindex)) {
@@ -362,18 +364,6 @@ class Webmart
 
         Flight::route('*', function() {
             $request = Flight::request();
-
-            // collect cookies, GET & POST data
-
-            foreach ((array) $request->data as $data) {
-                self::$data = $data;
-            }
-
-            // freeze routing for framework installation
-
-            if (self::$wm == false) {
-                return false;
-            }
 
             // remove query params
 
@@ -430,20 +420,27 @@ class Webmart
                 }
             }
 
-            // functions.php
-            if (WM_DEBUG && file_exists(WM_DIR_VIEW . 'functions.php')) {
-                include_once WM_DIR_VIEW . 'functions.php';
+            // collect cookies, GET & POST data
+
+            foreach ((array) $request->data as $data) {
+                self::$data = $data;
             }
 
-            //// view
+            // include functions.php
+
+            if (defined('WM_DEBUG') && file_exists(WM_DIR_THEME . 'functions.php')) {
+                include_once WM_DIR_THEME . 'functions.php';
+            }
+
+            // prepare the view
 
             self::addValue('version', \Config::$version);
             self::addValue('urls', array(
-                'base' => WM_BASE,
-                'page' => WM_BASE . self::$url,
-                'css' => WM_BASE . 'view/' . WM_THEME . '/assets/css/',
-                'imgs' => WM_BASE . 'view/' . WM_THEME . '/assets/imgs/',
-                'js' => WM_BASE . 'view/' . WM_THEME . '/assets/js/'
+                'base' => WM_URL,
+                'page' => WM_URL . self::$url,
+                'css' => WM_URL . 'view/' . WM_THEME . '/assets/css/',
+                'imgs' => WM_URL . 'view/' . WM_THEME . '/assets/imgs/',
+                'js' => WM_URL . 'view/' . WM_THEME . '/assets/js/'
             ));
 
             self::addAsset('css', 'global');
@@ -481,7 +478,7 @@ class Webmart
             }
 
             // assign routing path
-            self::$flight->route($path, function() {
+            Flight::route($path, function() {
                 $controller = null;
                 $parsed = explode('/', self::$url);
                 $args = func_get_args();
