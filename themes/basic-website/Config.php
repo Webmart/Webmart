@@ -91,4 +91,12 @@ class Config
 
     public static $bootstrap = 'bundle'; // false, true, 'bundle'
 
+    /** Enable Hotjar tracking - does not work if WM_DEBUG is enabled */
+
+    public static $hotjar = false;
+
+    /** Enable Google Analytics (Gtag) - does not work if WM_DEBUG is enabled */
+
+    public static $gtag = '';
+
 }
