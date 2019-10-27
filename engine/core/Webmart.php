@@ -147,14 +147,14 @@ class Webmart
         // prepare the HTML
 
         $html = '<!DOCTYPE html><html><head><title>Webmart - Installation Wizard</title>';
-        $html .= self::addFont('Fira Sans', array(
+        $html .= self::newFont('Fira Sans', array(
             'weights' => array(
                 '300i',
                 '400',
                 '400i'
             )
         ));
-        $html .= self::addCSS(array(
+        $html .= self::newCSS(array(
             'body' => array(
                 'background' => '#f8f8f8',
                 'font-family' => 'Fira Sans, sans-serif',
