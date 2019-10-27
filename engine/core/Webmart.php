@@ -181,67 +181,78 @@ class Webmart
             ),
             array(
                 'theme' => array(
-                    'title' => 'Select a theme:',
                     'type' => 'select',
+                    'label' => 'Choose a theme:',
+                    'placeholder' => '',
                     'options' => $themes
                 ),
                 'url' => array(
-                    'title' => "What's your base URL?",
                     'type' => 'text',
-                    'placeholder' => 'ex. localhost/mywebsite/'
+                    'label' => "What's your base URL?",
+                    'placeholder' => 'ex. mywebsite.com'
                 ),
                 'folder' => array(
-                    'title' => 'Working on a subdirectory?',
                     'type' => 'text',
+                    'heading' => 'Working on a subdirectory?',
                     'label' => 'ex. localhost/',
-                    'placeholder' => ''
+                    'placeholder' => 'webmart'
                 ),
                 'sitemap' => array(
-                    'title' => 'Generate a sitemap.xml file?',
                     'type' => 'radio',
-                    'options' => array('Enable', 'Disable')
+                    'heading' => 'SEO',
+                    'label' => 'Generate a sitemap.xml file?',
+                    'options' => array('No', 'Yes'),
+                    'class' => 'form-check-inline'
                 ),
                 'robots' => array(
-                    'title' => 'Generate a robots.txt file?',
                     'type' => 'radio',
-                    'options' => array('Enable', 'Disable')
+                    'label' => 'Generate a robots.txt file?',
+                    'options' => array('No', 'Yes'),
+                    'class' => 'form-check-inline'
                 ),
                 'https' => array(
-                    'title' => 'Force HTTPs?',
                     'type' => 'radio',
-                    'options' => array('No', 'Yes')
+                    'label' => 'Force HTTPs?',
+                    'options' => array('No', 'Yes'),
+                    'class' => 'form-check-inline'
+                ),
+                'debug' => array(
+                    'type' => 'radio',
+                    'heading' => 'Enable debugging?',
+                    'options' => array('Disable', 'Enable'),
+                    'class' => 'form-check-inline'
                 )
             ),
             function($response) {
-                // redirect in case of form resubmission
-
-                if (file_exists(WM_DIR . 'wm.php')) {
-                    Flight::redirect('/');
-                    exit();
-                }
-
-                // override form values
-
-                if ($response['folder']['value'] == '') {
-                    $response['success'] = true;
-                }
-
-                // generate wm.php file
-
-                if ($response['success'] == true) {
-                    $output = '<?php' . PHP_EOL;
-
-                    foreach ($response as $name => $data) {
-                        if (isset($fields[$name])) {
-                            $output .= 'define("WM_' . strtoupper($name) . '", "' . $data['value'] . '");' . PHP_EOL;
-                        }
-                    }
-
-                    file_put_contents(WM_DIR . 'wm.php', $output);
-
-                    Flight::redirect('/');
-                    exit();
-                }
+                // // redirect in case of form resubmission
+                //
+                // if (file_exists(WM_DIR . 'wm.php')) {
+                //     Flight::redirect('/');
+                //     exit();
+                // }
+                //
+                // // override form values
+                //
+                // if ($response['folder']['value'] == '') {
+                //     $response['success'] = true;
+                // }
+                //
+                // // generate wm.php file
+                //
+                // if ($response['success'] == true) {
+                //     $output = '<?php' . PHP_EOL;
+                //
+                //     foreach ($response as $name => $data) {
+                //         if (isset($fields[$name])) {
+                //             $output .= 'define("WM_' . strtoupper($name) . '", "' . $data['value'] . '");' . PHP_EOL;
+                //         }
+                //     }
+                //
+                //     file_put_contents(WM_DIR . 'wm.php', $output);
+                //
+                //     Flight::redirect('/');
+                //     exit();
+                // }
             }
         );
 
