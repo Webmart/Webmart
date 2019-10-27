@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang version="<?php echo $vars->version ?>">
+<html lang version="<?php echo $version ?>">
     <head>
-        <title><?php echo $vars->title ?></title>
-        <meta name="description" content="<?php echo $vars->description ?>" />
-        <?php echo $vars->head ?>
+        <title>Webmart - My First Website</title>
+        <?php echo $head ?>
     </head>
-    <body class="<?php echo $vars->body ?>">
+    <body class="<?php echo $body ?>">
         <header></header>
         <main>

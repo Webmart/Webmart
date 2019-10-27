@@ -1,6 +1,6 @@
         </main>
         <footer>
-            <?php echo $html->assets ?>
+            <?php echo $assets ?>
         </footer>
     </body>
 </html>
