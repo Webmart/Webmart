@@ -323,6 +323,10 @@ class Webmart
                             case 'theme':
                             case 'url':
                             case 'folder':
+                                if ($name == 'url' && strpos($data['value'], '/', -1) == false) {
+                                    $data['value'] .= '/';
+                                }
+
                                 $output .= 'define("WM_' . strtoupper($name) . '", "' . $data['value'] . '");' . PHP_EOL;
 
                                 break;
