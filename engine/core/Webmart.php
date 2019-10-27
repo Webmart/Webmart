@@ -21,10 +21,6 @@ class Webmart
 
     public static $data = array(); /** Request POST data */
 
-    private static $view = null; /** Response variables */
-
-    private static $json = null; /** Response JSON */
-
     private static $ready = false; /** Framework status */
 
     /**
@@ -37,7 +33,7 @@ class Webmart
             return;
         }
 
-        // define directories
+        // define directories and load core files
 
         define('WM_ROOT', getcwd() . '/');
 
@@ -47,12 +43,10 @@ class Webmart
             define('WM_DIR', WM_ROOT);
         }
 
-        define('wM_DIR_THEMES', WM_DIR . 'themes/');
+        define('WM_DIR_THEMES', WM_DIR . 'themes/');
         define('WM_DIR_ENGINE', WM_DIR . 'engine/');
         define('WM_DIR_CORE', WM_DIR_ENGINE . 'core/');
         define('WM_DIR_LIBS', WM_DIR_ENGINE . 'libs/');
-
-        // load core files
 
         require_once WM_DIR_CORE . 'Toolkit.php';
 
@@ -70,18 +64,30 @@ class Webmart
             }
         }
 
-        // load configuration and theme
+        // load the configuration and theme
 
-        if (file_exists(WM_DIR . 'wm.php')) {
-            require WM_DIR . 'wm.php';
-            self::theme();
+        if (!file_exists(WM_DIR . 'wm.php')) {
+            Flight::route('/', function() {
+                $request = Flight::request();
+
+                foreach ((array) $request->data as $data) {
+                    self::$data = $data;
+                }
+
+                self::setup();
+            });
+
+            Flight::start();
+
+            return;
         } else {
-            self::setup();
+            require_once WM_DIR . 'wm.php';
+            self::theme();
         }
 
         // enable debugging
 
-        if (WM_DEBUG == true) {
+        if (defined('WM_DEBUG') && WM_DEBUG == true) {
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
 
@@ -94,10 +100,10 @@ class Webmart
 
         if (!file_exists(WM_ROOT . '.htaccess')) {
             $htaccess = 'RewriteEngine On' . PHP_EOL;
-            $htaccess .= 'RewriteBase /' . WM_FOLDER;
+            $htaccess .= 'RewriteBase /';
 
-            if (WM_FOLDER != '') {
-                $htaccess .= '/';
+            if (defined('WM_FOLDER') && WM_FOLDER != '') {
+                $htaccess .= WM_FOLDER . '/';
             }
 
             $htaccess .= PHP_EOL;
@@ -110,59 +116,120 @@ class Webmart
             exit('Generated .htaccess file - please refresh the page.');
         }
 
-        // complete
+        // continue
 
-        self::$ready = true;
-        return;
+        self::route();
     }
 
     /**
-    * @method
+    * @method prepares and handles the installation
     */
 
     private static function setup()
     {
-        $output = '<?php' . PHP_EOL;
-        $wm = array(
-            'folder' => '',
-            'theme' => '',
-            'debug' => false,
-            'base' => '',
-            'sitemap' => false,
-            'robots' => false,
-            'https' => false
-        );
-        $fields = array(
-            'folder' => array(
-                'title' => 'Working on a subdirectory?',
-                'type' => 'text',
-                'placeholder' => 'ex. localhost/subfolder/'
-            ),
-            'theme' => array(
-                'title' => 'Select a theme',
-                'type' => 'select',
-                'options' => array(
-                    'one',
-                    'basic-website'
-                )
+        // scan available themes
+
+        $scan = scandir(WM_DIR_THEMES);
+        $themes = array();
+
+        foreach ($scan as $theme) {
+            if (is_dir(WM_DIR_THEMES . $theme) && $theme != '.' && $theme != '..') {
+                $themes[] = $theme;
+            }
+        }
+
+        if (empty($themes)) {
+            exit('No theme folders detected.');
+        }
+
+        // prepare the HTML
+
+        $html = '<!DOCTYPE html><html><head><title>Webmart - Installation Wizard</title>';
+        $html .= self::addFont('Fira Sans', array(
+            'weights' => array(
+                '300i',
+                '400',
+                '400i'
             )
+        ));
+        $html .= self::addCSS(array(
+            'body' => array(
+                'background' => '#f8f8f8',
+                'font-family' => 'Fira Sans, sans-serif',
+                'font-weight' => '300'
+            ),
+            'form-box field' => array(
+
+            )
+        ));
+
+        $html .= self::loadBootstrap(true) . '</head><body><div class="container">';
+        $html .= '<div class="row mt-3 mb-5"><div class="col-md-3"></div><div class="col-md-6">';
+        $html .= '<h1 class="mt-5 pt-5 text-center">Welcome to Webmart</h1>';
+        $html .= '<p class="text-center">Start building with this quick installation.</p>';
+        $html .= '<div class="mt-3 p-4 form-box">';
+
+        // prepare and handle the form
+
+        $html .= self::newForm(
+            array(
+                'name' => 'wmsetup',
+                'method' => 'POST',
+                'submit' => 'Complete'
+            ),
+            array(
+                'theme' => array(
+                    'title' => 'Select a theme:',
+                    'type' => 'select',
+                    'options' => $themes
+                ),
+                'url' => array(
+                    'title' => "What's your base URL?",
+                    'type' => 'text',
+                    'placeholder' => 'ex. localhost/mywebsite/'
+                ),
+                'folder' => array(
+                    'title' => 'Working on a subdirectory?',
+                    'type' => 'text',
+                    'label' => 'ex. localhost/',
+                    'placeholder' => ''
+                ),
+                'sitemap' => array(
+                    'title' => 'Generate a sitemap.xml file?',
+                    'type' => 'radio',
+                    'options' => array('Enable', 'Disable')
+                ),
+                'robots' => array(
+                    'title' => 'Generate a robots.txt file?',
+                    'type' => 'radio',
+                    'options' => array('Enable', 'Disable')
+                ),
+                'https' => array(
+                    'title' => 'Force HTTPs?',
+                    'type' => 'radio',
+                    'options' => array('No', 'Yes')
+                )
+            ),
+            function($response) {
+                // override form values
+
+                if ($response['folder']['value'] == '') {
+                    $response['success'] = true;
+                }
+
+                // generate wm.php file
+
+                if ($response['success'] == true) {
+                    $output = 'define("WM_FOLDER", "' . $response['folder']['value'] . '");' . PHP_EOL . 'define("WM_THEME", "' . $response['theme']['value'] . '");';
+
+                    file_put_contents(WM_DIR . 'wm.php', '<?php' . PHP_EOL . $output);
+
+                    exit('Installation complete - please refresh the page.');
+                }
+            }
         );
 
-        self::addBootstrap(true);
-
-        self::newForm(array(
-            'name' => 'wmsetup',
-            'method' => 'POST',
-            'action' => '',
-            'submit' => 'submit'
-        ), $fields, function($success, $response) {
-            var_dump(1);
-        });
-
-        var_dump(0);
-        die;
-
-        // file_put_contents(WM_DIR . 'wm.php', $output);
+        echo $html . '</div></div><div class="col-md-3"></div></div></div></body>';
     }
 
     /**
@@ -228,10 +295,10 @@ class Webmart
     }
 
     /**
-    * @method handles the request
+    * @method handles the routing request
     */
 
-    private static function request()
+    private static function route()
     {
         // configure Flight
 
@@ -240,14 +307,27 @@ class Webmart
         // handle global requests
 
         Flight::route('*', function() {
-            $request = self::$flight->request();
+            $request = Flight::request();
 
-            // clean the URL from queries
+            // collect cookies, GET & POST data
+
+            foreach ((array) $request->data as $data) {
+                self::$data = $data;
+            }
+
+            // freeze routing for framework installation
+
+            if (self::$wm == false) {
+                return false;
+            }
+
+            // remove query params
+
             if (strpos($request->url, '?') != 0) {
                 $request->url = substr($request->url, 0, strpos($request->url, '?'));
             }
 
-            //// page & view
+            // assign page, template and URL
 
             if ($request->url != '/') {
                 $request->url = rtrim($request->url, '/');
@@ -270,9 +350,8 @@ class Webmart
                 self::$page = $routes[count($routes) - 1]; // assign last as page
             }
 
-            //// data
+            // collect query params and cookies
 
-            // GET and cookies
             foreach (array('query', 'cookies') as $type) {
                 $clean = '';
 
@@ -295,11 +374,6 @@ class Webmart
                         }
                     }
                 }
-            }
-
-            // POST
-            foreach ((array) $request->data as $data) {
-                self::$data = $data;
             }
 
             // functions.php
@@ -388,17 +462,18 @@ class Webmart
             });
         }
 
+        Flight::start();
+
         // continue
 
-        Flight::start();
-        self::initView();
+        self::view();
     }
 
     /**
     * @method prepares and loads the view
     */
 
-    private static function initView()
+    private static function view()
     {
         self::addValue('page', self::$page);
         self::addValue('view', self::$view);
@@ -467,42 +542,31 @@ class Webmart
             self::$flight->render('footer');
         }
 
-        self::$initialised = true;
+        // complete
+
+        self::$ready = true;
+        return;
     }
 
     /**
-    * @method handles calls to framework methods
+    * @method
     */
 
-    public static function __callStatic($name = null, $params)
+    public static function __callStatic($name , $params)
     {
-        if (!$name) {
-            return null;
-        }
-
-        if (method_exists('Webmart\Tools', $name)) {
+        if (method_exists('Webmart\Toolkit', $name)) {
             if (isset($params[4])) {
-                return Webmart\Tools::$name($params[0], $params[1], $params[2], $params[3], $params[4]);
+                return Webmart\Toolkit::$name($params[0], $params[1], $params[2], $params[3], $params[4]);
             } elseif (isset($params[3])) {
-                return Webmart\Tools::$name($params[0], $params[1], $params[2], $params[3]);
+                return Webmart\Toolkit::$name($params[0], $params[1], $params[2], $params[3]);
             } elseif (isset($params[2])) {
-                return Webmart\Tools::$name($params[0], $params[1], $params[2]);
+                return Webmart\Toolkit::$name($params[0], $params[1], $params[2]);
             } elseif (isset($params[1])) {
-                return Webmart\Tools::$name($params[0], $params[1]);
+                return Webmart\Toolkit::$name($params[0], $params[1]);
             } elseif (isset($params[0])) {
-                return Webmart\Tools::$name($params[0]);
+                return Webmart\Toolkit::$name($params[0]);
             } else {
-                return Webmart\Tools::$name();
-            }
-        } elseif (method_exists('Webmart\View', $name)) {
-            if (isset($params[2])) {
-                return Webmart\View::$name($params[0], $params[1], $params[2]);
-            } elseif (isset($params[1])) {
-                return Webmart\View::$name($params[0], $params[1]);
-            } elseif (isset($params[0])) {
-                return Webmart\View::$name($params[0]);
-            } else {
-                return Webmart\View::$name();
+                return Webmart\Toolkit::$name();
             }
         }
 
