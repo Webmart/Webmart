@@ -17,37 +17,21 @@ class Toolkit
     public static $assets = '';
 
     /**
-    * @method redirects to path
+    * @method redirects to path with given protocol
+    * @param $where = string
+    * @param $http = string
     */
 
     public static function redirect($where = '', $http = null)
     {
-        if (!$where || $where == '') {
-            return false;
+        if (!$where) {
+            return;
         }
 
         Flight::redirect($where, $http);
+
         exit();
     }
-
-    /**
-    * @method renders a template
-    */
-
-    public static function render($template = '')
-    {
-        if (!$template || $template = '') {
-            return false;
-        }
-
-        if (file_exists(DIR_TEMPLATES . $template . '.php')) {
-            self::$flight->render($template, $data, $varname);
-        }
-    }
-
-
-
-
 
     /**
     * @method stores a variable
