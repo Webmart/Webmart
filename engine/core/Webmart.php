@@ -231,7 +231,7 @@ class Webmart
 
                     file_put_contents(WM_DIR . 'wm.php', '<?php' . PHP_EOL . $output);
 
-                    Flight::redirect('/?wm=ready');
+                    Flight::redirect('/?wm=setup');
                     exit();
                 }
             }
