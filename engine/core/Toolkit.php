@@ -11,6 +11,12 @@ class Toolkit
 {
 
     /**
+    * @var string view assets
+    */
+
+    public static $assets = '';
+
+    /**
     * @method redirects to path
     */
 
@@ -43,7 +49,53 @@ class Toolkit
 
 
 
+    /**
+    * @method stores a variable
+    * @param $name = string
+    * @param $value
+    */
 
+    public static function set($name = null, $value = null)
+    {
+        if (!$name) {
+            return;
+        }
+
+        \Flight::set($name, $value);
+
+        return $value;
+    }
+
+    /**
+    * @method retrieves a variable
+    * @param $name = string
+    */
+
+    public static function get($name = null)
+    {
+        if (!$name || $name == '') {
+            $collection = array();
+
+            foreach (\Flight::get() as $item => $value) {
+                switch ($item) {
+                    case 'flight.base_url':
+                    case 'flight.case_sensitive':
+                    case 'flight.handle_errors':
+                    case 'flight.log_errors':
+                    case 'flight.views.path':
+                    case 'flight.views.extension':
+                        continue;
+                        break;
+                    default:
+                        $collection[$item] = $value;
+                }
+            }
+
+            return $collection;
+        }
+
+        return \Flight::get($name);
+    }
 
     /**
     * @method passes a variable into the view
@@ -51,7 +103,7 @@ class Toolkit
     * @param $value
     */
 
-    public static function newVar($name = null, $value = null)
+    public static function pass($name = null, $value = null)
     {
         if (!$name || $name == '' || !$value) {
             return;
@@ -68,7 +120,7 @@ class Toolkit
     * @param $name = string
     */
 
-    public static function newAsset($type = '', $name = null)
+    public static function asset($type = '', $name = null)
     {
         // perform checks
 
@@ -89,9 +141,10 @@ class Toolkit
                 $html .= '<script src="' . $name . '"></script>';
             }
 
-            return self::newVar('assets', $html);
+            self::$assets .= $html;
+            return $html;
         } elseif (file_exists(WM_DIR_ASSETS . $type . '/' . $name . '.' . $type)) {
-            $url = self::$vars->urls[$type] . $name . '.' . $type;
+            $url = self::get('urls')[$type] . $name . '.' . $type;
 
             if ($type == 'css') {
                 $html .= '<link rel="stylesheet" href="' . $url . '" />';
@@ -99,7 +152,8 @@ class Toolkit
                 $html .= '<script src="' . $url . '"></script>';
             }
 
-            return self::newVar('assets', $html);
+            self::$assets .= $html;
+            return $html;
         }
     }
 
@@ -108,7 +162,7 @@ class Toolkit
     * @param $rules = array
     */
 
-    public static function newCSS($rules = array())
+    public static function style($rules = array())
     {
         if (!$rules || !is_array($rules) || empty($rules)) {
             return;
@@ -124,7 +178,7 @@ class Toolkit
     * @param $callback = function
     */
 
-    public static function newForm($config = array(), $fields = array(), $callback = null)
+    public static function form($config = array(), $fields = array(), $callback = null)
     {
         $html = '';
         $request = array();
@@ -337,64 +391,56 @@ class Toolkit
     * @param $set = array
     */
 
-    public static function newFont($name, $set = array())
+    public static function font($name = null, $set = array())
     {
-        if (!isset($name) || $name == '' || empty($set)) {
+        if (!$name || $name == '' || empty($set)) {
             return;
         }
 
-        if (is_array($name)) { // handle multiple fonts
-            foreach ($name as $fontname => $data) {
-                self::newFont($fontname, $data);
-            }
-        } else { // handle one font
-            if (!empty($set)) {
-                $font = str_replace(' ', '+', $name);
+        $font = str_replace(' ', '+', $name);
 
-                // add font weights
-                if (isset($set['weights']) && !empty($set['weights'])) {
-                    $i = 1;
-                    $font .= ':';
+        // add font weights
+        if (isset($set['weights']) && !empty($set['weights'])) {
+            $i = 1;
+            $font .= ':';
 
-                    foreach ($set['weights'] as $weight) {
-                        $font .= $weight;
+            foreach ($set['weights'] as $weight) {
+                $font .= $weight;
 
-                        if ($i < count($set['weights'])) {
-                            $font .= ',';
-                        }
-
-                        $i++;
-                    }
+                if ($i < count($set['weights'])) {
+                    $font .= ',';
                 }
 
-                $font .= '&display=swap';
-
-                // add font subsets
-                if (isset($set['subsets']) && !empty($set['subsets'])) {
-                    $i = 1;
-                    $font .= '&subset=';
-
-                    foreach ($set['subsets'] as $subset) {
-                        $font .= $subset;
-
-                        if ($i < count($set['subsets'])) {
-                            $font .= ',';
-                        }
-
-                        $i++;
-                    }
-                }
-
-                return self::newAsset('css', 'https://fonts.googleapis.com/css?family=' . $font);
+                $i++;
             }
         }
+
+        $font .= '&display=swap';
+
+        // add font subsets
+        if (isset($set['subsets']) && !empty($set['subsets'])) {
+            $i = 1;
+            $font .= '&subset=';
+
+            foreach ($set['subsets'] as $subset) {
+                $font .= $subset;
+
+                if ($i < count($set['subsets'])) {
+                    $font .= ',';
+                }
+
+                $i++;
+            }
+        }
+
+        return self::asset('css', 'https://fonts.googleapis.com/css?family=' . $font);
     }
 
     /**
     * @method passes a Google library into the view
     */
 
-    public static function newLibrary($name, $info = '')
+    public static function library($name, $info = '')
     {
         $supported = array(
             'jquery', // https://developers.google.com/speed/libraries/
@@ -412,12 +458,12 @@ class Toolkit
             if ($info != 'API_KEY' && $info != '') {
                 $script .= $info . '&libraries=geometry';
 
-                self::addAsset('js', 'https://maps.googleapis.com/maps/api/js?key=' . $script);
+                return self::asset('js', 'https://maps.googleapis.com/maps/api/js?key=' . $script);
             }
         } else { // handle all other similarly loaded scripts
             $script .= $name . '/' . $info . '/' . $name . '.min.js';
 
-            self::addAsset('js', 'https://ajax.googleapis.com/ajax/libs/' . $script);
+            return self::asset('js', 'https://ajax.googleapis.com/ajax/libs/' . $script);
         }
     }
 
@@ -425,13 +471,13 @@ class Toolkit
     * @method loads Bootstrap
     */
 
-    public static function loadBootstrap($bundle = false)
+    public static function bootstrap($bundle = false)
     {
         $source = 'https://stackpath.bootstrapcdn.com/bootstrap/';
         $version = '4.3.1';
         $html = '';
 
-        $html .= self::newAsset('css', $source . $version . '/css/bootstrap.min.css');
+        $html .= self::asset('css', $source . $version . '/css/bootstrap.min.css');
 
         // handle the JavaScript package
 
@@ -441,7 +487,7 @@ class Toolkit
             $script = '/js/bootstrap.min.js';
         }
 
-        $html .= self::newAsset('js', $source . $version . $script);
+        $html .= self::asset('js', $source . $version . $script);
 
         return $html;
     }
