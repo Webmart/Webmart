@@ -560,7 +560,7 @@ class Webmart
     * @method
     */
 
-    public static function __callStatic($name , $params)
+    public static function __callStatic($name, $params)
     {
         if (method_exists('Webmart\Toolkit', $name)) {
             if (isset($params[4])) {
