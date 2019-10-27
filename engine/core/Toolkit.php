@@ -164,8 +164,10 @@ class Toolkit
                 if (!isset($request[$field]) || $request[$field] == '') {
                     $error = ucfirst($field) . ' is empty.';
                 } else {
-                    if ($settings['type'] == 'e-mail') {
+                    if ($settings['type'] == 'email') {
                         $input = filter_var(trim($request[$field]), FILTER_VALIDATE_EMAIL);
+                    } elseif ($settings['type'] == 'radio' || $settings['type'] == 'checkbox') {
+                        $input = $request[$field];
                     } else {
                         $input = filter_var(trim($request[$field]), FILTER_SANITIZE_STRIPPED);
 
@@ -292,7 +294,7 @@ class Toolkit
                         $html .= '<div class="form-check';
                         $html .= isset($set['class']) ? ' ' . $set['class'] . '">' : '">';
 
-                        $html .= '<input type="' . $set['type'] . '" name="' . $id . '" id="' . $jid . '" class="form-check-input"';
+                        $html .= '<input type="' . $set['type'] . '" name="' . $field . '" id="' . $jid . '" class="form-check-input" value="' . $option . '"';
 
                         if ($set['type'] == 'radio' && $j == 1) {
                             $html .= ' checked';
@@ -311,8 +313,8 @@ class Toolkit
             // prepare error message
 
             if (isset($response[$field]['error'])) {
-                $html .= '<span class="error bubble bubble-red">';
-                $html .= $response[$field]['error'] . '</span>';
+                $html .= '<p class="error"><span class="error bubble bubble-red">';
+                $html .= $response[$field]['error'] . '</span></p>';
             }
 
             $html .= '</div>';
@@ -323,7 +325,7 @@ class Toolkit
         // close form
 
         $html .= '<div class="submit">';
-        $html .= '<input class="button" type="submit" value="' . $config['submit'] . '" ';
+        $html .= '<input class="button btn btn-primary" type="submit" value="' . $config['submit'] . '" ';
         $html .= 'name="' . \Webmart::$page . '" /></div></form>';
 
         return self::newVar($config['name'], $html, true);
