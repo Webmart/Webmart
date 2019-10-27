@@ -167,6 +167,7 @@ class Webmart
 
         $html .= self::loadBootstrap(true) . '</head><body><div class="container">';
         $html .= '<div class="row mt-3 mb-5"><div class="col-md-3"></div><div class="col-md-6">';
+        $html .= '<img src="https://avatars1.githubusercontent.com/u/35627431?s=200&v=4" />';
         $html .= '<h1 class="mt-5 pt-5 text-center">Welcome to Webmart</h1>';
         $html .= '<p class="text-center">Start building with this quick installation.</p>';
         $html .= '<div class="mt-3 p-4 form-box">';
@@ -224,35 +225,61 @@ class Webmart
                 )
             ),
             function($response) {
-                // // redirect in case of form resubmission
-                //
-                // if (file_exists(WM_DIR . 'wm.php')) {
-                //     Flight::redirect('/');
-                //     exit();
-                // }
-                //
-                // // override form values
-                //
-                // if ($response['folder']['value'] == '') {
-                //     $response['success'] = true;
-                // }
-                //
-                // // generate wm.php file
-                //
-                // if ($response['success'] == true) {
-                //     $output = '<?php' . PHP_EOL;
-                //
-                //     foreach ($response as $name => $data) {
-                //         if (isset($fields[$name])) {
-                //             $output .= 'define("WM_' . strtoupper($name) . '", "' . $data['value'] . '");' . PHP_EOL;
-                //         }
-                //     }
-                //
-                //     file_put_contents(WM_DIR . 'wm.php', $output);
-                //
-                //     Flight::redirect('/');
-                //     exit();
-                // }
+                // redirect in case of form resubmission
+
+                if (file_exists(WM_DIR . 'wm.php')) {
+                    Flight::redirect('/');
+                    exit();
+                }
+
+                // override form values
+
+                if ($response['folder']['value'] == '') {
+                    $response['success'] = true;
+                }
+
+                // generate wm.php file
+
+                if ($response['success'] == true) {
+                    $output = '<?php' . PHP_EOL . PHP_EOL;
+
+                    foreach ($response as $name => $data) {
+                        if ($name == 'success') {
+                            continue;
+                        }
+
+                        if (!isset($data['value'])) {
+                            $data['value'] = '';
+                        }
+
+                        switch ($name) {
+                            case 'sitemap':
+                            case 'robots':
+                            case 'https':
+                            case 'debug':
+                                if ($data['value'] == 'No' || $data['value'] == 'Disable') {
+                                    $data['value'] = "false";
+                                } else {
+                                    $data['value'] = "true";
+                                }
+
+                                $output .= 'define("WM_' . strtoupper($name) . '", ' . $data['value'] . ');' . PHP_EOL;
+
+                                break;
+                            case 'theme':
+                            case 'url':
+                            case 'folder':
+                                $output .= 'define("WM_' . strtoupper($name) . '", "' . $data['value'] . '");' . PHP_EOL;
+
+                                break;
+                        }
+                    }
+
+                    file_put_contents(WM_DIR . 'wm.php', $output);
+
+                    Flight::redirect('/');
+                    exit();
+                }
             }
         );
 
