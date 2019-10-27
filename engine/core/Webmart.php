@@ -113,7 +113,9 @@ class Webmart
             $htaccess .= 'RewriteRule ^(.*)$ index.php [QSA,L]' . PHP_EOL;
 
             file_put_contents(WM_ROOT . '.htaccess', $htaccess);
-            exit('Generated .htaccess file - please refresh the page.');
+
+            Flight::redirect('/?wm=ready');
+            exit();
         }
 
         // continue
