@@ -211,6 +211,11 @@ class Webmart
                 )
             ),
             function($response) {
+                if (file_exists(WM_DIR . 'wm.php')) {
+                    Flight::redirect('/');
+                    exit();
+                }
+
                 // override form values
 
                 if ($response['folder']['value'] == '') {
@@ -224,7 +229,8 @@ class Webmart
 
                     file_put_contents(WM_DIR . 'wm.php', '<?php' . PHP_EOL . $output);
 
-                    exit('Installation complete - please refresh the page.');
+                    Flight::redirect('/?wm=ready');
+                    exit();
                 }
             }
         );
