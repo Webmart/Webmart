@@ -213,6 +213,8 @@ class Webmart
                 )
             ),
             function($response) {
+                // redirect in case of form resubmission
+
                 if (file_exists(WM_DIR . 'wm.php')) {
                     Flight::redirect('/');
                     exit();
@@ -227,11 +229,17 @@ class Webmart
                 // generate wm.php file
 
                 if ($response['success'] == true) {
-                    $output = 'define("WM_FOLDER", "' . $response['folder']['value'] . '");' . PHP_EOL . 'define("WM_THEME", "' . $response['theme']['value'] . '");';
+                    $output = '<?php' . PHP_EOL;
 
-                    file_put_contents(WM_DIR . 'wm.php', '<?php' . PHP_EOL . $output);
+                    foreach ($response as $name => $data) {
+                        if (isset($fields[$name])) {
+                            $output .= 'define("WM_' . strtoupper($name) . '", "' . $data['value'] . '");' . PHP_EOL;
+                        }
+                    }
 
-                    Flight::redirect('/?wm=setup');
+                    file_put_contents(WM_DIR . 'wm.php', $output);
+
+                    Flight::redirect('/');
                     exit();
                 }
             }
