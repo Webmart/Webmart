@@ -102,9 +102,10 @@ class Toolkit
     * @method passes a CSS/JS asset into the view
     * @param $type = string
     * @param $name = string
+    * @param $async = boolean
     */
 
-    public static function asset($type = '', $name = null)
+    public static function asset($type = '', $name = null, $async = false)
     {
         // perform checks
 
@@ -122,7 +123,8 @@ class Toolkit
             if ($type == 'css') {
                 $html .= '<link rel="stylesheet" href="' . $name . '" />';
             } elseif ($type == 'js') {
-                $html .= '<script src="' . $name . '"></script>';
+                $html .= '<script src="' . $name . '"';
+                $html .= $async === true ? ' async"></script>' : '></script>';
             }
 
             self::$assets .= $html;
@@ -133,7 +135,8 @@ class Toolkit
             if ($type == 'css') {
                 $html .= '<link rel="stylesheet" href="' . $url . '" />';
             } else {
-                $html .= '<script src="' . $url . '"></script>';
+                $html .= '<script src="' . $url . '"';
+                $html .= $async === true ? ' async"></script>' : '></script>';
             }
 
             self::$assets .= $html;
