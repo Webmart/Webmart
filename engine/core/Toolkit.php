@@ -153,6 +153,21 @@ class Toolkit
         }
 
         $html = '<style type="text/css">';
+
+        foreach ($rules as $rule => $styles) {
+            $html .= $rule . '{';
+
+            foreach ($styles as $style => $value) {
+                $html .= $style . ':' . $value;
+            }
+
+            $html .= '}';
+        }
+
+        $html .= '</style>';
+
+        self::$assets .= $html;
+        return $html;
     }
 
     /**
