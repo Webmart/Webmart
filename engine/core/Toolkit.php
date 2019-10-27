@@ -171,6 +171,27 @@ class Toolkit
     }
 
     /**
+    * @method passes inline JS into the view
+    * @param $js = string
+    * @param $async = boolean
+    */
+
+    public static function script($js = '', $async = false)
+    {
+        if (!$js) {
+            return;
+        }
+
+        $html .= '<script type="text/javascript"';
+        $html .= $async === true ? ' async>' : '>';
+
+        $html .= $js . '</script>';
+
+        self::$assets .= $html;
+        return $html;
+    }
+
+    /**
     * @method generates a PHP based form with a request/response callback
     * @param $config = array
     * @param $fields = array
