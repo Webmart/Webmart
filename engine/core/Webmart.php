@@ -627,6 +627,29 @@ class Webmart
             self::bootstrap(Config::$bootstrap === 'bundle' ? true : false);
         }
 
+        if (defined('WM_DEBUG') && WM_DEBUG == false) {
+            if (isset(Config::$hotjar) && Config::$hotjar === true) {
+                self::script("(function(h,o,t,j,a,r){
+                    h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                    h._hjSettings={hjid:1,hjsv:5};
+                    a=o.getElementsByTagName('head')[0];
+                    r=o.createElement('script');r.async=1;
+                    r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                    a.appendChild(r);
+                })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');");
+            }
+
+            if (isset(Config::$gtag) && Config::$gtag != '') {
+                self::asset('js', 'https://www.googletagmanager.com/gtag/js?id=' . Config::$gtag, true);
+
+                self::script("window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', '" . Config::$gtag . "');")
+            }
+        }
+
         // render assets into the view
 
         self::pass('assets', Webmart\Toolkit::$assets);
