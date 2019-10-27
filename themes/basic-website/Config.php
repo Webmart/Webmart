@@ -66,14 +66,14 @@ class Config
 
     /** GOOGLE load supported libraries */
 
-    public static $googlelibs = array(
+    public static $libs = array(
         'jquery' => '3.4.1',
         'maps' => 'API_KEY'
     );
 
     /** GOOGLE load fonts with weights and subsets */
 
-    public static $googlefonts = array(
+    public static $fonts = array(
         'Fira Sans' => array(
             'weights' => array(
                 '300i',
