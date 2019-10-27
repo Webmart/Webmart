@@ -199,10 +199,14 @@ class Toolkit
             }
         }
 
+        // handle response
+
         $response['success'] = $success;
 
         if (!empty($request) && $callback) {
             $override = $callback($response);
+
+            // override response fields with closure
 
             if (!empty($override)) {
                 foreach ($override as $field => $data) {
@@ -211,58 +215,112 @@ class Toolkit
             }
         }
 
-        foreach ($fields as $field => $settings) {
-            $html .= '<div class="field field-' . $i . ' field-' . $settings['type'] . '">';
+        // prepare form fields
 
-            if (isset($settings['title'])) {
-                $html .= '<h4>' . $settings['title'] . '</h4>';
+        foreach ($fields as $field => $set) {
+            $html .= '<div class="form-group field-' . $i . ' field-' . $field . '">';
+
+            if (isset($set['heading'])) {
+                $html .= '<h4>' . $set['heading'] . '</h4>';
             }
 
             $html .= '<p>';
+            $id = $set['type'] . ucfirst($field) . $i;
+
+            // prepare label
+
+            if (isset($set['label']) && $set['label'] != '') {
+                $html .= '<label class="form-check-label" for="' . $id . '">' . $set['label'] . '</label>';
+            }
+
+            // prepare individual options
+
+            switch ($set['type']) {
+                case 'select':
+                    $html .= '<select name="' . $field . '" id="' . $id . '" class="form-control ' . $id;
+
+                    $html .= isset($set['class']) ? ' ' . $set['class'] . '">' : '">';
+
+                    if (isset($set['placeholder']) && $set['placeholder'] != '') {
+                        $html .= '<option>' . $set['placeholder'] . '</option>';
+                    }
+
+                    if (isset($set['options']) && !empty($set['options'])) {
+                        foreach ($set['options'] as $name) {
+                            $html .= '<option name="' . $name . '" value="' . $name . '" ';
+
+                            if (isset($request[$field]) && $request[$field] == $name) {
+                                $html .= ' selected="selected"';
+                            }
+
+                            $html .= '>' . $name . '</option>';
+                        }
+                    }
+
+                    $html .= '</select></p>';
+
+                    break;
+                case 'email':
+                case 'password':
+                case 'text':
+                case 'textarea':
+                    $html .= '<input type="' . $set['type'] . '" name="' . $field . '" id="' . $id . '" class="form-control ' . $id;
+
+                    $html .= isset($set['class']) ? ' ' . $set['class'] . '" ' : '" ';
+
+                    if (isset($set['placeholder']) && $set['placeholder'] != '') {
+                        $html .= ' placeholder="' . $set['placeholder'] . '"';
+                    }
+
+                    if (isset($request[$field]) && $request[$field] != '') {
+                        $html .= ' value="' . $request[$field] . '" ';
+                    } elseif (isset($set['value']) && $set['value'] != '') {
+                        $html .= ' value="' . $set['value'] . '"';
+                    }
+
+                    $html .= '/></p>';
+
+                    break;
+                case 'radio':
+                case 'checkbox':
+                    $j = 1;
+                    $html .= '</p>';
+
+                    foreach ($set['options'] as $option) {
+                        $jid = $id . '_' . $j;
+
+                        $html .= '<div class="form-check';
+                        $html .= isset($set['class']) ? ' ' . $set['class'] . '">' : '">';
+
+                        $html .= '<input type="' . $set['type'] . '" name="' . $id . '" id="' . $jid . '" class="form-check-input"';
+
+                        if ($set['type'] == 'radio' && $j == 1) {
+                            $html .= ' checked';
+                        }
+
+                        $html .= ' /><label class="form-check-label" for="' . $jid . '">' . $option . '</label>';
+
+                        $html .= '</div>';
+
+                        $j++;
+                    }
+
+                    break;
+            }
+
+            // prepare error message
 
             if (isset($response[$field]['error'])) {
                 $html .= '<span class="error bubble bubble-red">';
                 $html .= $response[$field]['error'] . '</span>';
             }
 
-            if ($settings['type'] == 'select') {
-                $html .= '<select name="' . $field . '">';
-
-                if (isset($settings['placeholder'])) {
-                    $html .= '<option>' . $settings['placeholder'] . '</option>';
-                }
-
-                if (isset($settings['options']) && !empty($settings['options'])) {
-                    foreach ($settings['options'] as $name) {
-                        $html .= '<option name="' . $name . '" value="' . $name . '" ';
-
-                        if (isset($request[$field]) && $request[$field] == $name) {
-                            $html .= ' selected="selected"';
-                        }
-
-                        $html .= '>' . $name . '</option>';
-                    }
-                }
-
-                $html .= '</select>';
-            } else {
-                $html .= '<input type="' . $settings['type'] . '" name="' . $field . '" ';
-
-                if (isset($settings['placeholder'])) {
-                    $html .= ' placeholder="' . $settings['placeholder'] . '" ';
-                }
-
-                if (isset($request[$field]) && $request[$field] != '') {
-                    $html .= 'value="' . $request[$field] . '" ';
-                }
-
-                $html .= '/>';
-            }
-
-            $html .= '</p></div>';
+            $html .= '</div>';
 
             $i++;
         }
+
+        // close form
 
         $html .= '<div class="submit">';
         $html .= '<input class="button" type="submit" value="' . $config['submit'] . '" ';
