@@ -646,7 +646,7 @@ class Webmart
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', '" . Config::$gtag . "');")
+                gtag('config', '" . Config::$gtag . "');");
             }
         }
 
