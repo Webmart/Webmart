@@ -22,7 +22,7 @@ class Toolkit
     * @param $http = string
     */
 
-    public static function redirect($where = '', $http = null)
+    public static function redirect($where = '', $http = '303')
     {
         if (!$where) {
             return;
