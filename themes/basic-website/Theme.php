@@ -9,9 +9,7 @@
 class Theme
 {
 
-    public $route;
-
-    public static $seo = array();
+    protected $route;
 
     /**
     * @method
@@ -20,31 +18,9 @@ class Theme
     public function __construct($route)
     {
         $this->route = $route;
-        self::$seo = Webmart::getJSON('seo');
 
-        Webmart::addValue('version', \Config::$version);
-
-        if (isset(self::$seo[Webmart::$view]['title'])) {
-            Webmart::addValue('title', self::$seo[Webmart::$view]['title']);
-        } else {
-            Webmart::addValue('title', self::$seo['home']['title']);
-        }
-
-        Webmart::addValue('description', '');
-
-        require WM_DIR_CLASSES . 'FrontEnd.php';
-
-        FrontEnd::newMenu(
-            'hello',
-            array(
-                'Get Started' => array(
-                    'url' => 'http://webmartphp.com/',
-                    'class' => 'webmart'
-                )
-            ),
-            'Welcome to Webmart',
-            'http://webmartphp.com/'
-        );
+        Webmart::pass('title', 'Webmart - My First Website');
+        Webmart::pass('heading', 'Hello, Webmart.');
     }
 
     /**
@@ -53,7 +29,7 @@ class Theme
 
     public function routeHome()
     {
-        Webmart::addValue('description', self::$seo['home']['description']);
+        Webmart::pass('welcome', 'My first website.');
     }
 
 }
