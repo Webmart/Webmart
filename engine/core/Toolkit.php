@@ -380,9 +380,9 @@ class Toolkit
 
         $html .= '<div class="submit">';
         $html .= '<input class="button btn btn-primary" type="submit" value="' . $config['submit'] . '" ';
-        $html .= 'name="' . \Webmart::$page . '" /></div></form>';
+        $html .= 'name="' . self::get('page') . '" /></div></form>';
 
-        return self::newVar($config['name'], $html, true);
+        return self::pass($config['name'], $html);
     }
 
     /**
