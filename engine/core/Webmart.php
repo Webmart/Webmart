@@ -62,9 +62,9 @@ class Webmart
             Flight::route('/', function() {
                 $data = array();
 
-                foreach ((array) Flight::request()->data as $item) {
-                    if (!empty($item)) {
-                        $data[] = $item;
+                foreach ((array) Flight::request()->data as $flight => $collection) {
+                    foreach ($collection as $item => $value) {
+                        $data[$item] = $value;
                     }
                 }
 
@@ -198,6 +198,17 @@ class Webmart
             ),
             '.submit input' => array(
                 'width' => '25%'
+            ),
+            'span.error' => array(
+                'padding' => '5px',
+                'font-size' => '14px',
+                'line-height' => '15px',
+                'background' => 'red',
+                'color' => 'white',
+                'font-weight' => 'bold',
+                'border-radius' => '6px',
+                'margin' => '4px 0 0 0',
+                'display' => 'inline-block'
             )
         ));
 
@@ -267,10 +278,18 @@ class Webmart
                     self::redirect('/?wm=ready');
                 }
 
-                // override form values
+                // handle response
 
-                if ($response['folder']['value'] == '') {
-                    $response['success'] = true;
+                if (!$response['folder']['value']) {
+                    $response['folder']['error'] = null;
+                }
+
+                foreach ($response as $item => $data) {
+                    if ($data['error'] && $item != 'folder') {
+                        return $response;
+                    } else {
+                        $response['success'] = true;
+                    }
                 }
 
                 // generate wm.php file
@@ -462,9 +481,9 @@ class Webmart
 
             $data = array();
 
-            foreach ((array) $request->data as $item) {
-                if (!empty($item)) {
-                    $data[] = $item;
+            foreach ((array) Flight::request()->data as $flight => $collection) {
+                foreach ($collection as $item => $value) {
+                    $data[$item] = $value;
                 }
             }
 
