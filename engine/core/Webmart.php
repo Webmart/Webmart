@@ -237,7 +237,7 @@ class Webmart
                 'url' => array(
                     'type' => 'text',
                     'label' => "What's your base URL?",
-                    'placeholder' => 'ex. mywebsite.com'
+                    'placeholder' => 'ex. http://mywebsite.com/'
                 ),
                 'folder' => array(
                     'type' => 'text',
