@@ -147,7 +147,7 @@ class Webmart
             'weights' => array(
                 '300'
             )
-        )) . self::font('Noto serif', array(
+        )) . self::font('Noto Serif', array(
             'weights' => array(
                 '400'
             )
@@ -498,9 +498,9 @@ class Webmart
             self::set('urls', array(
                 'base' => WM_URL,
                 'page' => WM_URL . self::get('url'),
-                'css' => WM_URL . 'view/' . WM_THEME . '/assets/css/',
-                'imgs' => WM_URL . 'view/' . WM_THEME . '/assets/imgs/',
-                'js' => WM_URL . 'view/' . WM_THEME . '/assets/js/'
+                'css' => 'themes/' . WM_THEME . '/assets/css/',
+                'imgs' => 'themes/' . WM_THEME . '/assets/imgs/',
+                'js' => 'themes/' . WM_THEME . '/assets/js/'
             ));
 
             // include functions.php
