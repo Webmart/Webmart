@@ -28,7 +28,7 @@ class Toolkit
             return;
         }
 
-        Flight::redirect($where, $http);
+        \Flight::redirect($where, $http);
 
         exit();
     }
@@ -158,7 +158,7 @@ class Toolkit
             $html .= $rule . '{';
 
             foreach ($styles as $style => $value) {
-                $html .= $style . ':' . $value;
+                $html .= $style . ':' . $value . ';';
             }
 
             $html .= '}';
@@ -185,9 +185,9 @@ class Toolkit
         $success = true;
 
         if ($config['method'] == 'POST') {
-            $request = \Webmart::$data;
+            $request = self::get('data');
         } elseif ($config['method'] == 'GET') {
-            $request = \Webmart::$query;
+            $request = self::get('query');
         }
 
         $html .= '<form method="' . strtolower($config['method']) . '" ';

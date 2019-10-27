@@ -60,12 +60,15 @@ class Webmart
 
         if (!file_exists(WM_DIR . 'wm.php')) {
             Flight::route('/', function() {
-                $request = Flight::request();
+                $data = array();
 
-                foreach ((array) $request->data as $data) {
-                    self::$data = $data;
+                foreach ((array) Flight::request()->data as $item) {
+                    if (!empty($item)) {
+                        $data[] = $item;
+                    }
                 }
 
+                self::set('data', empty($data) ? null : $data);
                 self::setup();
             });
 
@@ -142,29 +145,68 @@ class Webmart
 
         $html .= self::font('Fira Sans', array(
             'weights' => array(
-                '300i',
-                '400',
-                '400i'
+                '300'
+            )
+        )) . self::font('Noto serif', array(
+            'weights' => array(
+                '400'
             )
         ));
-
+        $html .= self::library('jquery', '3.4.1') . self::bootstrap(true);
         $html .= self::style(array(
             'body' => array(
                 'background' => '#f8f8f8',
                 'font-family' => 'Fira Sans, sans-serif',
-                'font-weight' => '300'
+                'font-weight' => '300',
+                'cursor' => 'default'
             ),
-            'form-box field' => array(
-
+            'img' => array(
+                'width' => '20%',
+                'height' => 'auto',
+                'margin' => '0 auto',
+                'display' => 'block'
+            ),
+            'h1,h4,label' => array(
+                'font-family' => 'Noto serif, serif',
+                'letter-spacing' => '-0.05em'
+            ),
+            'select,input[type="radio"]' => array(
+                'cursor' => 'pointer'
+            ),
+            'label' => array(
+                'line-height' => '35px'
+            ),
+            'h4' => array(
+                'margin' => '45px 0 14px 0'
+            ),
+            'p' => array(
+                'margin' => '0'
+            ),
+            '.form-group' => array(
+                'padding' => '4px 0',
+                'margin' => '0'
+            ),
+            '.field-3 label, .field-3 input' => array(
+                'display' => 'inline'
+            ),
+            '.field-3 input' => array(
+                'width' => '40%',
+                'margin-left' => '5px'
+            ),
+            '.submit' => array(
+                'margin-top' => '45px'
+            ),
+            '.submit input' => array(
+                'width' => '25%'
             )
         ));
 
-        $html .= self::bootstrap(true) . '</head><body><div class="container">';
-        $html .= '<div class="row mt-3 mb-5"><div class="col-md-3"></div><div class="col-md-6">';
+        $html .= '</head><body><div class="container">';
+        $html .= '<div class="row mt-5 mb-5"><div class="col-md-3"></div><div class="col-md-6">';
         $html .= '<img src="https://avatars1.githubusercontent.com/u/35627431?s=200&v=4" />';
-        $html .= '<h1 class="mt-5 pt-5 text-center">Welcome to Webmart</h1>';
+        $html .= '<h1 class="mt-2 pt-2 text-center">Welcome to Webmart</h1>';
         $html .= '<p class="text-center">Start building with this quick installation.</p>';
-        $html .= '<div class="mt-3 p-4 form-box">';
+        $html .= '<div class="mt-5 form-box">';
 
         // prepare and handle the form
 
@@ -194,7 +236,7 @@ class Webmart
                 ),
                 'sitemap' => array(
                     'type' => 'radio',
-                    'heading' => 'SEO',
+                    'heading' => 'Need an SEO boost?',
                     'label' => 'Generate a sitemap.xml file?',
                     'options' => array('No', 'Yes'),
                     'class' => 'form-check-inline'
