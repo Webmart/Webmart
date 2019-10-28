@@ -519,7 +519,7 @@ class Webmart
             if (method_exists('Theme', 'route404')) {
                 $controller->route404(null);
             }
-            
+
             self::view();
 
             exit();
@@ -527,13 +527,14 @@ class Webmart
 
         // handle individual requests
 
-        Config::$routes[] = '/'; // auto-include the homepage
+        Config::$routes[] = ''; // auto-include the homepage
 
         foreach (Config::$routes as $route) {
             $exploded = explode('-', $route);
             $path = '/';
 
             // prepare the routing path
+
             foreach ($exploded as $item) {
                 if (strpos($item, '(') === 0) {
                     $path .= str_replace('(', '(/@', $item);
@@ -543,7 +544,8 @@ class Webmart
                 $path .= $item;
             }
 
-            // assign routing path
+            // handle routing paths
+
             Flight::route($path, function() {
                 $controller = null;
                 $parsed = explode('/', self::get('url'));
@@ -553,7 +555,8 @@ class Webmart
                     $args = null;
                 }
 
-                // controllers
+                // handle and load controllers
+
                 foreach ($parsed as $item) {
                     if (file_exists(WM_DIR_CONTROLLERS . ucfirst($item) . '.php')) {
                         require WM_DIR_CONTROLLERS . ucfirst($item) . '.php';
@@ -561,7 +564,8 @@ class Webmart
                     }
                 }
 
-                // classes
+                // create instances
+
                 if (!$controller) {
                     $class = 'Theme';
                     $method = 'route' . ucfirst(self::get('template'));
@@ -572,7 +576,8 @@ class Webmart
 
                 $instance = new $class($args);
 
-                // methods
+                // execute methods
+
                 if (method_exists($class, $method)) {
                     $instance->$method($args);
                 }
