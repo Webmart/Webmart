@@ -13,6 +13,7 @@ class AboutTeam extends About
     {
         parent::__construct($route);
 
+        Webmart::pass('heading', 'Team');
         Webmart::pass('welcome', 'mywebsite/about/team/');
     }
 
