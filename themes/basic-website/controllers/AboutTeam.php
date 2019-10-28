@@ -9,6 +9,11 @@
 class AboutTeam extends About
 {
 
+    public function __construct($route)
+    {
+        parent::__construct($route);
 
+        Webmart::pass('welcome', 'mywebsite/about/team/');
+    }
 
 }
