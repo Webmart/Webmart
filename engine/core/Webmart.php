@@ -245,22 +245,10 @@ class Webmart
                     'label' => 'ex. localhost/',
                     'placeholder' => 'webmart'
                 ),
-                'sitemap' => array(
-                    'type' => 'radio',
-                    'heading' => 'Need an SEO boost?',
-                    'label' => 'Generate a sitemap.xml file?',
-                    'options' => array('No', 'Yes'),
-                    'class' => 'form-check-inline'
-                ),
                 'robots' => array(
                     'type' => 'radio',
+                    'heading' => 'Need an SEO boost?',
                     'label' => 'Generate a robots.txt file?',
-                    'options' => array('No', 'Yes'),
-                    'class' => 'form-check-inline'
-                ),
-                'https' => array(
-                    'type' => 'radio',
-                    'label' => 'Force HTTPs?',
                     'options' => array('No', 'Yes'),
                     'class' => 'form-check-inline'
                 ),
