@@ -491,7 +491,7 @@ class Webmart
 
             self::set('urls', array(
                 'base' => WM_URL,
-                'page' => self::get('url'),
+                'page' => WM_URL . self::get('url'),
                 'css' => $vendor . 'themes/' . WM_THEME . '/assets/css/',
                 'imgs' => $vendor . 'themes/' . WM_THEME . '/assets/imgs/',
                 'js' => $vendor . 'themes/' . WM_THEME . '/assets/js/'
@@ -681,7 +681,7 @@ class Webmart
 
         $head = '';
         $head .= '<base href="' . self::get('urls')['base'] . '" />';
-        $head .= '<link rel="canonical" href="' . WM_URL . self::get('urls')['page'] . '" />';
+        $head .= '<link rel="canonical" href="' . self::get('urls')['page'] . '" />';
         $head .= '<meta name="robots" content="';
 
         if (defined('WM_ROBOTS') && WM_ROBOTS == true) {
