@@ -509,6 +509,22 @@ class Webmart
             exit();
         }
 
+        // handle 404 requests
+
+        Flight::map('notFound', function() {
+            self::set('template', '404');
+
+            $controller = new Theme(null);
+
+            if (method_exists('Theme', 'route404')) {
+                $controller->route404(null);
+            }
+            
+            self::view();
+
+            exit();
+        });
+
         // handle individual requests
 
         Config::$routes[] = '/'; // auto-include the homepage
