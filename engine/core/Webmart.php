@@ -548,6 +548,7 @@ class Webmart
 
             Flight::route($path, function() {
                 $controller = null;
+                $heir = '';
                 $parsed = explode('/', self::get('url'));
                 $args = func_get_args();
 
@@ -558,13 +559,18 @@ class Webmart
                 // handle and load controllers
 
                 foreach ($parsed as $item) {
-                    if (file_exists(WM_DIR_CONTROLLERS . ucfirst($item) . '.php')) {
-                        require WM_DIR_CONTROLLERS . ucfirst($item) . '.php';
-                        $controller = ucfirst($item);
+                    $heir .= ucfirst($item);
+
+                    if (file_exists(WM_DIR_CONTROLLERS . ucfirst($heir) . '.php')) {
+                        require WM_DIR_CONTROLLERS . ucfirst($heir) . '.php';
+
+                        if (class_exists($heir)) {
+                            $controller = $heir;
+                        }
                     }
                 }
 
-                // create instances
+                // create instance
 
                 if (!$controller) {
                     $class = 'Theme';
@@ -576,7 +582,7 @@ class Webmart
 
                 $instance = new $class($args);
 
-                // execute methods
+                // execute assigned method
 
                 if (method_exists($class, $method)) {
                     $instance->$method($args);
