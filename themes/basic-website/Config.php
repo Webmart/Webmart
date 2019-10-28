@@ -9,7 +9,7 @@
 class Config
 {
 
-    /** VERSION theme */
+    /** Theme VERSION */
 
     public static $version = '1.0';
 
@@ -28,16 +28,6 @@ class Config
     /** POST data to accept */
 
     public static $data = array();
-
-    /** DATABASE configuration (requires Medoo library) */
-
-    public static $db = array(
-        'database_type' => '',
-        'database_name' => '',
-        'server' => '',
-        'username' => '',
-        'password' => ''
-    );
 
     /** FLIGHT redirect requests to pages with an HTTP response */
 
