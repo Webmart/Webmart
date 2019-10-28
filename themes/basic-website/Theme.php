@@ -32,4 +32,15 @@ class Theme
         Webmart::pass('welcome', 'My first website.');
     }
 
+    /**
+    * @method
+    */
+
+    public function route404()
+    {
+        Webmart::pass('title', 'Webmart - 404');
+        Webmart::pass('heading', 'Oops');
+        Webmart::pass('welcome', 'This page was not found.');
+    }
+
 }

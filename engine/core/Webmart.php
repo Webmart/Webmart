@@ -9,11 +9,9 @@
 class Webmart
 {
 
-    /**
-    * @var boolean framework status
-    */
-
     private static $ready = false;
+
+    private static $composer = false;
 
     /**
     * @method prepares the framework
@@ -25,11 +23,13 @@ class Webmart
             return;
         }
 
+        self::$composer = $composer;
+
         // define directories and load core files
 
         define('WM_ROOT', getcwd() . '/');
 
-        if ($composer) {
+        if (self::$composer) {
             define('WM_DIR', realpath(__DIR__ . '/../..') . '/');
         } else {
             define('WM_DIR', WM_ROOT);
@@ -44,7 +44,7 @@ class Webmart
 
         // attempt to load Flight
 
-        if (!$composer) {
+        if (!self::$composer) {
             if (!file_exists(WM_DIR_ENGINE . 'flight/Flight.php')) {
                 exit('Flight framework not detected.');
             }
@@ -245,22 +245,10 @@ class Webmart
                     'label' => 'ex. localhost/',
                     'placeholder' => 'webmart'
                 ),
-                'sitemap' => array(
-                    'type' => 'radio',
-                    'heading' => 'Need an SEO boost?',
-                    'label' => 'Generate a sitemap.xml file?',
-                    'options' => array('No', 'Yes'),
-                    'class' => 'form-check-inline'
-                ),
                 'robots' => array(
                     'type' => 'radio',
+                    'heading' => 'Need an SEO boost?',
                     'label' => 'Generate a robots.txt file?',
-                    'options' => array('No', 'Yes'),
-                    'class' => 'form-check-inline'
-                ),
-                'https' => array(
-                    'type' => 'radio',
-                    'label' => 'Force HTTPs?',
                     'options' => array('No', 'Yes'),
                     'class' => 'form-check-inline'
                 ),
@@ -495,12 +483,18 @@ class Webmart
 
             // collect URLs
 
+            $vendor = '';
+
+            if (self::$composer) {
+                $vendor = 'vendor/webmart/webmart/';
+            }
+
             self::set('urls', array(
                 'base' => WM_URL,
                 'page' => WM_URL . self::get('url'),
-                'css' => 'themes/' . WM_THEME . '/assets/css/',
-                'imgs' => 'themes/' . WM_THEME . '/assets/imgs/',
-                'js' => 'themes/' . WM_THEME . '/assets/js/'
+                'css' => $vendor . 'themes/' . WM_THEME . '/assets/css/',
+                'imgs' => $vendor . 'themes/' . WM_THEME . '/assets/imgs/',
+                'js' => $vendor . 'themes/' . WM_THEME . '/assets/js/'
             ));
 
             // include functions.php
@@ -521,15 +515,32 @@ class Webmart
             exit();
         }
 
+        // handle 404 requests
+
+        Flight::map('notFound', function() {
+            self::set('template', '404');
+
+            $controller = new Theme(null);
+
+            if (method_exists('Theme', 'route404')) {
+                $controller->route404(null);
+            }
+
+            self::view();
+
+            exit();
+        });
+
         // handle individual requests
 
-        Config::$routes[] = '/'; // auto-include the homepage
+        Config::$routes[] = ''; // auto-include the homepage
 
         foreach (Config::$routes as $route) {
             $exploded = explode('-', $route);
             $path = '/';
 
             // prepare the routing path
+
             foreach ($exploded as $item) {
                 if (strpos($item, '(') === 0) {
                     $path .= str_replace('(', '(/@', $item);
@@ -539,9 +550,11 @@ class Webmart
                 $path .= $item;
             }
 
-            // assign routing path
+            // handle routing paths
+
             Flight::route($path, function() {
                 $controller = null;
+                $heir = '';
                 $parsed = explode('/', self::get('url'));
                 $args = func_get_args();
 
@@ -549,15 +562,22 @@ class Webmart
                     $args = null;
                 }
 
-                // controllers
+                // handle and load controllers
+
                 foreach ($parsed as $item) {
-                    if (file_exists(WM_DIR_CONTROLLERS . ucfirst($item) . '.php')) {
-                        require WM_DIR_CONTROLLERS . ucfirst($item) . '.php';
-                        $controller = ucfirst($item);
+                    $heir .= ucfirst($item);
+
+                    if (file_exists(WM_DIR_CONTROLLERS . ucfirst($heir) . '.php')) {
+                        require WM_DIR_CONTROLLERS . ucfirst($heir) . '.php';
+
+                        if (class_exists($heir)) {
+                            $controller = $heir;
+                        }
                     }
                 }
 
-                // classes
+                // create instance
+
                 if (!$controller) {
                     $class = 'Theme';
                     $method = 'route' . ucfirst(self::get('template'));
@@ -568,7 +588,8 @@ class Webmart
 
                 $instance = new $class($args);
 
-                // methods
+                // execute assigned method
+
                 if (method_exists($class, $method)) {
                     $instance->$method($args);
                 }
@@ -599,6 +620,8 @@ class Webmart
         if (isset(Config::$version)) {
             self::pass('version', Config::$version);
         }
+
+        self::pass('urls', self::get('urls'));
 
         // collect assets
 
@@ -657,8 +680,8 @@ class Webmart
         // create <head> and <body> markup
 
         $head = '';
-        $head .= '<base href="' . WM_URL . '" />';
-        $head .= '<link rel="canonical" href="' . WM_URL . self::get('url') . '" />';
+        $head .= '<base href="' . self::get('urls')['base'] . '" />';
+        $head .= '<link rel="canonical" href="' . self::get('urls')['page'] . '" />';
         $head .= '<meta name="robots" content="';
 
         if (defined('WM_ROBOTS') && WM_ROBOTS == true) {

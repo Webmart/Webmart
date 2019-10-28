@@ -6,16 +6,15 @@
 * https://github.com/Webmart
 */
 
-class Home extends Theme
+class AboutTeam extends About
 {
-
-    /**
-    * @method
-    */
 
     public function __construct($route)
     {
+        parent::__construct($route);
 
+        Webmart::pass('heading', 'Team');
+        Webmart::pass('welcome', 'mywebsite/about/team/');
     }
 
 }
