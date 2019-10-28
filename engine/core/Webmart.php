@@ -9,11 +9,9 @@
 class Webmart
 {
 
-    /**
-    * @var boolean framework status
-    */
-
     private static $ready = false;
+
+    private static $composer = false;
 
     /**
     * @method prepares the framework
@@ -25,11 +23,13 @@ class Webmart
             return;
         }
 
+        self::$composer = $composer;
+
         // define directories and load core files
 
         define('WM_ROOT', getcwd() . '/');
 
-        if ($composer) {
+        if (self::$composer) {
             define('WM_DIR', realpath(__DIR__ . '/../..') . '/');
         } else {
             define('WM_DIR', WM_ROOT);
@@ -44,7 +44,7 @@ class Webmart
 
         // attempt to load Flight
 
-        if (!$composer) {
+        if (!self::$composer) {
             if (!file_exists(WM_DIR_ENGINE . 'flight/Flight.php')) {
                 exit('Flight framework not detected.');
             }
@@ -483,12 +483,18 @@ class Webmart
 
             // collect URLs
 
+            $vendor = '';
+
+            if (self::$composer) {
+                $vendor = 'vendor/webmart/webmart/';
+            }
+
             self::set('urls', array(
                 'base' => WM_URL,
-                'page' => WM_URL . self::get('url'),
-                'css' => 'themes/' . WM_THEME . '/assets/css/',
-                'imgs' => 'themes/' . WM_THEME . '/assets/imgs/',
-                'js' => 'themes/' . WM_THEME . '/assets/js/'
+                'page' => self::get('url'),
+                'css' => $vendor . 'themes/' . WM_THEME . '/assets/css/',
+                'imgs' => $vendor . 'themes/' . WM_THEME . '/assets/imgs/',
+                'js' => $vendor . 'themes/' . WM_THEME . '/assets/js/'
             ));
 
             // include functions.php
@@ -615,6 +621,8 @@ class Webmart
             self::pass('version', Config::$version);
         }
 
+        self::pass('urls', self::get('urls'));
+
         // collect assets
 
         self::asset('css', 'global');
@@ -672,8 +680,8 @@ class Webmart
         // create <head> and <body> markup
 
         $head = '';
-        $head .= '<base href="' . WM_URL . '" />';
-        $head .= '<link rel="canonical" href="' . WM_URL . self::get('url') . '" />';
+        $head .= '<base href="' . self::get('urls')['base'] . '" />';
+        $head .= '<link rel="canonical" href="' . WM_URL . self::get('urls')['page'] . '" />';
         $head .= '<meta name="robots" content="';
 
         if (defined('WM_ROBOTS') && WM_ROBOTS == true) {
