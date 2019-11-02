@@ -29,17 +29,21 @@ body {
     letter-spacing: -0.03em;
     cursor: default;
 }
-p,
 h1,
 h2,
 h3,
 h4 {
     font-family: 'Fira Sans', sans-serif;
     font-weight: 200;
+    color: #fff;
 }
 h1 {
     font-size: 55px;
     line-height: 62px;
+}
+h2 {
+    font-size: 38px;
+    line-height: 46px;
 }
 h4 {
     font-weight: 400;
@@ -54,11 +58,12 @@ h6 {
 a,
 a:visited {
     color: #fff;
-    text-decoration: none;
+    border-bottom: 1px solid #fff;
 }
 a:hover {
     color: #9b59b6;
     text-decoration: none;
+    border-bottom: 1px solid #9b59b6;
 }
 .btn-primary {
     background: #9b59b6;
@@ -70,13 +75,47 @@ a:hover {
 }
 
 body > header {
-    padding: 15px 0;
-    background: #2f2d2e;
     font-size: 16px;
     line-height: 16px;
+    background: linear-gradient(to right,#343233 0%,#2f2d2e 50%,#2f2d2e 100%);
+}
+body > header a,
+body > header a:hover,
+a.btn,
+a.inline {
+    border-bottom: none;
 }
 body > header a.logo {
     font-weight: 400;
     font-size: 20px;
     letter-spacing: -0.09em;
+}
+
+body > footer {
+    background: linear-gradient(to right,#343233 0%,#2f2d2e 50%,#2f2d2e 100%);
+}
+
+section.splash {
+    background: linear-gradient(to right,#343233 0%,#2f2d2e 50%,#2f2d2e 100%);
+}
+section.install {
+    background: linear-gradient(to right,#2f2d2e 0%,#2f2d2e 50%,#343233 100%);
+}
+section.contribute {
+    background: linear-gradient(to right,#343233 0%,#2f2d2e 50%,#2f2d2e 100%);
+}
+
+img {
+    width: 130%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .11);
+}
+img.cuty {
+    margin-left: -40%;
+}
+span.black {
+    background: #4e4e4e;
+    border-radius: 3px;
+    padding: 0 5px;
 }
