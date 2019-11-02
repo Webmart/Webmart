@@ -1,115 +1,131 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Webmart - A basic PHP framework for web applications and websites</title>
+        <style type="text/css">
+            body .component { display: none }
+            body.pace-done .component { display: block; }
+        </style>
     </head>
     <body>
-        <header></header>
-        <main>
-            Coming soon.
+        <header class="component mt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 text-left border-box">
+                        <a href="" class="logo">webmart</a>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right border-box">
+                        <a href="">Install</a>
+                        <a href="" class="ml-3">Docs</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="component pt-5 pb-5">
+            <section class="splash pt-5">
+                <div class="container pt-5">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-12"></div>
+                        <div class="col-md-8 col-sm-12 text-center">
+                            <h1 class="text-center">Build web applications and websites with PHP</h1>
+                            <p>Webmart is a simple framework that allows you to jump straight into the actual coding part. No useless stuff, no obfuscated processes, no complex learning and no ninja magic.</p>
+                            <div class="mt-5">
+                                <a class="btn btn-primary inline" href="">Download</a>
+                                <a class="ml-3 inline" href="">View on GitHub</a>
+                            </div>
+                            <h6 class="text-center mt-4">
+                                Released under the <a href="">MIT License</a>.
+                            </h6>
+                        </div>
+                        <div class="col-md-2 col-sm-12"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="install mt-5 pt-5">
+                <div class="container">
+                    <h2 class="text-center m-5 p-5">Get the boring stuff out of the way</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Install easily</h3>
+                            <p>Great things happen when developers work together—from teaching and sharing knowledge to building better software. Teletype for Atom makes collaborating on code just as easy as it is to code alone, right from your editor. Share your workspace and edit code together in real time. To start collaborating, open Teletype in Atom and install the package.</p>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="code">
+                <div class="container">
+                </div>
+            </section>
+            <section class="included mt-5 pt-5 mb-5 pb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <h3>The basics are already in place for you</h3>
+                            </div>
+                            <div class="row pt-4 mt-4">
+                                <div class="col-md-6 pr-4">
+                                    <h4>Configuration</h4>
+                                    <p>Your web applications and websites are basically themes, pre-packed with configuration options.</p>
+                                    <p>Docs: <a href="">WM</a>, <a href="">Config</a></p>
+                                </div>
+                                <div class="col-md-6 pl-4">
+                                    <h4>Routing</h4>
+                                    <p>Webmart is built on top of <a href="">mikecao/flight</a>, which means everything is auto-routed automatically.</p>
+                                    <p>Docs: <a href="">Routing</a>, <a href="">Redirects</a></p>
+                                </div>
+                            </div>
+                            <div class="row pt-4 mt-4">
+                                <div class="col-md-6 pr-4">
+                                    <h4>Toolkit</h4>
+                                    <p>Store and retrieve data, load CSS/JS assets, Bootstrap, create forms and more, with a simple toolkit.</p>
+                                    <p>Docs: <a href="">Constants</a>, <a href="">Methods</a></p>
+                                </div>
+                                <div class="col-md-6 pl-4">
+                                    <h4>MVC</h4>
+                                    <p>Create full-fledged web applications and websites, with a fully supported MVC logic.</p>
+                                    <p>Docs: <a href="">Controllers</a>, <a href="">Templates</a>, <a href="">More</a></p>
+                                </div>
+                            </div>
+                            <div class="row pt-4 mt-4">
+                                <div class="col-md-6 pr-4">
+                                    <h4>Libraries</h4>
+                                    <p>Webmart supports a few libraries, but you can also load and use your own.</p>
+                                    <p>Docs: <a href="">Libraries</a></p>
+                                </div>
+                                <div class="col-md-6 pl-4">
+                                    <h4>Themes</h4>
+                                    <p>You can use the included boilerplate themes to develop your own, or explore <a href="">community themes</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="contribute">
+                <div class="container">
+                </div>
+            </section>
         </main>
-        <footer></footer>
+        <footer class="component">
+
+        </footer>
+
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans:200,400&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="assets/css/normalize.css?ver=4.1.1" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="assets/css/global.css" />
+        <link rel="stylesheet" type="text/css" href="" />
+        <script type="text/javascript" src="assets/js/pace.min.js?ver=1.0.0"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Webmart - A basic PHP framework for web applications and websites</title>
-  <link href='http://fonts.googleapis.com/css?family=Mr+Dafoe' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
-  <link rel="stylesheet" href="/assets/css/normalize.css">
-  <link rel="stylesheet" href="/assets/css/highlight.css">
-  <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/jquery-1.12.3.min.js"></script>
-  <script src="/assets/js/main.js"></script>
-</head>
-
-<body>
-  <div id="container">
-    <div id="header">
-  <div id="title">Flight</div>
-  <div id="subtitle">
-
-
-<p>An extensible micro-framework for PHP</p>
-
-  </div>
-  <div id="nav">
-
-
-<p><a href="/">about</a>
-<a href="/install">install</a>
-<a href="/learn">learn</a>
-<a href="https://github.com/mikecao/flight">code</a></p>
-
-  </div>
-</div>
-
-    <div id="content">
-
-
-<h1 id="what-is-flight">What is Flight?</h1>
-
-<p>Flight is a fast, simple, extensible framework for PHP.
-Flight enables you to quickly and easily build RESTful web applications.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">require</span> <span class="s1">'flight/Flight.php'</span><span class="p">;</span>
-
-<span class="nx">Flight</span><span class="o">::</span><span class="na">route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
-  <span class="k">echo</span> <span class="s1">'hello world!'</span><span class="p">;</span>
-<span class="p">});</span>
-
-<span class="nx">Flight</span><span class="o">::</span><span class="na">start</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<p><a href="/learn">Learn more</a></p>
-
-<h1 id="requirements">Requirements</h1>
-
-<p>Flight requires PHP 5.3 or greater.</p>
-
-<h1 id="license">License</h1>
-
-<p>Flight is released under the <a href="https://github.com/mikecao/flight/blob/master/LICENSE">MIT</a> license.</p>
-
-<h1 id="contributing">Contributing</h1>
-
-<p>This website is hosted on <a href="https://github.com/mikecao/flightphp.com">Github</a>.
-Updates and language translations are welcome.</p>
-
-    </div>
-    <div id="footer">
-    <div>
-
-
-<p>Copyright © Mike Cao and other flightphp.com contributors</p>
-
-<p><a href="https://github.com/mikecao/flightphp.com">Fork this website on GitHub</a></p>
-
-    </div>
-    <a class="github-button" href="https://github.com/mikecao/flight" data-count-href="/mikecao/flight/stargazers" data-count-api="/repos/mikecao/flight#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star mikecao/flight on GitHub">Star</a>
-    <a class="github-button" href="https://github.com/mikecao/flight/fork" data-count-href="/mikecao/flight/network" data-count-api="/repos/mikecao/flight#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork mikecao/flight on GitHub">Fork</a>
-</div>
-
-<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-101933-10']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-</script>
-  </div>
-</body>
-</html> -->
