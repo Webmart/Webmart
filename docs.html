@@ -47,120 +47,187 @@
             <section class="docs pt-5 pb-5">
                 <div class="container pt-5 pb-5">
                     <div class="row pt-5 pb-5">
-                        <div class="col-md-4 pl-5">
+                        <div class="col-md-3 pl-5">
                             <ul id="menu">
-                                <li><a href="#configuration">Configuration</a></li>
-                                <li><a href="#routing">Routing</a></li>
+                                <li><a href="docs#configuration">Configuration</a></li>
+                                <li><a href="docs#routing">Routing</a></li>
                                 <li>
                                     Framework
                                     <ul>
-                                        <li><a href="#constants">Constants</a></li>
-                                        <li><a href="#variables">Variables</a></li>
-                                        <li><a href="#methods">Methods</a></li>
+                                        <li><a href="docs#constants">Constants</a></li>
+                                        <li><a href="docs#variables">Variables</a></li>
+                                        <li><a href="docs#methods">Methods</a></li>
                                     </ul>
                                 </li>
 
                                 <li>
                                     Theme
                                     <ul>
-                                        <li><a href="#controllers">Controllers</a></li>
-                                        <li><a href="#templates">Templates</a></li>
-                                        <li><a href="#more">More</a></li>
+                                        <li><a href="docs#controllers">Controllers</a></li>
+                                        <li><a href="docs#templates">Templates</a></li>
+                                        <li><a href="docs#more">More</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#libraries">Libraries</a></li>
+                                <li><a href="docs#libraries">Libraries</a></li>
                             </ul>
                         </div>
                         <div class="col-md-8">
+                            <p>For the installation guide, see the <a href="https://github.com/Webmart/webmart/blob/master/README.md">README</a> on GitHub.</p>
                             <div class="row" id="configuration">
-                                <div class="col-md-12">
+                                <div class="col-md-12 pt-5">
                                     <h3>Configuration</h3>
-                                    <p>You can store settings and data inside your theme's <span class="black">Config.php</span> file. The following settings are pre-packed and supported by Webmart:</p>
-                                    <p>Your theme's version, which is auto appended into the <span class="black">head</span> element.</p>
+                                    <p>Every theme requires a <span class="black">Config.php</span> and a <span class="black">Theme.php</span> file.</p>
+                                    <p>Webmart can collect and handle information based on your theme's <span class="black">Config.php</span> file, like auto-loading bootstrap, fonts and which GET/POST data to accept.</p>
+                                    <p>Some of the information is stored into <a href="docs#variables">Variables</a> and some are passed into <a href="docs#tempaltes">Templates</a>. Of course, you can basically do pretty much anything else you like.</p>
+                                    <p>Required (see <a href="docs#routing">Routing</a>):</p>
                                     <pre class="highlight">
-                                        <code class="php">public static $version = ''; /** ex. '1.0'</code>
+                                        <code class="php">class Config<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;public static $routes = array();<br>&nbsp;&nbsp;&nbsp;&nbsp;public static $redirects = array();<br>}</code>
                                     </pre>
-                                    <p>The cookies, POST and GET data you wish to accept. By default Webmart clears everything in the request unless you specify it.</p>
+                                    <p>Supported:</p>
                                     <pre class="highlight">
-                                        <code class="php">public static $$cookies = array(); /** ex. '1.0'</code>
+                                        <code class="php">$version = ''; /** your theme's version (see Templates) */<br>$cookies = array(); /** cookies to accept and collect */<br>$query = array(); /** GET data to accept and collect */<br>$data = array(); /** POST data to accept and collect */<br>$noindex = array(); /** pages to avoid in robots.txt */<br>$libs = array(); /** Google libraries to auto-load */<br>$fonts = array(); /** Google fonts to auto-load */<br>$bootstap = 'bundle' || true || false; /** load bootstrap */<br>$hotjar = true || false; /** activate the Hotjar snippet */<br>$gtag = ''; /** activate Google Analytics */<br></code>
                                     </pre>
+                                    <p>Feel free to use the <a href="https://github.com/Webmart/webmart/blob/master/themes/basic-website/Config.php" target="_blank">boilerplate</a> configuration file.</p>
                                 </div>
                             </div>
                             <div class="row" id="routing">
-                                <div class="col-md-12">
-                                    <h3 class="pt-4 pb-2">Routing</h3>
-                                    <p>Webmart is built on top of <a href="https://github.com/mikecao/flight/">mikecao/flight</a>, which means everything is routed automatically.</p>
-                                    <h4 class="pt-3 pb-2">Routes</h4>
-                                    <p>Create a <span class="black">$routes</span> array inside your theme's <span class="black">Config</span> class to define your sitemap. Your homepage is routed automatically, so no need to define it with an empty string.</p>
-                                    <p>Here's a simple static sitemap:</p>
-                                    <pre class="highlight">
-                                        <code class="php">public static $routes = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'about',<br>&nbsp;&nbsp;&nbsp;&nbsp;'about/team', /** use / to define subpages */<br>&nbsp;&nbsp;&nbsp;&nbsp;'contact',<br>&nbsp;&nbsp;&nbsp;&nbsp;'how-it-works'<br>);</code>
-                                    </pre>
-                                    <p>You can also go fully dynamic by leveraging arguments:</p>
-                                    <pre class="highlight">
-                                        <code class="php">public static $routes = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'about',<br>&nbsp;&nbsp;&nbsp;&nbsp;'about-(subpage)'<br>&nbsp;&nbsp;&nbsp;&nbsp;'articles',<br> &nbsp;&nbsp;&nbsp;&nbsp;'articles-(year-(month-(name)))'<br>);</code>
-                                    </pre>
-                                    <p>See <a href="">Controllers</a> below on how to use dynamic routing.</p>
-                                    <h4 class="pt-3 pb-2">Redirects</h4>
-                                    <p>You can pass an additional option inside your theme's <span class="black">Config</span> class to define redirects, grouped by an HTTP response. Webmart takes care of the rest, before loading the view.</p>
-                                    <p>For example, you might want to permanently move <span class="black">about-us</span> to the <span class="black">about</span> page:
-                                    <pre class="highlight">
-                                        <code class="php">public static $redirects = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'301' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/about-us' => 'about/' /** redirect string starts with an / */<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>);</code>
-                                    </pre>
-                                    <p>You can also redirect manually inside your theme. See <a href="">Methods</a> for more.</p>
-                                    <h4 class="pt-3 pb-2">404</h4>
-                                    <p>Requests which are not configured as either routes or redirects trigger a 404 response and override the template to 404.</p>
+                                <div class="col-md-12 pt-5">
+                                    <div class="head">
+                                        <h3>Routing</h3>
+                                        <p>Webmart is built on top of <a href="https://github.com/mikecao/flight/">mikecao/flight</a>, which means everything is routed automatically.</p>
+                                    </div>
+                                    <div class="part pt-4">
+                                        <h4>Routes</h4>
+                                        <p>Create a <span class="black">$routes</span> array inside your theme's <span class="black">Config</span> class to define your sitemap. Your homepage is routed automatically, so no need to define it with an empty string.</p>
+                                        <p>Here's a simple static sitemap:</p>
+                                        <pre class="highlight">
+                                            <code class="php">public static $routes = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'about',<br>&nbsp;&nbsp;&nbsp;&nbsp;'about/team', /** use / to define subpages */<br>&nbsp;&nbsp;&nbsp;&nbsp;'contact',<br>&nbsp;&nbsp;&nbsp;&nbsp;'how-it-works'<br>);</code>
+                                        </pre>
+                                        <p>You can also go fully dynamic by leveraging arguments:</p>
+                                        <pre class="highlight">
+                                            <code class="php">public static $routes = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'about',<br>&nbsp;&nbsp;&nbsp;&nbsp;'about-(subpage)'<br>&nbsp;&nbsp;&nbsp;&nbsp;'articles',<br> &nbsp;&nbsp;&nbsp;&nbsp;'articles-(year-(month-(name)))'<br>);</code>
+                                        </pre>
+                                        <p>See <a href="">Controllers</a> below on how to use dynamic routing.</p>
+                                    </div>
+                                    <div class="part pt-4">
+                                        <h4>Redirects</h4>
+                                        <p>You can pass an additional option inside your theme's <span class="black">Config</span> class to define redirects, grouped by an HTTP response. Webmart takes care of the rest, before loading the view.</p>
+                                        <p>For example, you might want to permanently move <span class="black">about-us</span> to the <span class="black">about</span> page:
+                                        <pre class="highlight">
+                                            <code class="php">public static $redirects = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'301' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/about-us' => 'about/' /** redirect string starts with an / */<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>);</code>
+                                        </pre>
+                                        <p>You can also redirect manually inside your theme. See <a href="">Methods</a> for more.</p>
+                                    </div>
+                                    <div class="part pt-4">
+                                        <h4>404</h4>
+                                        <p>Requests which are not configured as either routes or redirects trigger a 404 response and override the template to 404.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" id="constants">
-                                <div class="col-md-12">
-                                    <h3 class="pt-4 pb-2">Constants</h3>
-                                    <h4 class="pt-3 pb-2">Webmart</h4>
-                                    <p>The installation wizard generates a <span class="black">wm.php</span> file and defines the following constants for use within Webmart and your selected theme.</p>
+                                <div class="col-md-12 pt-5">
+                                    <h3>Constants</h3>
+                                    <p>Webmart offers some ready-to-go constants to help you navigate easily inside the core installation and your selected theme.</p>
+                                    <pre class="highlight">
+                                        <code class="php">WM_ROOT /** Your working directory */<br>WM_DIR /** Webmart's directory */</code>
+                                    </pre>
+                                    <pre class="highlight">
+                                        <code class="php">WM_DIR_ENGINE /** webmart/engine/ */<br>WM_DIR_CORE /** webmart/engine/core/ */<br>WM_DIR_LIBS /** webmart/engine/libs/ */<br>WM_DIR_THEMES /** webmart/themes/ */</code>
+                                    </pre>
+                                    <pre class="highlight">
+                                        <code class="php">WM_DIR_THEME /** webmart/themes/{THEMEFOLDER}/ */<br>WM_DIR_ASSETS /** webmart/themes/{THEMEFOLDER}/assets/ */<br>WM_DIR_CLASSES /** webmart/themes/{THEMEFOLDER}/classes/ */<br>WM_DIR_CONTROLLERS /** webmart/themes/{THEMEFOLDER}/controllers/ */<br>WM_DIR_JSON /** webmart/themes/{THEMEFOLDER}/json/ */<br>WM_DIR_TEMPLATES /** webmart/themes/{THEMEFOLDER}/templates/ */</code>
+                                    </pre>
+                                    <p>The installation wizard generates a <span class="black">wm.php</span> file and defines the following constants for use within Webmart and your selected theme:</p>
                                     <pre class="highlight">
                                         <code class="php">WM_THEME /** Blah blah */<br>WM_FOLDER /** Blah blah */<br>WM_URL /** @var string - your base URL (ex. http://mywebsite.com/) */<br>WM_ROBOTS /** @var boolean - generates a robots.txt file based on your Theme's settings */<br>WM_DEBUG /** @var boolean - enables debugging and loads your Theme's functions.php file */</code>
                                     </pre>
                                     <p>To restart the wizard, simply delete the file.</p>
-                                    <p>Webmart offers some ready-to-go constants to help you navigate easily inside the core installation and your selected theme.</p>
-                                    <p>Core:</p>
+                                </div>
+                            </div>
+                            <div class="row" id="variables">
+                                <div class="col-md-12 pt-5">
+                                    <h3>Variables</h3>
+                                    <p>Webmart pre-packs important data, like the current URL, assigned page, cookie data and more into a collection of variables. Use <a href="docs#get">Webmart::get()</a> to retrieve the data.</p>
                                     <pre class="highlight">
-                                        <code class="php">WM_ROOT /** Your working directory */<br>WM_DIR /** Webmart's directory */</code>
+                                        <code class="php">'url' /** ex. mywebsite.com/about/team */<br>'cookies' /** retrieved cookies allowed by theme */<br>'query' /** retrieved GET data allowed by theme */<br>'data' /** retrieved POST data allowed by theme */<br></code>
                                     </pre>
-                                    <p>Other core subdirectories:</p>
                                     <pre class="highlight">
-                                        <code class="php">WM_DIR_ENGINE /** webmart/engine/ */<br>WM_DIR_CORE /** webmart/engine/core/ */<br>WM_DIR_LIBS /** webmart/engine/libs/ */<br>WM_DIR_THEMES /** webmart/themes/ */</code>
+                                        <code class="php">'page' /** based on last call (ex. about/team/ => team) */<br>'template' /** based on first call (ex. about/team/ => about) */</code>
                                     </pre>
-                                    <p>Subdirectories defined for your active theme:</p>
-                                    <pre class="highlight">
-                                        <code class="php">WM_DIR_THEME /** webmart/themes/{THEMEFOLDER}/ */<br>WM_DIR_ASSETS /** webmart/themes/{THEMEFOLDER}/assets/ */<br>WM_DIR_CLASSES /** webmart/themes/{THEMEFOLDER}/classes/ */<br>WM_DIR_CONTROLLERS /** webmart/themes/{THEMEFOLDER}/controllers/ */<br>WM_DIR_JSON /** webmart/themes/{THEMEFOLDER}/json/ */<br>WM_DIR_TEMPLATES /** webmart/themes/{THEMEFOLDER}/templates/ */</code>
-                                    </pre>
-                                    <p>Your theme's core controller <span class="black">Theme.php</span> file and configuration file <span class="black">Config.php</span> need to be located in the root folder of your theme.</p>
+                                    <p>You can override these settings in your theme with <a href="docs#set">Webmart::set()</a>.</p>
                                 </div>
                             </div>
                             <div class="row" id="methods">
                                 <div class="col-md-12">
-                                    <h3 class="pt-4 pb-2">Methods</h3>
-                                    <p>Webmart provides some handy methods to help you take care of repetitive tasks, like loading assets and passing and retrieving data across your theme.</p>
-                                    <h4 class="pt-3 pb-2">Webmart::set()</h4>
-                                    <p>Create a variable and store its value:</p>
-                                    <pre class="highlight">
-                                        <code class="php">Webmart::set('myvalue', 'Hello world.');</code>
-                                    </pre>
-                                    <h4 class="pt-3 pb-2">Webmart::get()</h4>
-                                    <p>To retrieve that value:</p>
-                                    <pre class="highlight">
-                                        <code class="php">$myvalue = Webmart::get('myvalue');</code>
-                                    </pre>
-                                    <h4 class="pt-3 pb-2">Webmart::pass()</h4>
-                                    <p>To pass the value into your templates:</p>
-                                    <pre class="highlight">
-                                        <code class="php">Webmart::pass('myvalue', $myvalue); /** in your controller */<br>echo $myvalue; /** ex. in your template */</code>
-                                    </pre>
-                                    <h4 class="pt-3 pb-2">Webmart::font()</h4>
-                                    <p>Load a Google Font:</p>
-                                    <pre class="highlight">
-                                        <code class="php">Webmart::font('Fira Sans', array(<br>)<br>);</code>
-                                    </pre>
+                                    <div class="head pt-5">
+                                        <h3>Methods</h3>
+                                        <p>Webmart provides some handy methods to help you take care of repetitive tasks, like loading assets and passing and retrieving data across your theme.</p>
+                                        <p>Available methods:</p>
+                                        <ul>
+                                            <li><a href="docs#set">set</a></li>
+                                            <li><a href="docs#get">get</a></li>
+                                            <li><a href="docs#pass">pass</a></li>
+                                            <li><a href="docs#asset">asset</a></li>
+                                            <li><a href="docs#style">style</a></li>
+                                            <li><a href="docs#script">script</a></li>
+                                            <li><a href="docs#font">font</a></li>
+                                            <li><a href="docs#library">library</a></li>
+                                            <li><a href="docs#bootstrap">bootstrap</a></li>
+                                            <li><a href="docs#form">form</a></li>
+                                            <li><a href="docs#redirect">redirect</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="part pt-4" id="set">
+                                        <h4>Webmart::set($name, $value)</h4>
+                                        <p>Create a variable and store its value:</p>
+                                        <pre class="highlight">
+                                            <code class="php">Webmart::set('myvalue', 'Hello world.');</code>
+                                        </pre>
+                                    </div>
+                                    <div class="part pt-4" id="get">
+                                        <h4>Webmart::get($name)</h4>
+                                        <p>Retrieve the value of a variable:</p>
+                                        <pre class="highlight">
+                                            <code class="php">$myvalue = Webmart::get('myvalue' || null);</code>
+                                        </pre>
+                                        <p>If no name is provided, all set variables are returned as an array.</p>
+                                    </div>
+                                    <div class="part pt-4" id="pass">
+                                        <h4>Webmart::pass($name, $value)</h4>
+                                        <p>Pass a value into your templates:</p>
+                                        <pre class="highlight">
+                                            <code class="php">Webmart::pass('myvalue', $myvalue); /** in your controller */<br>echo $myvalue; /** ex. in your template */</code>
+                                        </pre>
+                                    </div>
+                                    <div class="part pt-4" id="asset">
+                                        <h4>Webmart::asset($type, $src, $async)</h4>
+                                        <p>Add an internal or external CSS/JS file:</p>
+                                        <pre class="highlight">
+                                            <code class="php">$async = true || false;<br>Webmart::asset('js', 'vue.min', $async);</code>
+                                        </pre>
+                                        <p>By default, Webmart looks for the asset inside your theme's assets directory. If the second argument is an external link, Webmart will just append it as is.</p>
+                                    </div>
+                                    <div class="part pt-4" id="style">
+                                    </div>
+                                    <div class="part pt-4" id="script">
+                                    </div>
+                                    <div class="part pt-4" id="font">
+                                        <h4>Webmart::font()</h4>
+                                        <p>Load a Google Font:</p>
+                                        <pre class="highlight">
+                                            <code class="php">Webmart::font('Fira Sans', array(<br>)<br>);</code>
+                                        </pre>
+                                    </div>
+                                    <div class="part pt-4" id="library">
+                                    </div>
+                                    <div class="part pt-4" id="bootstrap">
+                                    </div>
+                                    <div class="part pt-4" id="form">
+                                    </div>
+                                    <div class="part pt-4" id="redirect">
+                                    </div>
+
+
                                     <h4 class="pt-3 pb-2">Webmart::library()</h4>
                                     <h4 class="pt-3 pb-2">Webmart::bootstrap()</h4>
                                     <p>Load the latest version of Bootstrap:</p>
@@ -168,8 +235,12 @@
                                         <code class="php">$package = 'bundle'; /** true if you don't want the bundle */<br>Webmart::bootstrap($package);</code>
                                     </pre>
                                     <p>Note that you'll need to load jQuery yourself, for Bootstrap to work.</p>
-                                    <h4 class="pt-3 pb-2">Webmart::asset()</h4>
+
                                     <h4 class="pt-3 pb-2">Webmart::style()</h4>
+                                    <p>Create CSS and append it as is:</p>
+                                    <pre class="highlight">
+                                        <code class="php">$async = true || false;<br>Webmart::asset('js', 'vue.min', $async);</code>
+                                    </pre>
                                     <h4 class="pt-3 pb-2">Webmart::script()</h4>
                                     <h4 class="pt-3 pb-2">Webmart::form()</h4>
                                     <h4 class="pt-3 pb-2">Webmart::redirect()</h4>
