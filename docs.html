@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <base href="http://webmartphp.com/" />
+        <base href="http://localhost/webmart/" />
         <title>Documentation - Webmart</title>
         <style type="text/css">
             body .component { display: none }
@@ -48,39 +48,33 @@
                 <div class="container pt-5 pb-5">
                     <div class="row pt-5 pb-5">
                         <div class="col-md-4 pl-5">
-                            <ul>
+                            <ul id="menu">
+                                <li><a href="#configuration">Configuration</a></li>
+                                <li><a href="#routing">Routing</a></li>
                                 <li>
-                                    <a href="">Configuration</a>
+                                    Framework
                                     <ul>
-                                        <li><a href="">Webmart</a></li>
-                                        <li><a href="">Themes</a></li>
+                                        <li><a href="#constants">Constants</a></li>
+                                        <li><a href="#variables">Variables</a></li>
+                                        <li><a href="#methods">Methods</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="">Routing</a></li>
-                                <li><a href="">Constants</a></li>
-                                <li><a href="">Methods</a></li>
+
                                 <li>
-                                    <a href="">MVC</a>
+                                    Theme
                                     <ul>
-                                        <li><a href="">Controllers</a></li>
-                                        <li><a href="">Templates</a></li>
-                                        <li><a href="">More</a></li>
+                                        <li><a href="#controllers">Controllers</a></li>
+                                        <li><a href="#templates">Templates</a></li>
+                                        <li><a href="#more">More</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="">Libraries</a></li>
+                                <li><a href="#libraries">Libraries</a></li>
                             </ul>
                         </div>
                         <div class="col-md-8">
                             <div class="row" id="configuration">
                                 <div class="col-md-12">
                                     <h3>Configuration</h3>
-                                    <h4 class="pt-3 pb-2">Webmart</h4>
-                                    <p>The installation wizard generates a <span class="black">wm.php</span> file and defines the following constants for use within Webmart and your selected theme.</p>
-                                    <pre class="highlight">
-                                        <code class="php">WM_THEME /** Blah blah */<br>WM_FOLDER /** Blah blah */<br>WM_URL /** @var string - your base URL (ex. http://mywebsite.com/) */<br>WM_ROBOTS /** @var boolean - generates a robots.txt file based on your Theme's settings */<br>WM_DEBUG /** @var boolean - enables debugging and loads your Theme's functions.php file */</code>
-                                    </pre>
-                                    <p>To restart the wizard, simply delete the file.</p>
-                                    <h4 class="pt-3 pb-2">Theme</h4>
                                     <p>You can store settings and data inside your theme's <span class="black">Config.php</span> file. The following settings are pre-packed and supported by Webmart:</p>
                                     <p>Your theme's version, which is auto appended into the <span class="black">head</span> element.</p>
                                     <pre class="highlight">
@@ -96,13 +90,6 @@
                                 <div class="col-md-12">
                                     <h3 class="pt-4 pb-2">Routing</h3>
                                     <p>Webmart is built on top of <a href="https://github.com/mikecao/flight/">mikecao/flight</a>, which means everything is routed automatically.</p>
-                                    <h4 class="pt-3 pb-2">Redirects</h4>
-                                    <p>You can pass an additional option inside your theme's <span class="black">Config</span> class to define redirects, grouped by an HTTP response. Webmart takes care of the rest, before loading the view.</p>
-                                    <p>For example, you might want to permanently move <span class="black">about-us</span> to the <span class="black">about</span> page:
-                                    <pre class="highlight">
-                                        <code class="php">public static $redirects = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'301' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/about-us' => 'about/' /** redirect string starts with an / */<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>);</code>
-                                    </pre>
-                                    <p>You can also redirect manually inside your theme. See <a href="">Methods</a> for more.</p>
                                     <h4 class="pt-3 pb-2">Routes</h4>
                                     <p>Create a <span class="black">$routes</span> array inside your theme's <span class="black">Config</span> class to define your sitemap. Your homepage is routed automatically, so no need to define it with an empty string.</p>
                                     <p>Here's a simple static sitemap:</p>
@@ -113,7 +100,14 @@
                                     <pre class="highlight">
                                         <code class="php">public static $routes = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'about',<br>&nbsp;&nbsp;&nbsp;&nbsp;'about-(subpage)'<br>&nbsp;&nbsp;&nbsp;&nbsp;'articles',<br> &nbsp;&nbsp;&nbsp;&nbsp;'articles-(year-(month-(name)))'<br>);</code>
                                     </pre>
-                                    <p>See <a href="">MVC > Controllers</a> below on how to use dynamic routing.</p>
+                                    <p>See <a href="">Controllers</a> below on how to use dynamic routing.</p>
+                                    <h4 class="pt-3 pb-2">Redirects</h4>
+                                    <p>You can pass an additional option inside your theme's <span class="black">Config</span> class to define redirects, grouped by an HTTP response. Webmart takes care of the rest, before loading the view.</p>
+                                    <p>For example, you might want to permanently move <span class="black">about-us</span> to the <span class="black">about</span> page:
+                                    <pre class="highlight">
+                                        <code class="php">public static $redirects = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'301' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/about-us' => 'about/' /** redirect string starts with an / */<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>);</code>
+                                    </pre>
+                                    <p>You can also redirect manually inside your theme. See <a href="">Methods</a> for more.</p>
                                     <h4 class="pt-3 pb-2">404</h4>
                                     <p>Requests which are not configured as either routes or redirects trigger a 404 response and override the template to 404.</p>
                                 </div>
@@ -121,6 +115,12 @@
                             <div class="row" id="constants">
                                 <div class="col-md-12">
                                     <h3 class="pt-4 pb-2">Constants</h3>
+                                    <h4 class="pt-3 pb-2">Webmart</h4>
+                                    <p>The installation wizard generates a <span class="black">wm.php</span> file and defines the following constants for use within Webmart and your selected theme.</p>
+                                    <pre class="highlight">
+                                        <code class="php">WM_THEME /** Blah blah */<br>WM_FOLDER /** Blah blah */<br>WM_URL /** @var string - your base URL (ex. http://mywebsite.com/) */<br>WM_ROBOTS /** @var boolean - generates a robots.txt file based on your Theme's settings */<br>WM_DEBUG /** @var boolean - enables debugging and loads your Theme's functions.php file */</code>
+                                    </pre>
+                                    <p>To restart the wizard, simply delete the file.</p>
                                     <p>Webmart offers some ready-to-go constants to help you navigate easily inside the core installation and your selected theme.</p>
                                     <p>Core:</p>
                                     <pre class="highlight">
@@ -217,6 +217,27 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="assets/js/hl.min.js?ver=9.16.2"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
+        <script>
+            hljs.initHighlightingOnLoad();
+            $(document).ready(function(){
+                Pace.on('hide', function() {
+                    var menu = $("#menu");
+
+                    if (menu.length) {
+                        var offset = menu.offset().top;
+
+                        $(window).on("scroll", function () {
+                            if ($(window).scrollTop() > offset - '55') {
+                                menu.css('position', 'fixed');
+                                menu.css('top', '55px');
+                            } else {
+                                menu.css('position', 'absolute');
+                                menu.css('top', 'auto');
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
