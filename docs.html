@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Documentation - Webmart</title>
+        <style type="text/css">
+            body .component { display: none }
+            body.pace-done .component { display: block; }
+        </style>
+        <link rel="icon" type="image/x-icon" href="assets/imgs/favicon.ico" />
+    </head>
+    <body>
+        <header class="component pt-4 pb-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 text-left border-box pt-2">
+                        <a href="" class="logo mr-5">webmart</a>
+                        <a href="https://packagist.org/packages/webmart/webmart" class="ml-3">Packagist</a>
+                        <a href="https://github.com/Webmart" class="ml-3">GitHub</a>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right border-box">
+                        <a href="docs/" class="ml-3">Docs</a>
+                        <a href="https://github.com/Webmart/webmart/issues" class="ml-3">Issues</a>
+                        <a href="https://github.com/webmart/webmart/archive/master.zip" class="btn btn-primary ml-4">Download v2.0</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="component">
+            <section class="splash pt-3 pb-3">
+                <div class="container pt-3 pb-4">
+                    <div class="row pt-3 pb-4">
+                        <div class="col-md-2 col-sm-12"></div>
+                        <div class="col-md-8 col-sm-12 text-center">
+                            <h1 class="text-center">Documentation</h1>
+                            <h6 class="text-center mt-4">
+                                PHP >= 5.6 | Apache | MIT License
+                            </h6>
+                        </div>
+                        <div class="col-md-2 col-sm-12"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="docs pt-5 pb-5">
+                <div class="container pt-5 pb-5">
+                    <div class="row pt-5 pb-5">
+                        <div class="col-md-4 pl-5">
+                            <ul>
+                                <li>
+                                    <a href="">Configuration</a>
+                                    <ul>
+                                        <li><a href="">Webmart</a></li>
+                                        <li><a href="">Themes</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="">Routing</a></li>
+                                <li><a href="">Constants</a></li>
+                                <li><a href="">Methods</a></li>
+                                <li>
+                                    <a href="">MVC</a>
+                                    <ul>
+                                        <li><a href="">Controllers</a></li>
+                                        <li><a href="">Templates</a></li>
+                                        <li><a href="">More</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="">Libraries</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row" id="configuration">
+                                <div class="col-md-12">
+                                    <h3>Configuration</h3>
+                                    <h4 class="pt-3 pb-2">Webmart</h4>
+                                    <p>The installation wizard generates a <span class="black">wm.php</span> file and defines the following constants for use within Webmart and your selected theme.</p>
+                                    <pre class="highlight">
+                                        <code class="php">WM_THEME /** Blah blah */<br>WM_FOLDER /** Blah blah */<br>WM_URL /** @var string - your base URL (ex. http://mywebsite.com/) */<br>WM_ROBOTS /** @var boolean - generates a robots.txt file based on your Theme's settings */<br>WM_DEBUG /** @var boolean - enables debugging and loads your Theme's functions.php file */</code>
+                                    </pre>
+                                    <p>To restart the wizard, simply delete the file.</p>
+                                    <h4 class="pt-3 pb-2">Theme</h4>
+                                    <p>You can store settings and data inside your theme's <span class="black">Config.php</span> file. The following settings are pre-packed and supported by Webmart:</p>
+                                    <p>Your theme's version, which is auto appended into the <span class="black">head</span> element.</p>
+                                    <pre class="highlight">
+                                        <code class="php">public static $version = ''; /** ex. '1.0'</code>
+                                    </pre>
+                                    <p>The cookies, POST and GET data you wish to accept. By default Webmart clears everything in the request unless you specify it.</p>
+                                    <pre class="highlight">
+                                        <code class="php">public static $$cookies = array(); /** ex. '1.0'</code>
+                                    </pre>
+                                </div>
+                            </div>
+                            <div class="row" id="routing">
+                                <div class="col-md-12">
+                                    <h3 class="pt-4 pb-2">Routing</h3>
+                                    <p>Webmart is built on top of <a href="https://github.com/mikecao/flight/">mikecao/flight</a>, which means everything is routed automatically.</p>
+                                    <h4 class="pt-3 pb-2">Redirects</h4>
+                                    <p>You can pass an additional option inside your theme's <span class="black">Config</span> class to define redirects, grouped by an HTTP response. Webmart takes care of the rest, before loading the view.</p>
+                                    <p>For example, you might want to permanently move <span class="black">about-us</span> to the <span class="black">about</span> page:
+                                    <pre class="highlight">
+                                        <code class="php">public static $redirects = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'301' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/about-us' => 'about/' /** redirect string starts with an / */<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>);</code>
+                                    </pre>
+                                    <p>You can also redirect manually inside your theme. See <a href="">Methods</a> for more.</p>
+                                    <h4 class="pt-3 pb-2">Routes</h4>
+                                    <p>Create a <span class="black">$routes</span> array inside your theme's <span class="black">Config</span> class to define your sitemap. Your homepage is routed automatically, so no need to define it with an empty string.</p>
+                                    <p>Here's a simple static sitemap:</p>
+                                    <pre class="highlight">
+                                        <code class="php">public static $routes = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'about',<br>&nbsp;&nbsp;&nbsp;&nbsp;'about/team', /** use / to define subpages */<br>&nbsp;&nbsp;&nbsp;&nbsp;'contact',<br>&nbsp;&nbsp;&nbsp;&nbsp;'how-it-works'<br>);</code>
+                                    </pre>
+                                    <p>You can also go fully dynamic by leveraging arguments:</p>
+                                    <pre class="highlight">
+                                        <code class="php">public static $routes = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'about',<br>&nbsp;&nbsp;&nbsp;&nbsp;'about-(subpage)'<br>&nbsp;&nbsp;&nbsp;&nbsp;'articles',<br> &nbsp;&nbsp;&nbsp;&nbsp;'articles-(year-(month-(name)))'<br>);</code>
+                                    </pre>
+                                    <p>See <a href="">MVC > Controllers</a> below on how to use dynamic routing.</p>
+                                    <h4 class="pt-3 pb-2">404</h4>
+                                    <p>Requests which are not configured as either routes or redirects trigger a 404 response and override the template to 404.</p>
+                                </div>
+                            </div>
+                            <div class="row" id="constants">
+                                <div class="col-md-12">
+                                    <h3 class="pt-4 pb-2">Constants</h3>
+                                    <p>Webmart offers some ready-to-go constants to help you navigate easily inside the core installation and your selected theme.</p>
+                                    <p>Core:</p>
+                                    <pre class="highlight">
+                                        <code class="php">WM_ROOT /** Your working directory */<br>WM_DIR /** Webmart's directory */</code>
+                                    </pre>
+                                    <p>Other core subdirectories:</p>
+                                    <pre class="highlight">
+                                        <code class="php">WM_DIR_ENGINE /** webmart/engine/ */<br>WM_DIR_CORE /** webmart/engine/core/ */<br>WM_DIR_LIBS /** webmart/engine/libs/ */<br>WM_DIR_THEMES /** webmart/themes/ */</code>
+                                    </pre>
+                                    <p>Subdirectories defined for your active theme:</p>
+                                    <pre class="highlight">
+                                        <code class="php">WM_DIR_THEME /** webmart/themes/{THEMEFOLDER}/ */<br>WM_DIR_ASSETS /** webmart/themes/{THEMEFOLDER}/assets/ */<br>WM_DIR_CLASSES /** webmart/themes/{THEMEFOLDER}/classes/ */<br>WM_DIR_CONTROLLERS /** webmart/themes/{THEMEFOLDER}/controllers/ */<br>WM_DIR_JSON /** webmart/themes/{THEMEFOLDER}/json/ */<br>WM_DIR_TEMPLATES /** webmart/themes/{THEMEFOLDER}/templates/ */</code>
+                                    </pre>
+                                    <p>Your theme's core controller <span class="black">Theme.php</span> file and configuration file <span class="black">Config.php</span> need to be located in the root folder of your theme.</p>
+                                </div>
+                            </div>
+                            <div class="row" id="methods">
+                                <div class="col-md-12">
+                                    <h3 class="pt-4 pb-2">Methods</h3>
+                                    <p>Webmart provides some handy methods to help you take care of repetitive tasks, like loading assets and passing and retrieving data across your theme.</p>
+                                    <h4 class="pt-3 pb-2">Webmart::set()</h4>
+                                    <p>Create a variable and store its value:</p>
+                                    <pre class="highlight">
+                                        <code class="php">Webmart::set('myvalue', 'Hello world.');</code>
+                                    </pre>
+                                    <h4 class="pt-3 pb-2">Webmart::get()</h4>
+                                    <p>To retrieve that value:</p>
+                                    <pre class="highlight">
+                                        <code class="php">$myvalue = Webmart::get('myvalue');</code>
+                                    </pre>
+                                    <h4 class="pt-3 pb-2">Webmart::pass()</h4>
+                                    <p>To pass the value into your templates:</p>
+                                    <pre class="highlight">
+                                        <code class="php">Webmart::pass('myvalue', $myvalue); /** in your controller */<br>echo $myvalue; /** ex. in your template */</code>
+                                    </pre>
+                                    <h4 class="pt-3 pb-2">Webmart::font()</h4>
+                                    <p>Load a Google Font:</p>
+                                    <pre class="highlight">
+                                        <code class="php">Webmart::font('Fira Sans', array(<br>)<br>);</code>
+                                    </pre>
+                                    <h4 class="pt-3 pb-2">Webmart::library()</h4>
+                                    <h4 class="pt-3 pb-2">Webmart::bootstrap()</h4>
+                                    <p>Load the latest version of Bootstrap:</p>
+                                    <pre class="highlight">
+                                        <code class="php">$package = 'bundle'; /** true if you don't want the bundle */<br>Webmart::bootstrap($package);</code>
+                                    </pre>
+                                    <p>Note that you'll need to load jQuery yourself, for Bootstrap to work.</p>
+                                    <h4 class="pt-3 pb-2">Webmart::asset()</h4>
+                                    <h4 class="pt-3 pb-2">Webmart::style()</h4>
+                                    <h4 class="pt-3 pb-2">Webmart::script()</h4>
+                                    <h4 class="pt-3 pb-2">Webmart::form()</h4>
+                                    <h4 class="pt-3 pb-2">Webmart::redirect()</h4>
+                                    <p>Set a variable:</p>
+                                    <p>Retrieve a variable:</p>
+                                    <p>Set a variable into your view:</p>
+                                    <p>Add a CSS/JS file:</p>
+                                    <p>Add inline CSS:</p>
+                                    <p>Add inline JS:</p>
+                                    <p>Create a form:</p>
+                                </div>
+                            </div>
+                            <div class="row" id="mvc">
+                                <div class="col-md-12">
+                                    <h3>MVC</h3>
+                                </div>
+                            </div>
+                            <div class="row" id="libraries">
+                                <div class="col-md-12">
+                                    <h3>Libraries</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="component pt-5 pb-5">
+            <h6 class="text-center">
+                Co-created by <a href="https://github.com/thegeorgekary" target="_blank">George Kary</a>, <a href="https://github.com/BalzoT" target="_blank">Valandis Zotos</a> and <a href="https://github.com/jdimas87" target="_blank">John Dimas</a>.
+            </h6>
+            <h6 class="text-center">
+                Made in Greece, with lots of coffee.
+            </h6>
+        </footer>
+
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans:200,400&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="assets/css/normalize.css?ver=4.1.1" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="assets/css/global.css" />
+        <link rel="stylesheet" type="text/css" href="" />
+
+        <script type="text/javascript" src="assets/js/pace.min.js?ver=1.0.0"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="assets/js/hl.min.js?ver=9.16.2"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>
