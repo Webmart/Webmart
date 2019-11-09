@@ -526,6 +526,8 @@ class Webmart
             exit();
         }
 
+
+
         // handle 404 requests
 
         Flight::map('notFound', function() {
@@ -548,6 +550,7 @@ class Webmart
 
         foreach (Config::$routes as $route) {
             $exploded = explode('-', $route);
+            $last = end($exploded);
             $path = '/';
 
             // prepare the routing path
@@ -558,7 +561,7 @@ class Webmart
                     continue;
                 }
 
-                $path .= $item;
+                $path .= $item === $last ? $item : $item . '-';
             }
 
             // handle routing paths
@@ -576,6 +579,7 @@ class Webmart
                 // handle and load controllers
 
                 foreach ($parsed as $item) {
+                    $item = str_replace('-', '_', $item);
                     $heir .= ucfirst($item);
 
                     if (file_exists(WM_DIR_CONTROLLERS . ucfirst($heir) . '.php')) {
@@ -591,12 +595,13 @@ class Webmart
 
                 if (!$controller) {
                     $class = 'Theme';
-                    $method = 'route' . ucfirst(self::get('template'));
+                    $method = self::get('template');
                 } else {
                     $class = '\\' . $controller;
-                    $method = 'route' . ucfirst(self::get('page'));
+                    $method = self::get('page');
                 }
 
+                $method = 'route' . ucfirst(str_replace('-', '_', $method));
                 $instance = new $class($args);
 
                 // execute assigned method

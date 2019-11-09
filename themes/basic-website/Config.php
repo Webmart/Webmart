@@ -44,6 +44,7 @@ class Config
     public static $routes = array(
         'about', // absolute rule
         'about/team',
+        'how-it-works',
         'legal-(subpage)' // dynamic rule, ex. legal/privacy/, legal/terms/
     );
 

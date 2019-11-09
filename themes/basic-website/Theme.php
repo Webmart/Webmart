@@ -43,4 +43,9 @@ class Theme
         Webmart::pass('welcome', 'This page was not found.');
     }
 
+    public function routeHow_it_works()
+    {
+        Webmart::pass('title', 'How it Works - Webmart');
+    }
+
 }
