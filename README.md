@@ -12,21 +12,19 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 ## How to Install
 
-The first time you'll open in your browser, Webmart will generate `.htaccess` and `wm.php` for you.
+The first time you'll open in your browser, Webmart's installation wizard will auto-generate `.htaccess` and `wm.php` for you.
 
-### Setup manually
+### A. Setup manually
 
 Download [Webmart](https://github.com/webmart/webmart/archive/master.zip). Unzip in your directory.
 
 Download [Flight](https://github.com/mikecao/flight/archive/master.zip). Unzip flight folder inside `engine/core/` (make sure it's not flight/flight).
 
-You can optionally use extra PHP libraries, including those [supported by Webmart](http://webmartphp.com/docs/libraries/).
-
 Open in your browser.
 
-### Install with Composer
+### B. Install with Composer
 
-Available versions [here](https://packagist.org/packages/webmart/webmart). Run:
+Available versions on [Packagist](https://packagist.org/packages/webmart/webmart). Run:
 
 ```
 composer require webmart/webmart
@@ -38,15 +36,8 @@ Create an `index.php` file in your root directory. Require the autoloader:
 require 'vendor/autoload.php';
 ```
 
-You can optionally install the suggested libraries, [supported by Webmart](http://webmartphp.com/docs/libraries/).
-
 Open in your browser.
 
 ## How to Edit
 
-In your selected theme under `/webmart/view/`, open `Config.php` and start editing.
-
-Learn more at [http://webmartphp.com/](http://webmartphp.com/docs/).
-
-
-###### Co-created by [George Kary](http://georgekary.com/), [Valandis Zotos](https://github.com/BalzoT), [John Dimas](https://github.com/jdimas87).<br>Special thanks to [mikecao](https://github.com/mikecao).
+See the [docs](http://webmartphp.com/docs) for more.
