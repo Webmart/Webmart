@@ -503,6 +503,17 @@ class Webmart
                 include_once WM_DIR_THEME . 'functions.php';
             }
 
+            // collect global assets
+
+            self::asset('css', 'global');
+            self::asset('js', 'global');
+
+            foreach (array('page', 'template') as $asset) {
+                foreach (array('css', 'js') as $type) {
+                    self::asset($type, self::get($asset));
+                }
+            }
+
             return true; // re-route Flight
         });
 
@@ -624,15 +635,6 @@ class Webmart
         self::pass('urls', self::get('urls'));
 
         // collect assets
-
-        self::asset('css', 'global');
-        self::asset('js', 'global');
-
-        foreach (array('page', 'template') as $asset) {
-            foreach (array('css', 'js') as $type) {
-                self::asset($type, self::get($asset));
-            }
-        }
 
         if (isset(Config::$fonts) && !empty(Config::$fonts)) {
             foreach (Config::$fonts as $font => $set) {
