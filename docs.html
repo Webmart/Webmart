@@ -198,12 +198,13 @@
                                         </pre>
                                         <p>By default, Webmart looks for the asset inside your theme's assets directory. If the second argument is an external link, Webmart will just append it as is.</p>
                                         <p>Use the <span class="black">$assets</span> variable in your <a href="docs#templates">Templates</a>.</p>
+                                        <p>CSS/JS files matching the current page (ex. <span class="black">about.css</span>) are auto-included.</p>
                                     </div>
                                     <div class="part pt-4" id="style">
                                         <h4>Webmart::style($css)</h4>
                                         <p>Append inline CSS:</p>
                                         <pre class="highlight">
-                                            <code class="php">Webmart::font('Fira Sans', array(<br>)<br>);</code>
+                                            <code class="php">Webmart:style(array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'body' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'background' => "#fff"<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>));</code>
                                         </pre>
                                         <p>Auto-passed into the <span class="black">$assets</span> variable in your templates.</p>
                                     </div>
@@ -211,7 +212,7 @@
                                         <h4>Webmart::script($js, $async)</h4>
                                         <p>Append inline JavaScript:</p>
                                         <pre class="highlight">
-                                            <code class="php">Webmart::font('Fira Sans', array(<br>)<br>);</code>
+                                            <code class="php">$js = 'console.log(1)';<br>Webmart::script($js, true || false);</code>
                                         </pre>
                                         <p>Auto-passed into the <span class="black">$assets</span> variable in your templates.</p>
                                     </div>
@@ -219,7 +220,7 @@
                                         <h4>Webmart::font($name, $config)</h4>
                                         <p>Load a Google Font:</p>
                                         <pre class="highlight">
-                                            <code class="php">Webmart::font('Fira Sans', array(<br>)<br>);</code>
+                                            <code class="php">Webmart::font('Fira Sans', array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'weights' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'300',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'400'<br>&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;&nbsp;&nbsp;'subsets' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'latin-extended'<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>));</code>
                                         </pre>
                                         <p>Auto-passed into the <span class="black">$assets</span> variable in your templates.</p>
                                     </div>
@@ -227,7 +228,7 @@
                                         <h4>Webmart::library($name, $config)</h4>
                                         <p>Load a supported Google library:</p>
                                         <pre class="highlight">
-                                            <code class="php">Webmart::font('Fira Sans', array(<br>)<br>);</code>
+                                            <code class="php">/** 2.0.0 */<br>Webmart::library('jquery', '4.3.1');<br>Webmart::library('maps', '{API_KEY}');</code>
                                         </pre>
                                         <p>Auto-passed into the <span class="black">$assets</span> variable in your templates.</p>
                                     </div>
@@ -243,7 +244,7 @@
                                         <h4>Webmart::form($config, $fields, $closure)</h4>
                                         <p>Generate a PHP form with a closure:</p>
                                         <pre class="highlight">
-                                            <code class="php">$config = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'name' => '', /** name of template variable */<br>&nbsp;&nbsp;&nbsp;&nbsp;'method' => 'GET/POST', /** config what your theme allows first */<br>&nbsp;&nbsp;&nbsp;&nbsp;'submit' => '' /* name of submit button and request */<br>);<br><br>Webmart::font($config, $fields, function($response) {<br>&nbsp;&nbsp;&nbsp;&nbsp;return $response;<br>});</code>
+                                            <code class="php">$config = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'name' => '', /** name of template variable */<br>&nbsp;&nbsp;&nbsp;&nbsp;'method' => 'GET/POST', /** config what your theme allows first */<br>&nbsp;&nbsp;&nbsp;&nbsp;'submit' => '' /* name of submit button and request */<br>);<br><br>$fields = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'fieldname1' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'type' => 'text/textarea/email/password/number/phone',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'heading' => '',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => '',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'placeholder' => '',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class' => ''<br>&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;&nbsp;&nbsp;'fieldname2' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'type' => 'select/radio/checkbox',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'heading' => '',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => '',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'option1',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'option2'<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class' => ''<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>);<br><br>Webmart::font($config, $fields, function($response) {<br>&nbsp;&nbsp;&nbsp;&nbsp;return $response;<br>});</code>
                                         </pre>
                                         <p>Webmart performs basic checks and displays relative messages in the <span class="black">$response</span>.</p>
                                         <p>In your closure, you can always return the new array with the response to override functionality and/or display your custom errors and messages.</p>
