@@ -505,6 +505,22 @@ class Webmart
 
             // collect global assets
 
+            if (isset(Config::$fonts) && !empty(Config::$fonts)) {
+                foreach (Config::$fonts as $font => $set) {
+                    self::font($font, $set);
+                }
+            }
+
+            if (isset(Config::$libs) && !empty(Config::$libs)) {
+                foreach (Config::$libs as $lib => $data) {
+                    self::library($lib, $data);
+                }
+            }
+
+            if (isset(Config::$bootstrap) && Config::$bootstrap != false) {
+                self::bootstrap(Config::$bootstrap === 'bundle' ? true : false);
+            }
+
             self::asset('css', 'global');
             self::asset('js', 'global');
 
@@ -525,8 +541,6 @@ class Webmart
 
             exit();
         }
-
-
 
         // handle 404 requests
 
@@ -640,22 +654,6 @@ class Webmart
         self::pass('urls', self::get('urls'));
 
         // collect assets
-
-        if (isset(Config::$fonts) && !empty(Config::$fonts)) {
-            foreach (Config::$fonts as $font => $set) {
-                self::font($font, $set);
-            }
-        }
-
-        if (isset(Config::$libs) && !empty(Config::$libs)) {
-            foreach (Config::$libs as $lib => $data) {
-                self::library($lib, $data);
-            }
-        }
-
-        if (isset(Config::$bootstrap) && Config::$bootstrap != false) {
-            self::bootstrap(Config::$bootstrap === 'bundle' ? true : false);
-        }
 
         if (defined('WM_DEBUG') && WM_DEBUG == false) {
             if (isset(Config::$hotjar) && Config::$hotjar === true) {
