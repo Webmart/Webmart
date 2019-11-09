@@ -400,7 +400,7 @@ class Webmart
         // configure Flight
 
         Flight::set('flight.views.path', WM_DIR_TEMPLATES);
-        Flight::set('flight.base_url', WM_URL);
+        Flight::set('flight.base_url', rtrim(WM_URL, '/'));
 
         // handle global requests
 
