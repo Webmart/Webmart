@@ -120,6 +120,11 @@ span.black {
     border-radius: 3px;
     padding: 0 5px;
 }
+span.yellow {
+    background: #8a8a2d;
+    border-radius: 3px;
+    padding: 0 5px;
+}
 
 pre {
     margin: 12.5px 0 25px 0;
