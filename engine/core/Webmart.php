@@ -400,7 +400,7 @@ class Webmart
         // configure Flight
 
         Flight::set('flight.views.path', WM_DIR_TEMPLATES);
-        Flight::set('flight.base_url', WM_URL);
+        Flight::set('flight.base_url', rtrim(WM_URL, '/'));
 
         // handle global requests
 
@@ -503,6 +503,17 @@ class Webmart
                 include_once WM_DIR_THEME . 'functions.php';
             }
 
+            // collect global assets
+
+            self::asset('css', 'global');
+            self::asset('js', 'global');
+
+            foreach (array('page', 'template') as $asset) {
+                foreach (array('css', 'js') as $type) {
+                    self::asset($type, self::get($asset));
+                }
+            }
+
             return true; // re-route Flight
         });
 
@@ -514,6 +525,8 @@ class Webmart
 
             exit();
         }
+
+
 
         // handle 404 requests
 
@@ -537,6 +550,7 @@ class Webmart
 
         foreach (Config::$routes as $route) {
             $exploded = explode('-', $route);
+            $last = end($exploded);
             $path = '/';
 
             // prepare the routing path
@@ -547,7 +561,7 @@ class Webmart
                     continue;
                 }
 
-                $path .= $item;
+                $path .= $item === $last ? $item : $item . '-';
             }
 
             // handle routing paths
@@ -565,6 +579,7 @@ class Webmart
                 // handle and load controllers
 
                 foreach ($parsed as $item) {
+                    $item = str_replace('-', '_', $item);
                     $heir .= ucfirst($item);
 
                     if (file_exists(WM_DIR_CONTROLLERS . ucfirst($heir) . '.php')) {
@@ -580,12 +595,13 @@ class Webmart
 
                 if (!$controller) {
                     $class = 'Theme';
-                    $method = 'route' . ucfirst(self::get('template'));
+                    $method = self::get('template');
                 } else {
                     $class = '\\' . $controller;
-                    $method = 'route' . ucfirst(self::get('page'));
+                    $method = self::get('page');
                 }
 
+                $method = 'route' . ucfirst(str_replace('-', '_', $method));
                 $instance = new $class($args);
 
                 // execute assigned method
@@ -624,15 +640,6 @@ class Webmart
         self::pass('urls', self::get('urls'));
 
         // collect assets
-
-        self::asset('css', 'global');
-        self::asset('js', 'global');
-
-        foreach (array('page', 'template') as $asset) {
-            foreach (array('css', 'js') as $type) {
-                self::asset($type, self::get($asset));
-            }
-        }
 
         if (isset(Config::$fonts) && !empty(Config::$fonts)) {
             foreach (Config::$fonts as $font => $set) {

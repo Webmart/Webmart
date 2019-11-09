@@ -34,8 +34,8 @@ class Config
     public static $redirects = array(
         '301' => array(
             '/home' => '/',
-            '/about-us' => '/about/',
-            '/legal/terms-of-service' => '/legal/terms/'
+            '/about-us' => 'about/',
+            '/legal/terms-of-service' => 'legal/terms/'
         )
     );
 
@@ -44,6 +44,7 @@ class Config
     public static $routes = array(
         'about', // absolute rule
         'about/team',
+        'how-it-works',
         'legal-(subpage)' // dynamic rule, ex. legal/privacy/, legal/terms/
     );
 
