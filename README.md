@@ -10,9 +10,9 @@ A basic PHP framework for web applications and websites. [http://webmartphp.com/
 
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
 
-## How to Install
+## 1/2 Install
 
-The first time you'll open in your browser, Webmart's installation wizard will auto-generate `.htaccess` and `wm.php` for you.
+The first time you'll open in your browser, Webmart will auto-generate `.htaccess` and `wm.php` for you.
 
 ### A. Setup manually
 
@@ -38,6 +38,6 @@ require 'vendor/autoload.php';
 
 Open in your browser.
 
-## How to Edit
+## 2/2 Configure
 
 See the [docs](http://webmartphp.com/docs) for more.
