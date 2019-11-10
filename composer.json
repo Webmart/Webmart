@@ -1,6 +1,6 @@
 {
     "name" : "webmart/webmart",
-    "version" : "v2.0.1",
+    "version" : "v2.0.2",
     "description" : "A basic PHP framework for web applications and websites.",
     "homepage" : "http://webmartphp.com",
     "license" : "MIT",
