@@ -407,6 +407,21 @@ class Webmart
 
             file_put_contents(WM_ROOT . 'robots.txt', $robots);
         }
+
+        // auto-include classes
+
+        if (defined('WM_AUTOCLASS') && WM_AUTOCLASS === true) {
+            $classes = scandir(WM_DIR_CLASSES);
+
+            array_shift($classes);
+            array_shift($classes);
+
+            foreach ($classes as $class) {
+                if (is_file(WM_DIR_CLASSES . $class)) {
+                    require_once WM_DIR_CLASSES . $class;
+                }
+            }
+        }
     }
 
     /**
