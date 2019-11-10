@@ -247,15 +247,22 @@ class Webmart
                 ),
                 'robots' => array(
                     'type' => 'radio',
-                    'heading' => 'Need an SEO boost?',
+                    'heading' => 'SEO',
                     'label' => 'Generate a robots.txt file?',
                     'options' => array('No', 'Yes'),
                     'class' => 'form-check-inline'
                 ),
                 'debug' => array(
                     'type' => 'radio',
-                    'heading' => 'Enable debugging?',
+                    'heading' => 'Developers',
+                    'label' => 'Enable debugging?',
                     'options' => array('Disable', 'Enable'),
+                    'class' => 'form-check-inline'
+                ),
+                'autoclass' => array(
+                    'type' => 'radio',
+                    'label' => 'Auto-include all the theme`s classes?',
+                    'options' => array('No', 'Yes'),
                     'class' => 'form-check-inline'
                 )
             ),
@@ -299,6 +306,7 @@ class Webmart
                             case 'robots':
                             case 'https':
                             case 'debug':
+                            case 'autoclass':
                                 if ($data['value'] == 'No' || $data['value'] == 'Disable') {
                                     $data['value'] = "false";
                                 } else {
@@ -387,7 +395,32 @@ class Webmart
                 $robots .= 'Noindex: ' . PHP_EOL;
             }
 
+            if (isset(Config::$redirects) && !empty(Config::$redirects)) {
+                foreach (Config::$redirects as $group) {
+                    foreach ($group as $source => $to) {
+                        foreach (array('Disallow', 'Noindex') as $cmd) {
+                            $robots .= $cmd . ': /' . ltrim($source, '/') . '/' . PHP_EOL;
+                        }
+                    }
+                }
+            }
+
             file_put_contents(WM_ROOT . 'robots.txt', $robots);
+        }
+
+        // auto-include classes
+
+        if (defined('WM_AUTOCLASS') && WM_AUTOCLASS === true) {
+            $classes = scandir(WM_DIR_CLASSES);
+
+            array_shift($classes);
+            array_shift($classes);
+
+            foreach ($classes as $class) {
+                if (is_file(WM_DIR_CLASSES . $class)) {
+                    require_once WM_DIR_CLASSES . $class;
+                }
+            }
         }
     }
 
@@ -505,6 +538,22 @@ class Webmart
 
             // collect global assets
 
+            if (isset(Config::$fonts) && !empty(Config::$fonts)) {
+                foreach (Config::$fonts as $font => $set) {
+                    self::font($font, $set);
+                }
+            }
+
+            if (isset(Config::$libs) && !empty(Config::$libs)) {
+                foreach (Config::$libs as $lib => $data) {
+                    self::library($lib, $data);
+                }
+            }
+
+            if (isset(Config::$bootstrap) && Config::$bootstrap != false) {
+                self::bootstrap(Config::$bootstrap === 'bundle' ? true : false);
+            }
+
             self::asset('css', 'global');
             self::asset('js', 'global');
 
@@ -525,8 +574,6 @@ class Webmart
 
             exit();
         }
-
-
 
         // handle 404 requests
 
@@ -640,22 +687,6 @@ class Webmart
         self::pass('urls', self::get('urls'));
 
         // collect assets
-
-        if (isset(Config::$fonts) && !empty(Config::$fonts)) {
-            foreach (Config::$fonts as $font => $set) {
-                self::font($font, $set);
-            }
-        }
-
-        if (isset(Config::$libs) && !empty(Config::$libs)) {
-            foreach (Config::$libs as $lib => $data) {
-                self::library($lib, $data);
-            }
-        }
-
-        if (isset(Config::$bootstrap) && Config::$bootstrap != false) {
-            self::bootstrap(Config::$bootstrap === 'bundle' ? true : false);
-        }
 
         if (defined('WM_DEBUG') && WM_DEBUG == false) {
             if (isset(Config::$hotjar) && Config::$hotjar === true) {
