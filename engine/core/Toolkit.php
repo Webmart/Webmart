@@ -185,7 +185,7 @@ class Toolkit
             return;
         }
 
-        $html .= '<script type="text/javascript"';
+        $html = '<script type="text/javascript"';
         $html .= $async === true ? ' async>' : '>';
 
         $html .= $js . '</script>';
