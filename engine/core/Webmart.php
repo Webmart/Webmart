@@ -247,15 +247,22 @@ class Webmart
                 ),
                 'robots' => array(
                     'type' => 'radio',
-                    'heading' => 'Need an SEO boost?',
+                    'heading' => 'SEO',
                     'label' => 'Generate a robots.txt file?',
                     'options' => array('No', 'Yes'),
                     'class' => 'form-check-inline'
                 ),
                 'debug' => array(
                     'type' => 'radio',
-                    'heading' => 'Enable debugging?',
+                    'heading' => 'Developers',
+                    'label' => 'Enable debugging?',
                     'options' => array('Disable', 'Enable'),
+                    'class' => 'form-check-inline'
+                ),
+                'autoclass' => array(
+                    'type' => 'radio',
+                    'label' => 'Auto-include all the theme`s classes?',
+                    'options' => array('No', 'Yes'),
                     'class' => 'form-check-inline'
                 )
             ),
@@ -299,6 +306,7 @@ class Webmart
                             case 'robots':
                             case 'https':
                             case 'debug':
+                            case 'autoclass':
                                 if ($data['value'] == 'No' || $data['value'] == 'Disable') {
                                     $data['value'] = "false";
                                 } else {
