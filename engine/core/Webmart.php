@@ -387,6 +387,16 @@ class Webmart
                 $robots .= 'Noindex: ' . PHP_EOL;
             }
 
+            if (isset(Config::$redirects) && !empty(Config::$redirects)) {
+                foreach (Config::$redirects as $group) {
+                    foreach ($group as $source => $to) {
+                        foreach (array('Disallow', 'Noindex') as $cmd) {
+                            $robots .= $cmd . ': /' . ltrim($source, '/') . '/' . PHP_EOL;
+                        }
+                    }
+                }
+            }
+
             file_put_contents(WM_ROOT . 'robots.txt', $robots);
         }
     }
