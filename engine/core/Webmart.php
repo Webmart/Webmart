@@ -31,11 +31,12 @@ class Webmart
 
         if (self::$composer) {
             define('WM_DIR', realpath(__DIR__ . '/../..') . '/');
+            define('WM_DIR_THEMES', WM_ROOT . 'themes/');
         } else {
             define('WM_DIR', WM_ROOT);
+            define('WM_DIR_THEMES', WM_DIR . 'themes/');
         }
 
-        define('WM_DIR_THEMES', WM_DIR . 'themes/');
         define('WM_DIR_ENGINE', WM_DIR . 'engine/');
         define('WM_DIR_CORE', WM_DIR_ENGINE . 'core/');
         define('WM_DIR_LIBS', WM_DIR_ENGINE . 'libs/');
@@ -58,7 +59,7 @@ class Webmart
 
         // load the configuration and theme
 
-        if (!file_exists(WM_DIR . 'wm.php')) {
+        if (!file_exists(WM_ROOT . 'wm.php')) {
             Flight::route('/', function() {
                 $data = array();
 
@@ -76,7 +77,7 @@ class Webmart
 
             return;
         } else {
-            require_once WM_DIR . 'wm.php';
+            require_once WM_ROOT . 'wm.php';
             self::theme();
         }
 
@@ -269,7 +270,7 @@ class Webmart
             function($response) {
                 // redirect in case of form resubmission
 
-                if (file_exists(WM_DIR . 'wm.php')) {
+                if (file_exists(WM_ROOT . 'wm.php')) {
                     self::redirect('/?wm=ready');
                 }
 
@@ -329,7 +330,7 @@ class Webmart
                         }
                     }
 
-                    file_put_contents(WM_DIR . 'wm.php', $output);
+                    file_put_contents(WM_ROOT . 'wm.php', $output);
 
                     self::redirect('/?wm=ready');
                 }
@@ -516,18 +517,12 @@ class Webmart
 
             // collect URLs
 
-            $vendor = '';
-
-            if (self::$composer) {
-                $vendor = 'vendor/webmart/webmart/';
-            }
-
             self::set('urls', array(
                 'base' => WM_URL,
                 'page' => WM_URL . self::get('url'),
-                'css' => $vendor . 'themes/' . WM_THEME . '/assets/css/',
-                'imgs' => $vendor . 'themes/' . WM_THEME . '/assets/imgs/',
-                'js' => $vendor . 'themes/' . WM_THEME . '/assets/js/'
+                'css' => 'themes/' . WM_THEME . '/assets/css/',
+                'imgs' => 'themes/' . WM_THEME . '/assets/imgs/',
+                'js' => 'themes/' . WM_THEME . '/assets/js/'
             ));
 
             // include functions.php
