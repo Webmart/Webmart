@@ -712,6 +712,10 @@ class Webmart
 
         $head .= '" />';
 
+        if (isset(Config::$gcode) && Config::$gcode != '') {
+            $head .= '<meta name="google-site-verification" content="' . Config::$gcode . '" />';
+        }
+
         self::pass('head', $head);
         self::pass('body', ' view-' . self::get('template') . ' page-' . self::get('page'));
 
