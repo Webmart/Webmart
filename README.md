@@ -8,6 +8,11 @@ A basic PHP framework for web applications and websites. [http://webmartphp.com/
 - [Flight](https://github.com/mikecao/flight/), by mikecao
 - Apache
 
+### Suggested
+
+- [mobiledetect/mobiledetectlib](https://packagist.org/packages/mobiledetect/mobiledetectlib)
+- [catfan/medoo](https://packagist.org/packages/catfan/medoo)
+
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
 
 ## 1/2 Install
@@ -23,7 +28,7 @@ Webmart auto-generates `.htaccess` and `wm.php` for you.
 
 ### B. Install with Composer
 
-See available versions on [Packagist](https://packagist.org/packages/webmart/webmart) or on [GitHub](https://github.com/Webmart/webmart/releases).
+See available versions on [Packagist](https://packagist.org/packages/webmart/webmart) or [GitHub](https://github.com/Webmart/webmart/releases).
 
 Navigate to your directory and run:
 
