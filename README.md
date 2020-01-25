@@ -19,14 +19,14 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 Webmart auto-generates `.htaccess` and `wm.php` for you.
 
-### A. Setup manually
+### A. Manual
 
 - Download [Webmart](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
 - Download [Flight](https://github.com/mikecao/flight/archive/master.zip) and unzip inside `webmart/engine/` (make sure it's a subfolder named `flight`).
 - Setup your theme folders inside `webmart/themes/` - feel free to use the [Boilerplate](https://github.com/Webmart/wm-boilerplate/archive/master.zip) theme.
 - Open in your browser.
 
-### B. Install with Composer
+### B. Composer
 
 See available versions on [Packagist](https://packagist.org/packages/webmart/webmart) or [GitHub](https://github.com/Webmart/webmart/releases).
 
