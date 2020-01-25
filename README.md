@@ -16,13 +16,10 @@ The first time you'll open in your browser, Webmart will auto-generate `.htacces
 
 ### A. Setup manually
 
-Download [Webmart](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
-
-Download [Flight](https://github.com/mikecao/flight/archive/master.zip) and unzip inside `webmart/engine/` (make sure it's not flight/flight).
-
-Setup your theme folders inside `webmart/themes/` - feel free to use the [Boilerplate](https://github.com/Webmart/wm-boilerplate).
-
-Open in your browser.
+- Download [Webmart](https://github.com/webmart/webmart/archive/master.zip) and unzip in your directory.
+- Download [Flight](https://github.com/mikecao/flight/archive/master.zip) and unzip inside `webmart/engine/` (make sure it's not flight/flight).
+- Setup your theme folders inside `webmart/themes/` - feel free to use the [Boilerplate](https://github.com/Webmart/wm-boilerplate/archive/master.zip) theme.
+- Open in your browser.
 
 ### B. Install with Composer
 
