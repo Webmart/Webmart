@@ -1,6 +1,6 @@
 {
     "name" : "webmart/webmart",
-    "version" : "v2.0.2",
+    "version" : "v2.0.3",
     "description" : "A basic PHP framework for web applications and websites.",
     "homepage" : "http://webmartphp.com",
     "license" : "MIT",
@@ -29,8 +29,8 @@
         "mikecao/flight" : "1.3.*"
     },
     "suggest" : {
-        "mobiledetect/mobiledetectlib" : "Webmart supports the Mobile_Detect library with Webmart::newDetect().",
-        "catfan/medoo" : "Webmart supports the Medoo library for databases with Webmart::newDatabase()."
+        "mobiledetect/mobiledetectlib" : "",
+        "catfan/medoo" : ""
     },
     "autoload" : {
         "files" : [
