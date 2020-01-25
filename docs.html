@@ -50,26 +50,26 @@
                     <div class="row pt-5 pb-5">
                         <div class="col-md-3 pl-5">
                             <ul id="menu">
-                                <li><a href="docs#configuration">Configuration</a></li>
-                                <li><a href="docs#routing">Routing</a></li>
+                                <li><a href="https://webmartphp.com/docs#configuration">Configuration</a></li>
+                                <li><a href="https://webmartphp.com/docs#routing">Routing</a></li>
                                 <li>
                                     Framework
                                     <ul>
-                                        <li><a href="docs#constants">Constants</a></li>
-                                        <li><a href="docs#variables">Variables</a></li>
-                                        <li><a href="docs#methods">Methods</a></li>
+                                        <li><a href="https://webmartphp.com/docs#constants">Constants</a></li>
+                                        <li><a href="https://webmartphp.com/docs#variables">Variables</a></li>
+                                        <li><a href="https://webmartphp.com/docs#methods">Methods</a></li>
                                     </ul>
                                 </li>
 
                                 <li>
                                     Theme
                                     <ul>
-                                        <li><a href="docs#controllers">Controllers</a></li>
-                                        <li><a href="docs#templates">Templates</a></li>
-                                        <li><a href="docs#more">More</a></li>
+                                        <li><a href="https://webmartphp.com/docs#controllers">Controllers</a></li>
+                                        <li><a href="https://webmartphp.com/docs#templates">Templates</a></li>
+                                        <li><a href="https://webmartphp.com/docs#more">More</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="docs#libraries">Libraries</a></li>
+                                <li><a href="https://webmartphp.com/docs#libraries">Libraries</a></li>
                             </ul>
                         </div>
                         <div class="col-md-8">
@@ -79,8 +79,8 @@
                                     <h3>Configuration</h3>
                                     <p>Every theme requires a <span class="black">Config.php</span> and a <span class="black">Theme.php</span> file.</p>
                                     <p>Webmart can collect and handle information based on your theme's <span class="black">Config.php</span> file, like auto-loading bootstrap, fonts and which GET/POST data to accept.</p>
-                                    <p>Some of the information is stored into <a href="docs#variables">Variables</a> and some are passed into <a href="docs#tempaltes">Templates</a>. Of course, you can basically do pretty much anything else you like.</p>
-                                    <p>Required (see <a href="docs#routing">Routing</a>):</p>
+                                    <p>Some of the information is stored into <a href="https://webmartphp.com/docs#variables">Variables</a> and some are passed into <a href="https://webmartphp.com/docs#tempaltes">Templates</a>. Of course, you can basically do pretty much anything else you like.</p>
+                                    <p>Required (see <a href="https://webmartphp.com/docs#routing">Routing</a>):</p>
                                     <pre class="highlight">
                                         <code class="php">class Config<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;public static $routes = array();<br>&nbsp;&nbsp;&nbsp;&nbsp;public static $redirects = array();<br>}</code>
                                     </pre>
@@ -117,7 +117,7 @@
                                         <pre class="highlight">
                                             <code class="php">public static $redirects = array(<br>&nbsp;&nbsp;&nbsp;&nbsp;'301' => array(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/about-us' => 'about/' /** redirect string starts with an / */<br>&nbsp;&nbsp;&nbsp;&nbsp;)<br>);</code>
                                         </pre>
-                                        <p>You can also redirect manually with <a href="docs#redirect">Webmart::redirect()</a>.</p>
+                                        <p>You can also redirect manually with <a href="https://webmartphp.com/docs#redirect">Webmart::redirect()</a>.</p>
                                     </div>
                                     <div class="part pt-4">
                                         <h4>404</h4>
@@ -142,11 +142,11 @@
                             <div class="row" id="variables">
                                 <div class="col-md-12 pt-5">
                                     <h3>Variables</h3>
-                                    <p>Webmart pre-packs important data, like the current URL, assigned page, cookie data and more into a collection of variables. Use <a href="docs#get">Webmart::get()</a> to retrieve the data.</p>
+                                    <p>Webmart pre-packs important data, like the current URL, assigned page, cookie data and more into a collection of variables. Use <a href="https://webmartphp.com/docs#get">Webmart::get()</a> to retrieve the data.</p>
                                     <pre class="highlight">
                                         <code class="php">'url' /** ex. mywebsite.com/about/team */<br>'cookies' /** retrieved cookies allowed by theme */<br>'query' /** retrieved GET data allowed by theme */<br>'data' /** retrieved POST data allowed by theme */<br>'page' /** based on last call (ex. about/team/ => team) */<br>'template' /** based on first call (ex. about/team/ => about) */</code>
                                     </pre>
-                                    <p>You can override these settings in your theme with <a href="docs#set">Webmart::set()</a>.</p>
+                                    <p>You can override these settings in your theme with <a href="https://webmartphp.com/docs#set">Webmart::set()</a>.</p>
                                 </div>
                             </div>
                             <div class="row" id="methods">
@@ -156,17 +156,17 @@
                                         <p>Webmart provides some handy methods to help you take care of repetitive tasks, like loading assets and passing and retrieving data across your theme.</p>
                                         <p>Available methods:</p>
                                         <ul>
-                                            <li><a href="docs#set">set</a>, store a variable</li>
-                                            <li><a href="docs#get">get</a>, retrieve a variable's value</li>
-                                            <li><a href="docs#pass">pass</a>, pass a variable into your templates</li>
-                                            <li><a href="docs#asset">asset</a>, add a CSS/JS file</li>
-                                            <li><a href="docs#style">style</a>, append inline CSS</li>
-                                            <li><a href="docs#script">script</a>, append inline JS</li>
-                                            <li><a href="docs#font">font</a>, add a Google font</li>
-                                            <li><a href="docs#library">library</a>, add a Google library</li>
-                                            <li><a href="docs#bootstrap">bootstrap</a>, load Bootstrap</li>
-                                            <li><a href="docs#form">form</a>, create a form with a closure</li>
-                                            <li><a href="docs#redirect">redirect</a>, redirect to another page</li>
+                                            <li><a href="https://webmartphp.com/docs#set">set</a>, store a variable</li>
+                                            <li><a href="https://webmartphp.com/docs#get">get</a>, retrieve a variable's value</li>
+                                            <li><a href="https://webmartphp.com/docs#pass">pass</a>, pass a variable into your templates</li>
+                                            <li><a href="https://webmartphp.com/docs#asset">asset</a>, add a CSS/JS file</li>
+                                            <li><a href="https://webmartphp.com/docs#style">style</a>, append inline CSS</li>
+                                            <li><a href="https://webmartphp.com/docs#script">script</a>, append inline JS</li>
+                                            <li><a href="https://webmartphp.com/docs#font">font</a>, add a Google font</li>
+                                            <li><a href="https://webmartphp.com/docs#library">library</a>, add a Google library</li>
+                                            <li><a href="https://webmartphp.com/docs#bootstrap">bootstrap</a>, load Bootstrap</li>
+                                            <li><a href="https://webmartphp.com/docs#form">form</a>, create a form with a closure</li>
+                                            <li><a href="https://webmartphp.com/docs#redirect">redirect</a>, redirect to another page</li>
                                         </ul>
                                     </div>
                                     <div class="part pt-4" id="set">
@@ -198,7 +198,7 @@
                                             <code class="php">$async = true || false;<br>Webmart::asset('js', 'vue.min', $async);</code>
                                         </pre>
                                         <p>By default, Webmart looks for the asset inside your theme's assets directory. If the second argument is an external link, Webmart will just append it as is.</p>
-                                        <p>Use the <span class="black">$assets</span> variable in your <a href="docs#templates">Templates</a>.</p>
+                                        <p>Use the <span class="black">$assets</span> variable in your <a href="https://webmartphp.com/docs#templates">Templates</a>.</p>
                                         <p>CSS/JS files matching the current page (ex. <span class="black">about.css</span>) are auto-included.</p>
                                     </div>
                                     <div class="part pt-4" id="style">
@@ -291,7 +291,7 @@
                                     </div>
                                     <div class="part pt-4">
                                         <h4>Arguments</h4>
-                                        <p>You can always use dynamic arguments in your <a href="docs#routing">Routing</a>, pretty much in the same MVC logic.</p>
+                                        <p>You can always use dynamic arguments in your <a href="https://webmartphp.com/docs#routing">Routing</a>, pretty much in the same MVC logic.</p>
                                         <p>Let's say you've routed <span class="black">blog-(year-(month-(name)))</span> which might translate to a <span class="black">blog/2019/05/hello-world/</span> request.</p>
                                         <p>In this case, Webmart doesn't look for sub-controllers or class methods for the subpages, but instead provides you with those arguments directly:</p>
                                         <pre class="highlight">
@@ -307,12 +307,12 @@
                                         <h3>Templates</h3>
                                         <p>Webmart autoloads your templates with a basic template engineering logic.</p>
                                         <p>In sequence, it renders the <span class="black">header.php</span> template, then your set <span class="black">template</span> and finally the <span class="black">footer.php</span> template.</p>
-                                        <p>Your templates need to be inside the <span class="black">templates/</span> subdirectory and need to be in lowercase. For the <a href="docs#controllers">Controllers</a> examples, the final rendering of the templates are:</p>
+                                        <p>Your templates need to be inside the <span class="black">templates/</span> subdirectory and need to be in lowercase. For the <a href="https://webmartphp.com/docs#controllers">Controllers</a> examples, the final rendering of the templates are:</p>
                                         <pre class="highlight">
                                             <code class="php">about.php<br>team.php /** for an about/team/ request or just team/ */<br>how_it_works.php /** ex. how-it-works/ */<br>blog.php /** blog/.../ still loads blog.php */</code>
                                         </pre>
-                                        <p>You can always override the template with <a href="docs#set">Webmart::set()</a>.</p>
-                                        <p>Any variables you have passed with <a href="docs#pass">Webmart::pass()</a> can be directly called in any of the templates. Webmart also prepacks the following for you:</p>
+                                        <p>You can always override the template with <a href="https://webmartphp.com/docs#set">Webmart::set()</a>.</p>
+                                        <p>Any variables you have passed with <a href="https://webmartphp.com/docs#pass">Webmart::pass()</a> can be directly called in any of the templates. Webmart also prepacks the following for you:</p>
                                         <pre class="highlight">
                                             <code class="php">echo $assets;<br>echo $head;<br>echo $body;</code>
                                         </pre>
@@ -325,7 +325,7 @@
                                 <div class="col-md-12 pt-5">
                                     <h3>More</h3>
                                     <p>You can pretty much do anything you like.</p>
-                                    <p>Themes are treated as standalone web applications and websites. Webmart just provides the basics for you, like <a href="docs#constants">Constants</a>, <a href="docs#variables">Variables</a>, <a href="docs#methods">Methods</a> and <a href="docs#routing">Routing</a>.</p>
+                                    <p>Themes are treated as standalone web applications and websites. Webmart just provides the basics for you, like <a href="https://webmartphp.com/docs#constants">Constants</a>, <a href="https://webmartphp.com/docs#variables">Variables</a>, <a href="https://webmartphp.com/docs#methods">Methods</a> and <a href="https://webmartphp.com/docs#routing">Routing</a>.</p>
                                     <p>Check out the GitHub organisation for free themes.</p>
                                 </div>
                             </div>
