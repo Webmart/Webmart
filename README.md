@@ -42,7 +42,7 @@ Create an `index.php` and require the autoloader:
 require 'vendor/autoload.php';
 ```
 
-Setup your theme folders inside `webmart/themes/` - feel free to use the [Boilerplate](https://github.com/Webmart/wm-boilerplate/archive/master.zip) theme.
+Setup your theme folders inside `themes/` (same level as `vendor/`) - feel free to use the [Boilerplate](https://github.com/Webmart/wm-boilerplate/archive/master.zip) theme.
 
 Open in your browser.
 
