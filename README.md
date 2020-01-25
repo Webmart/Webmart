@@ -15,9 +15,9 @@ A basic PHP framework for web applications and websites. [http://webmartphp.com/
 
 Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/LICENSE.md).
 
-## 1/2 Install
+## How to Install
 
-Webmart auto-generates `.htaccess` and `wm.php` for you.
+See available versions on [Packagist](https://packagist.org/packages/webmart/webmart) or [GitHub](https://github.com/Webmart/webmart/releases).
 
 ### A. Manual
 
@@ -27,8 +27,6 @@ Webmart auto-generates `.htaccess` and `wm.php` for you.
 - Open in your browser.
 
 ### B. Composer
-
-See available versions on [Packagist](https://packagist.org/packages/webmart/webmart) or [GitHub](https://github.com/Webmart/webmart/releases).
 
 Navigate to your directory and run:
 
@@ -46,6 +44,6 @@ Setup your theme folders inside `themes/` (same level as `vendor/`) - feel free 
 
 Open in your browser.
 
-## 2/2 Configure
+## How to Configure
 
 See the [docs](http://webmartphp.com/docs) for more.
