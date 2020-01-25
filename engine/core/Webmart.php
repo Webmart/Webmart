@@ -596,20 +596,7 @@ class Webmart
         Config::$routes[] = ''; // auto-include the homepage
 
         foreach (Config::$routes as $route) {
-            $exploded = explode('-', $route);
-            $last = end($exploded);
-            $path = '/';
-
-            // prepare the routing path
-
-            foreach ($exploded as $item) {
-                if (strpos($item, '(') === 0) {
-                    $path .= str_replace('(', '(/@', $item);
-                    continue;
-                }
-
-                $path .= $item === $last ? $item : $item . '-';
-            }
+            $path = '/' . $route;
 
             // handle routing paths
 
