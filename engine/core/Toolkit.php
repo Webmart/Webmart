@@ -515,43 +515,4 @@ class Toolkit
         return $html;
     }
 
-    /**
-    * @method establishes connection to database
-    * @param $config = array
-    */
-
-    public static function database($config = array())
-    {
-        if (!$config || empty($config)) {
-            return;
-        }
-
-        if (!class_exists('\Medoo\Medoo')) {
-            if (!file_exists(WM_DIR_LIBS . 'Medoo.php')) {
-                return;
-            }
-
-            require_once WM_DIR_LIBS . 'Medoo.php';
-        }
-
-        return new \Medoo\Medoo($config);
-    }
-
-    /**
-    * @method creates a new Mobile_Detect instance
-    */
-
-    public static function detect()
-    {
-        if (!class_exists('\Mobile_Detect')) {
-            if (!file_exists(WM_DIR_LIBS . 'Mobile_Detect.php')) {
-                return;
-            }
-
-            require_once WM_DIR_LIBS . 'Mobile_Detect.php';
-        }
-
-        return new \Mobile_Detect();
-    }
-
 }
