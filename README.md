@@ -12,7 +12,7 @@ Released under the [MIT License](https://github.com/Webmart/webmart/blob/master/
 
 ## 1/2 Install
 
-The first time you'll open in your browser, Webmart will auto-generate `.htaccess` and `wm.php` for you.
+Webmart auto-generates `.htaccess` and `wm.php` for you.
 
 ### A. Setup manually
 
@@ -23,19 +23,21 @@ The first time you'll open in your browser, Webmart will auto-generate `.htacces
 
 ### B. Install with Composer
 
-Available versions on [Packagist](https://packagist.org/packages/webmart/webmart). Run:
+See available versions on [Packagist](https://packagist.org/packages/webmart/webmart) or on [GitHub](https://github.com/Webmart/webmart/releases).
+
+Navigate to your directory and run:
 
 ```
 composer require webmart/webmart
 ```
 
-Create an `index.php` file in your root directory. Require the autoloader:
+Create an `index.php` and require the autoloader:
 
 ```php
 require 'vendor/autoload.php';
 ```
 
-Setup your theme folders inside `themes/` - feel free to use the [Boilerplate](https://github.com/Webmart/wm-boilerplate).
+Setup your theme folders inside `webmart/themes/` - feel free to use the [Boilerplate](https://github.com/Webmart/wm-boilerplate/archive/master.zip) theme.
 
 Open in your browser.
 
