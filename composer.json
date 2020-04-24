@@ -1,27 +1,15 @@
 {
     "name" : "webmart/webmart",
-    "version" : "v2.0.4",
+    "version" : "v2.0.5",
     "description" : "A basic PHP framework for web applications and websites.",
     "homepage" : "http://webmartphp.com",
     "license" : "MIT",
     "authors" : [
         {
             "name" : "George Kary",
-            "email" : "dev@webmartphp.com",
+            "email" : "",
             "homepage" : "http://georgekary.com/",
             "role" : "Creator"
-        },
-        {
-            "name" : "Valandis Zotos",
-            "email" : "dev@webmartphp.com",
-            "homepage" : "https://github.com/BalzoT",
-            "role" : "Contributor"
-        },
-        {
-            "name" : "John Dimas",
-            "email" : "dev@webmartphp.com",
-            "homepage" : "https://github.com/jdimas87",
-            "role" : "Contributor"
         }
     ],
     "require" : {
