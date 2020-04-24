@@ -322,6 +322,8 @@ class Webmart
                             case 'folder':
                                 if ($name == 'url' && strpos($data['value'], '/', -1) == false) {
                                     $data['value'] .= '/';
+                                } elseif ($name == 'folder') {
+                                    $data['value'] = str_replace('/', '', $data['value']);
                                 }
 
                                 $output .= 'define("WM_' . strtoupper($name) . '", "' . $data['value'] . '");' . PHP_EOL;
